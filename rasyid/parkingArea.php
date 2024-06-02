@@ -78,7 +78,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="PAGE7.php">Admin Parking Area</a>
+                <a href="PparkingArea.php">Admin Parking Area</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">event_available</span>

@@ -125,7 +125,7 @@
         <ul class="links">
             <li>
                 <span class="material-symbols-outlined">dashboard</span>
-                <a href="base.php">Admin Dashboard</a>
+                <a href="admindasnboard.php">Admin Dashboard</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
@@ -133,15 +133,15 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="PAGE7.php">Admin Parking Area</a>
+                <a href="parkingArea.php">Admin Parking Area</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">event_available</span>
-                <a href="PAGE9.php">Parking Availability</a>
+                <a href="availability.php">Parking Availability</a>
             </li>
             <li>
             <span class="material-symbols-outlined">local_parking</span>
-            <a href="PAGE6.php">List of Parking</a>
+            <a href="listparking.php">List of Parking</a>
         </li>
         <hr>
             <li class="logout-link">
