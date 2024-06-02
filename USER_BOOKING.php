@@ -20,7 +20,7 @@
             <li>                
             <div class="menu-item">
                 <span class="material-symbols-outlined">browse</span>
-                <span class="dropdown-title">Booking list<span class="material-symbols-outlined">expand_more</span></span>
+                <span class="dropdown-title">Booking<span class="material-symbols-outlined">expand_more</span></span>
             </div>
             <div class="dropdown-container">
                 <a href="NEW_BOOKING.php">New Booking</a>
