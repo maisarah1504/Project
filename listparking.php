@@ -146,6 +146,6 @@
             </table>
         </div>
     </main>
-    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+   
 </body>
 </html>
