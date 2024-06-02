@@ -1,0 +1,36 @@
+/* Hide the dropdown title and container initially*/
+.dropdown-title, .dropdown-container {
+    display: none;
+}
+
+/* Show the title and container on hover of the parent list item */
+.links li:hover .dropdown-title, 
+.links li:hover .dropdown-container {
+    display: block;
+}*/
+
+/* Optional: Style the dropdown title to look like regular text */
+.dropdown-title {
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* Ensure the links in the dropdown container are styled properly */
+.dropdown-container {
+    display: none;
+    padding-left: 15px;
+}
+
+.dropdown-container a {
+    display: block;
+    padding: 10px 15px;
+    color: black;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown-container a:hover {
+    background-color: #ddd;
+}
