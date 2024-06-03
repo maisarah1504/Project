@@ -1,10 +1,16 @@
+<?php
+    require_once('connection.php'); 
+
+    $query = "select * from booking";
+    $result = mysqli_query($conn, $query);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FKPark</title>
-    <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="confirmation.css">
@@ -35,47 +41,45 @@
         </aside>
 
     <main>
-        <h3>Booking Form</h3>
-        <?php
-            include_once('connection.php'); // Ensure this file sets up the $conn variable correctly
+        <div class="container">
+            <div class = "row mt-5">
+                <div class="col">
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <h2 class="display-6 text-center">Booking Form</h2>
+                        </div>
+                    <div class="body">
+                        <table class="table-bordered">
+                            <tr>
+                                <td>Booking ID</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Parking ID</td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td>Parking Location</td>
+                            </tr>
+                            <tr>
+                                <td>Student ID</td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                            </tr>
+                            <tr>
+                                <td>Vehicle</td>
+                            </tr>
+                            <tr>
+                                <td>Start time</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+                    
+                </div>
+            </div>
 
-            // Setting a variable
-            $a = 1;
-
-            try {
-                // Prepare and execute the statement
-                $stmt = $conn->prepare("SELECT * FROM booking");
-                $stmt->execute();
-                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Loop through each user and get the booking ID
-                foreach ($bookingID as $id) {
-                    // Check if bookingID exists in the user array
-                    if (isset($user['bookingID'])) {
-                        $id = $user['bookingID']; // This should be correct
-                        // Perform your actions with $id here
-                        echo "Booking ID: " . $id . "<br>";
-                    } else {
-                        echo "Booking ID not found for user.<br>";
-                    }
-                }
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-            {
-        ?>
-
-            <div class="box">
-                <table> 
-                    <tr> 
-                        <td> 
-                            <div class="bookingID">
-                                <p>Booking ID: <?php echo $booking['id']; ?></p>
-
-                            </div>
-            </table>
-        <?php 
-            }?>
         </div>
     </main>
 
