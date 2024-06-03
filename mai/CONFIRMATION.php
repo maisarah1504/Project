@@ -7,7 +7,7 @@
     <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="new_booking.css">
+    <link rel="stylesheet" href="confirmation.css">
 
 </head>
 <body>
@@ -32,11 +32,52 @@
                 <a href="#">Logout</a>
             </li>
         </ul>
-    </aside>
+        </aside>
+
     <main>
-        
+        <h3>Booking Form</h3>
+        <?php
+            include_once('connection.php'); // Ensure this file sets up the $conn variable correctly
+
+            // Setting a variable
+            $a = 1;
+
+            try {
+                // Prepare and execute the statement
+                $stmt = $conn->prepare("SELECT * FROM booking");
+                $stmt->execute();
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Loop through each user and get the booking ID
+                foreach ($bookingID as $id) {
+                    // Check if bookingID exists in the user array
+                    if (isset($user['bookingID'])) {
+                        $id = $user['bookingID']; // This should be correct
+                        // Perform your actions with $id here
+                        echo "Booking ID: " . $id . "<br>";
+                    } else {
+                        echo "Booking ID not found for user.<br>";
+                    }
+                }
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+            {
+        ?>
+
+            <div class="box">
+                <table> 
+                    <tr> 
+                        <td> 
+                            <div class="bookingID">
+                                <p>Booking ID: <?php echo $booking['id']; ?></p>
+
+                            </div>
+            </table>
+        <?php 
+            }?>
+        </div>
     </main>
-    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 
     <!-- JavaScript to handle dropdown -->
     <script>
@@ -50,5 +91,8 @@
             });
         });
     </script>
-</body>
+    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+
+</body>    
+
 </html>
