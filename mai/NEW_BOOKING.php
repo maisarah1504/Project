@@ -9,18 +9,7 @@
     <link rel="stylesheet" href="MAIN.css">
     <link rel="stylesheet" href="USER_BOOKING.css">
     <?php
-        $dbname = "fkpark";
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Check connection
-        if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-        }
+        include('connection.php')
     ?>
 </head>
 <body>
@@ -89,7 +78,7 @@
                     }
                 }
                 else {
-                    echo "No result found";
+                    echo "<br>No result found";
                 }
 
                 $conn->close();
