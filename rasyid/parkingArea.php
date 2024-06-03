@@ -22,6 +22,14 @@
             border-collapse: collapse;
             background-color: white; /* Set table background to white */
         }
+		.sidebar {
+            width: 110px;
+            background-color: #184A92;
+            padding: 20px;
+            color: white;
+            height: 100vh;
+            position: fixed;
+		}
         th {
             height: 50px;
             background-color: #184A92;
@@ -49,6 +57,35 @@
         }
         .button-group button:hover {
             background-color: #002b6e;
+        }
+		.links {
+            list-style-type: none;
+            padding: 0;
+        }
+        .links li {
+            margin: 20px 0;
+        }
+        .links a {
+    color: white !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .links .material-symbols-outlined {
+            margin-right: 10px;
+        }
+        .logout-link {
+            margin-top: auto;
+        }
+        main {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
         }
         footer {
             text-align: center;
@@ -78,7 +115,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="PparkingArea.php">Admin Parking Area</a>
+                <a href="parkingArea.php">Admin Parking Area</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">event_available</span>
@@ -101,7 +138,8 @@
             <table class="parking-table">
                 <thead>
                     <tr>
-                        <th>Parking ID</th>
+                        <th>Select</th>
+                        <th>Parking</th>
                         <th>Location</th>
                         <th>qrCode</th>
                         <th>Status Space</th>
@@ -109,6 +147,7 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area A1</td>
                         <td>
                             <select>
@@ -117,11 +156,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
@@ -130,6 +169,7 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area A2</td>
                         <td>
                             <select>
@@ -138,11 +178,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
@@ -151,6 +191,7 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area A3</td>
                         <td>
                             <select>
@@ -159,11 +200,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
@@ -171,7 +212,8 @@
                             </select>
                         </td>
                     </tr>
-					<tr>
+                    <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area A4</td>
                         <td>
                             <select>
@@ -180,11 +222,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
@@ -192,7 +234,8 @@
                             </select>
                         </td>
                     </tr>
-					<tr>
+                    <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area B1</td>
                         <td>
                             <select>
@@ -201,11 +244,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
@@ -213,7 +256,8 @@
                             </select>
                         </td>
                     </tr>
-					<tr>
+                    <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area B2</td>
                         <td>
                             <select>
@@ -222,11 +266,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
@@ -234,7 +278,8 @@
                             </select>
                         </td>
                     </tr>
-					<tr>
+                    <tr>
+                        <td><input type="checkbox" name="selectRow"></td>
                         <td>Parking Area B3</td>
                         <td>
                             <select>
@@ -243,11 +288,11 @@
                         </td>
                         <td>
                             <select id="linkSelect">
-                        <option value="">qrCode</option>
-                        <option value="1" data-img="path/to/qr.svg">Option 1</option>
-                        <option value="2" data-img="path/to/qr.svg">Option 2</option>
-						<option value="2" data-img="path/to/qr.svg">Option 3</option>
-                    </select>
+                                <option value="">qrCode</option>
+                                <option value="1" data-img="path/to/qr.svg">Option 1</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 2</option>
+                                <option value="2" data-img="path/to/qr.svg">Option 3</option>
+                            </select>
                         </td>
                         <td>
                             <select>
