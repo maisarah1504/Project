@@ -42,11 +42,12 @@
         }
 
         .links a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
+    color: white !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
 
         .links a:hover {
             text-decoration: underline;
@@ -88,23 +89,25 @@
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white; /* Set table background to white */
+}
 
-        th, td {
-            height: 50px;
-            text-align: center;
-            vertical-align: middle;
-            border: 1px solid #ddd;
-            padding: 10px; /* Added padding for better appearance */
-        }
+th, td {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    padding: 10px; /* Added padding for better appearance */
+    background-color: white; /* Ensure table cells have a white background */
+}
 
-        th {
-            background: #184A92;
-            color: white;
-            font-weight: bold;
-        }
+th {
+    background: #184A92;
+    color: white;
+    font-weight: bold;
+}
 
         .button-group {
             display: flex;
@@ -162,7 +165,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="listparking.php">List of Parking</a>
+                <a href="PAGE6.php">List of Parking</a>
             </li>
             <hr>
             <li class="logout-link">
@@ -172,10 +175,10 @@
         </ul>
     </aside>
     <main>
-        <h1>Admin Parking Page</h1>
+        <h1>Parking Availability</h1>
         <div class="content-wrapper">
             <div class="content">
-                <h2>Parking Availability</h2>
+               
                 <div class="parking-availability">
                     <table class="parking-table">
                         <thead>
@@ -185,7 +188,34 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        
+                        <tbody>
+                            <?php
+                            // Include the database connection script
+                            include 'db_connect.php';
+
+                            // SQL query to fetch data from the database
+                            $sql = "SELECT spaceID, status FROM parking_space;";
+
+                            // Execute the query
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                // Output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["spaceID"] . "</td>";
+                                    echo "<td>" . $row["status"] . "</td>";
+                                    echo "<td><button>change</button></td>"; // Example action button
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>No parking spaces found.</td></tr>";
+                            }
+
+                            // Close the database connection
+                            $conn->close();
+                            ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
