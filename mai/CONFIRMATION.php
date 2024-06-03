@@ -1,8 +1,13 @@
 <?php
     require_once('connection.php'); 
 
-    $query = "select * from booking";
-    $result = mysqli_query($conn, $query);
+    $query_booking = "select * from booking";
+    $query_parking = "select * from parking_space";
+    $query_user = "select * from user";
+
+    $result_booking = mysqli_query($conn, $query_booking);
+    $result_parking = mysqli_query($conn, $query_parking);
+    $result_user = mysqli_query($conn, $query_user);
 
 ?>
 <!DOCTYPE html>
@@ -46,23 +51,42 @@
                 <div class="col">
                     <div class="card mt-5">
                         <div class="card-header">
-                            <h2 class="display-6 text-center">Booking Form</h2>
+                            <h2 class="display">Booking Form</h2>
                         </div>
                     <div class="body">
                         <table class="table-bordered">
                             <tr>
+                                <?php 
+                                    $row_booking = mysqli_fetch_assoc($result_booking);
+                                    $row_parking = mysqli_fetch_assoc($result_parking);
+                                    $row_user = mysqli_fetch_assoc($result_user);
+
+                                ?>
+
                                 <td>Booking ID</td>
-                                
+
+                            </tr>
+                            <tr>
+                                <td><?php echo $row_booking['bookingID']?></td>
                             </tr>
                             <tr>
                                 <td>Parking ID</td>
-                                <td> </td>
+                    
+                            </tr>
+                            <tr>
+                                <td><?php echo $row_parking['spaceID']?></td>
                             </tr>
                             <tr>
                                 <td>Parking Location</td>
                             </tr>
                             <tr>
+                                <td><?php echo $row_parking['location']?></td>
+                            </tr>
+                            <tr>
                                 <td>Student ID</td>
+                            </tr>
+                            <tr>
+                                <td><?php echo $row_user['userID']?></td>
                             </tr>
                             <tr>
                                 <td>Date</td>
