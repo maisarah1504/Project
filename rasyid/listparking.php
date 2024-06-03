@@ -14,7 +14,7 @@
             display: flex;
         }
         .sidebar {
-            width: 110px;
+            width: 120px;
             background-color: #184A92;
             padding: 20px;
             color: white;
@@ -42,7 +42,7 @@
     align-items: center;
 }
 
-        
+        }
         .links a:hover {
             text-decoration: underline;
         }
@@ -142,7 +142,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="parkingArea.php">Admin Parking Area</a>
+                <a href="PAGE7.php">Admin Parking Area</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">event_available</span>
@@ -166,7 +166,7 @@
                 <table class="parking-table">
                     <thead>
                         <tr>
-                            <th>Location</th>
+                            <th>Area</th>
                             <th>QR Code</th>
                             <th>Capacity</th>
                         </tr>
