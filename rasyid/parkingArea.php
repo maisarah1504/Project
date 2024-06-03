@@ -23,7 +23,7 @@
             background-color: white; /* Set table background to white */
         }
 		.sidebar {
-            width: 250px;
+            width: 110px;
             background-color: #184A92;
             padding: 20px;
             color: white;
