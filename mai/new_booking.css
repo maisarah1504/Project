@@ -1,18 +1,8 @@
 #filterTime {
-    padding: 10px;
     font-size: 16px;
 }
 
 h3 {
     padding: 10px;
     margin: auto;
-}
-table 
-{
-    padding: 50px;
-}
-
-.status_booked, .status_available {
-    padding: 20px;
-    position: relative;
 }
