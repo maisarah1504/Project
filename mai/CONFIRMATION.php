@@ -1,8 +1,13 @@
 <?php
     require_once('connection.php'); 
 
-    $query = "select * from booking";
-    $result = mysqli_query($conn, $query);
+    $query_booking = "select * from booking";
+    $query_parking = "select * from parking_space";
+    $query_user = "select * from user";
+
+    $result_booking = mysqli_query($conn, $query_booking);
+    $result_parking = mysqli_query($conn, $query_parking);
+    $result_user = mysqli_query($conn, $query_user);
 
 ?>
 <!DOCTYPE html>
@@ -46,32 +51,32 @@
                 <div class="col">
                     <div class="card mt-5">
                         <div class="card-header">
-                            <h2 class="display-6 text-center">Booking Form</h2>
+                            <h2 class="display">Booking Form</h2>
                         </div>
                     <div class="body">
                         <table class="table-bordered">
                             <tr>
-                                <td>Booking ID</td>
-                                
+                                <td>
+                                    <label id="fname">Full Name: </label>
+                                    <input type="text" id="name">
+                                </td>
                             </tr>
+                    
                             <tr>
-                                <td>Parking ID</td>
-                                <td> </td>
+                                <td>
+                                    <label id="fvehicle">Vehicle Plate Number: </label>
+                                    <input type="text" id="fvehicle">
+                                </td>
                             </tr>
+
                             <tr>
-                                <td>Parking Location</td>
-                            </tr>
-                            <tr>
-                                <td>Student ID</td>
-                            </tr>
-                            <tr>
-                                <td>Date</td>
-                            </tr>
-                            <tr>
-                                <td>Vehicle</td>
-                            </tr>
-                            <tr>
-                                <td>Start time</td>
+                                <td>Start time
+                                    <input type="time" id="ftime">
+                                </td>
+                                <td>
+                                    Start date
+                                    <input type="date" id="fdate">
+                                </td>
                             </tr>
                         </table>
                     </div>
