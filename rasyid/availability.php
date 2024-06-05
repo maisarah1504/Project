@@ -222,5 +222,58 @@ th {
         </div>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+    <script>
+        const rowsPerPage = 10;
+        let currentPage = 1;
+        let parkingData = [];
+
+        // Fetch data from the database
+        async function fetchData() {
+            const response = await fetch('get_parking_data.php');
+            const data = await response.json();
+            parkingData = data;
+            renderTable();
+        }
+
+        // Render table with pagination
+        function renderTable() {
+            const tableBody = document.getElementById('parkingTableBody');
+            tableBody.innerHTML = '';
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = parkingData.slice(start, end);
+
+            for (const row of pageData) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.spaceID}</td>
+                    <td>${row.location}</td>
+                    <td><img src="${row.qrCode}" alt="QR Code" style="width: 64px;"></td>
+                    <td>${row.status}</td>
+                `;
+                tableBody.appendChild(tr);
+            }
+        }
+
+        // Go to the previous page
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+
+        // Go to the next page
+        function nextPage() {
+            if ((currentPage * rowsPerPage) < parkingData.length) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        // Initialize the table on page load
+        window.onload = fetchData;
+    </script>
 </body>
 </html>
