@@ -9,6 +9,25 @@
     $result_parking = mysqli_query($conn, $query_parking);
     $result_user = mysqli_query($conn, $query_user);
 
+    if(isset($_POST['submit']))
+    {
+        $fname = $_POST['fname'];
+        $fvehicle = $_POST['fvehicle'];
+        $fdate = $_POST['fdate'];
+        $ftime = $_POST['ftime'];
+
+        $conn = new mysqli('localhost', 'root', '', 'fkpark');
+        $sql = "INSERT INTO booking(startDate, startTime) VALUES ('$fdate, '$ftime')";
+
+        if ($conn ->query($sql))
+        {
+            $message = "<div class='alert-success'>Booking Successful</div>";
+
+        }else 
+        {
+            $message = "<div class='alert-fail'>Booking Failed</div>";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,30 +74,35 @@
                         </div>
                     <div class="body">
                         <table class="table-bordered">
+                            <?php echo isset($message)? $message: '';?>
+                            <form method="" action="POST" autocomplete="off">
                             <tr>
                                 <td>
                                     <label id="fname">Full Name: </label>
-                                    <input type="text" id="name">
+                                    <input type="text" name="fname">
                                 </td>
                             </tr>
                     
                             <tr>
                                 <td>
                                     <label id="fvehicle">Vehicle Plate Number: </label>
-                                    <input type="text" id="fvehicle">
+                                    <input type="text" name="fvehicle">
                                 </td>
                             </tr>
 
                             <tr>
                                 <td>Start time
-                                    <input type="time" id="ftime">
+                                    <input type="time" name="ftime">
                                 </td>
                                 <td>
                                     Start date
-                                    <input type="date" id="fdate">
+                                    <input type="date" name="fdate">
                                 </td>
                             </tr>
+                            </form>
                         </table>
+                        <button class="submit" type="submit"><a href="BOOKED_SPACE.php"> SUBMIT</a></button>
+                        <button> <a href="NEW_BOOKING.php" class="btn btn-success"> BACK </a></button>
                     </div>
                     </div>
                     

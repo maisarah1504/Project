@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="MAIN.css">
     <link rel="stylesheet" href="user_booking.css">
     <link rel="stylesheet" href="new_booking.css">
-    <?php
+    <script src="script.js"></script>
+<?php
         include('connection.php')
     ?>
 </head>
@@ -38,7 +39,7 @@
     </aside>
     <main>
         <div class="form">
-            <form action="New_Booking.php" method="get" > 
+            <form action="PARKING_LIST.php" method="get" > 
                 <h3>Parking List</h3>
 
                 <label for="filter_date">Date</label>
@@ -56,58 +57,13 @@
         <div class="container_parking">
 
             <?php 
-                $sql = "SELECT * from parking_space";
+                include('PARKING_LIST.php');
 
-                $result = mysqli_query($conn, $sql);
-
-                $row = mysqli_fetch_assoc($result);
-
-
-                do
-                {
             ?>
-            <table>
-                <form action="CONFIRMATION.php" method="post">
-                <tr>
-                    <td>
-                        <?php echo $row['location']?>
-                    </td>
-                    <td>
-                        <?php 
-                            if($row['status'] == "BOOKED")
-                            {
-                                echo "<button class='status-booked' id = 'booked' style = 'background-color:red'>BOOKED</button> ";
-
-                            }
-                            else 
-                            {
-                                echo "<button class='status-available' id = 'available' style = 'background-color: green'> AVAILABLE </button>"; 
-
-                            }
-                        ?>
-                    </td>
-                </tr>   
-                </form>
-            </table>
-            <?php 
-                }while($row = mysqli_fetch_assoc($result));
-            ?>
+            
         </div>
 
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
-
-    <!-- JavaScript to handle dropdown -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdownBtns = document.querySelectorAll(".dropdown-btn");
-            dropdownBtns.forEach(function(btn) {
-                btn.addEventListener("click", function() {
-                    var dropdownContainer = this.nextElementSibling;
-                    dropdownContainer.style.display = dropdownContainer.style.display === "block" ? "none" : "block";
-                });
-            });
-        });
-    </script>
 </body>
 </html>
