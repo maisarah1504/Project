@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FKPark</title>
+    <title>FKPark - Parking Availability</title>
     <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="base.css">
@@ -15,7 +15,7 @@
         }
         
         .sidebar {
-            width: 110px;
+            width: 120px;
             background-color: #184A92;
             padding: 20px;
             color: white;
@@ -42,12 +42,11 @@
         }
 
         .links a {
-    color: white !important;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
+            color: white !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
 
         .links a:hover {
             text-decoration: underline;
@@ -80,7 +79,7 @@
         }
 
         .content {
-            width: 100%; /* Adjusted to full width */
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -89,33 +88,34 @@
         }
 
         table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white; /* Set table background to white */
-}
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
 
-th, td {
-    height: 50px;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #ddd;
-    padding: 10px; /* Added padding for better appearance */
-    background-color: white; /* Ensure table cells have a white background */
-}
+        th, td {
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+        }
 
-th {
-    background: #184A92;
-    color: white;
-    font-weight: bold;
-}
+        th {
+            background: #184A92;
+            color: white;
+            font-weight: bold;
+        }
 
-        .button-group {
+        .pagination {
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             gap: 10px;
         }
 
-        .button-group button {
+        .pagination button {
             padding: 5px 10px;
             border: none;
             background-color: #184A92;
@@ -124,7 +124,7 @@ th {
             border-radius: 5px;
         }
 
-        .button-group button:hover {
+        .pagination button:hover {
             background-color: #002b6e;
         }
 
@@ -165,7 +165,7 @@ th {
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="PAGE6.php">List of Parking</a>
+                <a href="Plistparking.php">List of Parking</a>
             </li>
             <hr>
             <li class="logout-link">
@@ -178,7 +178,6 @@ th {
         <h1>Parking Availability</h1>
         <div class="content-wrapper">
             <div class="content">
-               
                 <div class="parking-availability">
                     <table class="parking-table">
                         <thead>
@@ -188,40 +187,70 @@ th {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                            // Include the database connection script
-                            include 'db_connect.php';
-
-                            // SQL query to fetch data from the database
-                            $sql = "SELECT spaceID, status FROM parking_space;";
-
-                            // Execute the query
-                            $result = $conn->query($sql);
-
-                            if ($result->num_rows > 0) {
-                                // Output data of each row
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row["spaceID"] . "</td>";
-                                    echo "<td>" . $row["status"] . "</td>";
-                                    echo "<td><button>change</button></td>"; // Example action button
-                                    echo "</tr>";
-                                }
-                            } else {
-                                echo "<tr><td colspan='3'>No parking spaces found.</td></tr>";
-                            }
-
-                            // Close the database connection
-                            $conn->close();
-                            ?>
+                        <tbody id="parkingTableBody">
+                            <!-- Data will be inserted here by JavaScript -->
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        <button onclick="prevPage()">Previous</button>
+                        <button onclick="nextPage()">Next</button>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
-    
+    <script>
+        const rowsPerPage = 10;
+        let currentPage = 1;
+        let parkingData = [];
+
+        // Fetch data from the database
+        async function fetchData() {
+            const response = await fetch('get_parking_data.php');
+            const data = await response.json();
+            parkingData = data;
+            renderTable();
+        }
+
+        // Render table with pagination
+        function renderTable() {
+            const tableBody = document.getElementById('parkingTableBody');
+            tableBody.innerHTML = '';
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = parkingData.slice(start, end);
+
+            for (const row of pageData) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.spaceID}</td>
+                    <td>${row.status}</td>
+                    <td><button>change</button></td>
+                `;
+                tableBody.appendChild(tr);
+            }
+        }
+
+        // Go to the previous page
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+
+        // Go to the next page
+        function nextPage() {
+            if ((currentPage * rowsPerPage) < parkingData.length) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        // Initialize the table on page load
+        window.onload = fetchData;
+    </script>
 </body>
 </html>
