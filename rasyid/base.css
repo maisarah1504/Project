@@ -15,7 +15,7 @@ html, body {
 body {
             display: flex;
             flex-direction: column;
-            background-image: url("images/back.jpg");
+            background-image: url("images/ground.jpg");
             background-position: center;
             background-size: cover;
             backdrop-filter: blur(2.5px);
