@@ -56,46 +56,27 @@
                     <div class="body">
                         <table class="table-bordered">
                             <tr>
-                                <?php 
-                                    $row_booking = mysqli_fetch_assoc($result_booking);
-                                    $row_parking = mysqli_fetch_assoc($result_parking);
-                                    $row_user = mysqli_fetch_assoc($result_user);
-
-                                ?>
-
-                                <td>Booking ID</td>
-
+                                <td>
+                                    <label id="fname">Full Name: </label>
+                                    <input type="text" id="name">
+                                </td>
                             </tr>
-                            <tr>
-                                <td><?php echo $row_booking['bookingID']?></td>
-                            </tr>
-                            <tr>
-                                <td>Parking ID</td>
                     
-                            </tr>
                             <tr>
-                                <td><?php echo $row_parking['spaceID']?></td>
+                                <td>
+                                    <label id="fvehicle">Vehicle Plate Number: </label>
+                                    <input type="text" id="fvehicle">
+                                </td>
                             </tr>
+
                             <tr>
-                                <td>Parking Location</td>
-                            </tr>
-                            <tr>
-                                <td><?php echo $row_parking['location']?></td>
-                            </tr>
-                            <tr>
-                                <td>Student ID</td>
-                            </tr>
-                            <tr>
-                                <td><?php echo $row_user['userID']?></td>
-                            </tr>
-                            <tr>
-                                <td>Date</td>
-                            </tr>
-                            <tr>
-                                <td>Vehicle</td>
-                            </tr>
-                            <tr>
-                                <td>Start time</td>
+                                <td>Start time
+                                    <input type="time" id="ftime">
+                                </td>
+                                <td>
+                                    Start date
+                                    <input type="date" id="fdate">
+                                </td>
                             </tr>
                         </table>
                     </div>

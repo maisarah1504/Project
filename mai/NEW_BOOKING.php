@@ -7,7 +7,8 @@
     <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="MAIN.css">
-    <link rel="stylesheet" href="USER_BOOKING.css">
+    <link rel="stylesheet" href="user_booking.css">
+    <link rel="stylesheet" href="new_booking.css">
     <?php
         include('connection.php')
     ?>
@@ -39,49 +40,57 @@
         <div class="form">
             <form action="New_Booking.php" method="get" > 
                 <h3>Parking List</h3>
-                <label for="filter_date">Filter</label>
+
+                <label for="filter_date">Date</label>
                 <input type="date" id="filterDate" method="get" />
-                <label for="filter_time">Filter</label>
+
+                <label for="filter_time">Time</label>
                 <input type="time" id="filterTime" method="get" />
-                <label for="filter_park_space">Filter</label>
+                
+                <label for="filter_park_space">Location</label>
                 <input type="text" id="filterSpace" method="get" />
+
                 <button type="submit">Submit</button>
             </form>
         </div>
         <div class="container_parking">
+
             <?php 
-                $filter_date = isset($_GET['filter_date']) ? $_GET['filter_date'] : '';
-                $filter_time = isset($_GET['filter_time']) ? $_GET['filter_time'] : '';
-                $filter_space = isset($_GET['filter_space']) ? $_GET['filter_space'] : '';
-                
-                $sql = "SELECT * from parking_space WHERE 1=1";
+                $sql = "SELECT * from parking_space";
 
-                if (!empty($filter_date)) {
-                    $sql .= " AND date = '$filter_date'";
-                }
-                if (!empty($filter_time)) {
-                    $sql .= " AND date = '$filter_time'";
-                }
-                if (!empty($filter_space)) {
-                    $sql .= " AND date = '$filter_space'";
-                }
+                $result = mysqli_query($conn, $sql);
 
-                $result = $conn->query($sql);
+                $row = mysqli_fetch_assoc($result);
 
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<div class = 'parking-item'>";
-                        echo "<h4>Parking Space: " . $row['space'] . "</h4>";
-                        echo "<p>Date: " . $row['date'] . "</p>";
-                        echo "<p>Time: " . $row['time'] . "</p>";
-                        echo "</div>";
-                    }
-                }
-                else {
-                    echo "<br>No result found";
-                }
 
-                $conn->close();
+                do
+                {
+            ?>
+            <table>
+                <form action="CONFIRMATION.php" method="post">
+                <tr>
+                    <td>
+                        <?php echo $row['location']?>
+                    </td>
+                    <td>
+                        <?php 
+                            if($row['status'] == "BOOKED")
+                            {
+                                echo "<button class='status-booked' id = 'booked' style = 'background-color:red'>BOOKED</button> ";
+
+                            }
+                            else 
+                            {
+                                echo "<button class='status-available' id = 'available' style = 'background-color: green'> AVAILABLE </button>"; 
+
+                            }
+                        ?>
+                    </td>
+                </tr>   
+                </form>
+            </table>
+            <?php 
+                }while($row = mysqli_fetch_assoc($result));
             ?>
         </div>
 
