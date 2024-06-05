@@ -36,12 +36,10 @@
             margin: 20px 0;
         }
         .links a {
-    color: white !important;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
+            color: white !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
         }
         .links a:hover {
             text-decoration: underline;
@@ -166,9 +164,10 @@
                 <table class="parking-table">
                     <thead>
                         <tr>
+                            <th>Space ID</th>
                             <th>Area</th>
                             <th>QR Code</th>
-                            <th>Capacity</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="parkingTableBody">
@@ -187,7 +186,7 @@
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
     <script>
-        const rowsPerPage = 5;
+        const rowsPerPage = 10;
         let currentPage = 1;
         let parkingData = [];
 
@@ -211,9 +210,10 @@
             for (const row of pageData) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
+                    <td>${row.spaceID}</td>
                     <td>${row.location}</td>
                     <td><img src="${row.qrCode}" alt="QR Code" style="width: 64px;"></td>
-                    <td>${row.capacity}</td>
+                    <td>${row.status}</td>
                 `;
                 tableBody.appendChild(tr);
             }
