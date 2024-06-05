@@ -132,7 +132,7 @@
         <ul class="links">
             <li>
                 <span class="material-symbols-outlined">dashboard</span>
-                <a href="admindashboard.php">Admin Dashboard</a>
+                <a href="admindasnboard.php">Admin Dashboard</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
@@ -140,7 +140,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="PAGE7.php">Admin Parking Area</a>
+                <a href="PparkingArea.php">Admin Parking Area</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">event_available</span>
