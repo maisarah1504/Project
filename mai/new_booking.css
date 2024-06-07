@@ -6,3 +6,9 @@ h3 {
     padding: 10px;
     margin: auto;
 }
+
+main {
+    flex: 0;
+    margin-left: 150px; /* Space for the sidebar */
+    padding: 15px;
+}
