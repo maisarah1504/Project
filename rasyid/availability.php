@@ -157,7 +157,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="PparkingArea.php">Admin Parking Area</a>
+                <a href="parkingArea.php">Admin Parking Area</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">event_available</span>
@@ -165,7 +165,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
-                <a href="Plistparking.php">List of Parking</a>
+                <a href="listparking.php">List of Parking</a>
             </li>
             <hr>
             <li class="logout-link">
