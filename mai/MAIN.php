@@ -1,3 +1,7 @@
+<?php 
+    //require '../session.php';
+    ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
 <body>
     <aside class="sidebar">
         <div class="logo">
-            <img src="PROJECT/images/logo.jpeg" alt="logo">
+            <img src="../images/logo.jpeg" alt="logo">
             <h2>FKPark</h2>
         </div>  
         <ul class="links">
@@ -22,7 +26,7 @@
                 <span class="material-symbols-outlined">expand_more</span>
                 <div class="dropdown-content">
                     <a href="NEW_BOOKING.php">New Booking</a>
-                    <a href="#">Booking History</a>
+                    <a href="BOOKING_HISTORY.php">Booking History</a>
                 </div>
             </li>
             <hr style="color: black;">

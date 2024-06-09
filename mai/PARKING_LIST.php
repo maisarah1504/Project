@@ -62,7 +62,12 @@ $result = mysqli_query($conn, $sql);
                 $spaceID = htmlspecialchars($row['spaceID']);
                 echo '<div class="parking-item">';
                 echo '<p>Parking Space ID: ' . $spaceID . '</p>';
-                echo '<a href="CONFIRMATION.php?spaceID=' . $spaceID . '" class="book-button">Book Now</a>';
+                echo '<form method="post" action="CONFIRMATION.php">';
+                echo '<input type="hidden" name="spaceID" value="' . $spaceID . '">';
+                echo '<input type="hidden" name="filterDate" value="' . htmlspecialchars($filterDate) . '">';
+                echo '<input type="hidden" name="filterTime" value="' . htmlspecialchars($filterTime) . '">';
+                echo '<input type="submit" value="Book Now" class="book-button">';
+                echo '</form>';
                 echo '</div>';
             }
         } else {
