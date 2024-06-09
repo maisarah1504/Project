@@ -32,7 +32,7 @@
             <hr style="color: black;">
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
+                <a href="../MODULE_1/weblogout.php">Logout</a>
             </li>
         </ul>
     </aside>

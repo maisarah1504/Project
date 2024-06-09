@@ -1,5 +1,5 @@
 <?php 
-    include('BOOKING_HISTORY.php');
+    include('MAIN.php');
     require('connection.php');
 
 ?>
@@ -15,8 +15,7 @@
     <style>
         .filter-history {
             display: flex;
-            flex-direction: column; /* Display the book list items vertically */
-            flex: 1; /* Allow the book list to expand to fill available space */
+            padding-top: 20px;
             padding-left: 150px; /* Adjust the left padding to leave space for the sidebar */
         }
 
