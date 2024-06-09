@@ -207,7 +207,7 @@
                                 echo "<td><input type='checkbox' name='selectedSpaces[]' value='" . $row["spaceID"] . "'></td>";
                                 echo "<td>" . $row["spaceID"] . "</td>";
                                 echo "<td>" . $row["location"] . "</td>";
-                                echo "<td><img src='" . $row["qrCode"] . "' alt='QR Code' style='width: 64px;'></td>";
+                                echo "<td><a href='" . $row["qrCode"] . "' target='_blank'><img src='" . $row["qrCode"] . "' alt='QR Code' style='width: 64px;'></a></td>";
                                 echo "<td>" . $row["status"] . "</td>";
                                 echo "</tr>";
                             }

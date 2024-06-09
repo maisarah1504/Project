@@ -215,15 +215,16 @@
             const pageData = parkingData.slice(start, end);
 
             for (const row of pageData) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${row.spaceID}</td>
-                    <td>${row.location}</td>
-                    <td><img src="${row.qrCode}" alt="QR Code" style="width: 64px;"></td>
-                    <td>${row.status}</td>
-                `;
-                tableBody.appendChild(tr);
-            }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${row.spaceID}</td>
+        <td>${row.location}</td>
+        <td><a href="${row.qrCode}" target="_blank"><img src="${row.qrCode}" alt="QR Code" style="width: 64px;"></a></td>
+        <td>${row.status}</td>
+    `;
+    tableBody.appendChild(tr);
+}
+
         }
 
         // Go to the previous page
