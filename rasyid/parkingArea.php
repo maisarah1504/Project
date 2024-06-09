@@ -234,7 +234,7 @@
                     <button type="button" onclick="submitForm('update_parking.php')">Update</button>
                 </div>
             </form>
-            <div class="pagination">
+            <div class="pagination" style="background-color: white;">
                 <?php
                 for ($i = 1; $i <= $total_pages; $i++) {
                     $active = ($i == $page) ? "class='active'" : "";
