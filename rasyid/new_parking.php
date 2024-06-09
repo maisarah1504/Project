@@ -1,4 +1,7 @@
 <?php
+include('process_new_parking.php');
+require('db_connect.php');
+
 session_start();
 if ($_SESSION['Role'] != 'Administrator') {
     header("Location: ../Layout/errorPage.php");
@@ -31,3 +34,4 @@ if ($_SESSION['Role'] != 'Administrator') {
     </form>
 </body>
 </html>
+
