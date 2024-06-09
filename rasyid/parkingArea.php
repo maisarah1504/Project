@@ -132,7 +132,7 @@
 <body>
     <aside class="sidebar">
         <div class="logo">
-            <img src="images/Logo FKPark.png" alt="logo">
+            <img src="images/logo.png" alt="logo">
             <h2>FKPark</h2>
         </div>
         <ul class="links">
@@ -228,7 +228,7 @@
                 <?php
                 for ($i = 1; $i <= $total_pages; $i++) {
                     $active = ($i == $page) ? "class='active'" : "";
-                    echo "<a href='PAGE7.php?page=$i' $active>$i</a>";
+                    echo "<a href='parkingArea.php?page=$i' $active>$i</a>";
                 }
                 ?>
             </div>
