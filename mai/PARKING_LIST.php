@@ -1,5 +1,7 @@
 <?php 
-require 'connection.php';
+include('MAIN.php');
+include_once('NEW_BOOKING.php');
+require ('connection.php');
 
 // Initialize variables with default values
 $filterDate = '';
@@ -23,7 +25,6 @@ $result = mysqli_query($conn, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FKPark</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="main.css">
 
     <style>
         .parking-list {
@@ -50,27 +51,24 @@ $result = mysqli_query($conn, $sql);
             text-decoration: none;
             border-radius: 5px;
         }
-
-        
     </style>
 </head>
 <body>
-
     <div class="parking-list">
         <?php 
+        echo "<p>Parking Location: " . htmlspecialchars($filterSpace) . "</p>";
         if ($result && mysqli_num_rows($result) > 0) {
             while($row = mysqli_fetch_assoc($result)) {  
-                $spaceID = $row['spaceID'];    
+                $spaceID = htmlspecialchars($row['spaceID']);
                 echo '<div class="parking-item">';
-                echo '<p>Parking Space ID: ' . htmlspecialchars($row['spaceID']) . '</p>';
-                echo '<a href="CONFIRMATION.php' . htmlspecialchars($row['spaceID']) . 'class="book-button">Book Now</a>';
+                echo '<p>Parking Space ID: ' . $spaceID . '</p>';
+                echo '<a href="CONFIRMATION.php?spaceID=' . $spaceID . '" class="book-button">Book Now</a>';
                 echo '</div>';
             }
         } else {
-            echo '<p>No available parking spaces.</p>';
+            echo '<p><b>No available parking spaces.</b></p>';
         }
         ?>
     </div>
-
 </body>
 </html>

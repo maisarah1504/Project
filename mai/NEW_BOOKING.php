@@ -19,7 +19,7 @@ require('connection.php');
 <body>
     <main>
         <div class="form">
-            <form action="NEW_BOOKING.php" method="post"> 
+            <form action="PARKING_LIST.php" method="post"> 
                 <h3>Parking List</h3>
 
                 <label for="filter_date">Date</label>
@@ -33,9 +33,6 @@ require('connection.php');
 
                 <button type="submit">Submit</button>
             </form>
-        </div>
-        <div class="container_parking">
-            <?php include('PARKING_LIST.php'); ?>
         </div>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
