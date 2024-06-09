@@ -1,5 +1,6 @@
 <?php 
-include('connection.php');
+include('MAIN.php');
+require('connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,28 +17,6 @@ include('connection.php');
     <script src="script.js"></script>
 </head>
 <body>
-    <aside class="sidebar">
-        <div class="logo">
-            <img src="images/Logo FKPark.png" alt="logo">
-            <h2>FKPark</h2>
-        </div>  
-        <ul class="links">
-            <li>                
-                <div class="menu-item">
-                    <span class="material-symbols-outlined">browse</span>
-                    <span class="dropdown-title">Booking<span class="material-symbols-outlined">expand_more</span></span>
-                </div>
-                <div class="dropdown-container">
-                    <a href="NEW_BOOKING.php">New Booking</a>
-                    <a href="#">Booking History</a>
-                </div>
-                <hr>
-            <li class="logout-link">
-                <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
-            </li>
-        </ul>
-    </aside>
     <main>
         <div class="form">
             <form action="NEW_BOOKING.php" method="post"> 

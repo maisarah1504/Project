@@ -13,20 +13,20 @@
 <body>
     <aside class="sidebar">
         <div class="logo">
-            <img src="images/Logo FKPark.png" alt="logo">
+            <img src="PROJECT/images/logo.jpeg" alt="logo">
             <h2>FKPark</h2>
         </div>  
         <ul class="links">
-            <li>                
-            <div class="menu-item">
-                <span class="material-symbols-outlined">browse</span>
-                <span class="dropdown-title">Booking<span class="material-symbols-outlined">expand_more</span></span>
-            </div>
-            <div class="dropdown-container">
-                <a href="NEW_BOOKING.php">New Booking</a>
-                <a href="#">Booking History</a>
-            </div>
+            <li class="dropdown">               
+                <span class="material-symbols-outlined">book</span>
+                <a href="#">Bookings</a>                    
+                <span class="material-symbols-outlined">expand_more</span>
+                <div class="dropdown-content">
+                    <a href="NEW_BOOKING.php">New Booking</a>
+                    <a href="#">Booking History</a>
+                </div>
             <hr>
+            </li>
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
                 <a href="#">Logout</a>
