@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
+       body {
             display: flex;
+            flex-direction: column;
+            background-image: url("../images/ground.jpg");
+            background-position: center;
+            background-size: cover;
+            backdrop-filter: blur(2.5px);
+            overflow-x: hidden;
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
         }
         
@@ -143,7 +150,7 @@
 <body>
     <aside class="sidebar">
         <div class="logo">
-            <img src="images/Logo FKPark.png" alt="logo">
+            <img src="../images/logo.jpeg" alt="logo">
             <h2>FKPark</h2>
         </div>
         <ul class="links">
