@@ -50,6 +50,8 @@ $result = mysqli_query($conn, $sql);
             text-decoration: none;
             border-radius: 5px;
         }
+
+        
     </style>
 </head>
 <body>
@@ -61,7 +63,7 @@ $result = mysqli_query($conn, $sql);
                 $spaceID = $row['spaceID'];    
                 echo '<div class="parking-item">';
                 echo '<p>Parking Space ID: ' . htmlspecialchars($row['spaceID']) . '</p>';
-                echo '<a href="CONFIRMATION.php?spaceID=' . htmlspecialchars($row['spaceID']) . 'class="book-button">Book Now</a>';
+                echo '<a href="CONFIRMATION.php' . htmlspecialchars($row['spaceID']) . 'class="book-button">Book Now</a>';
                 echo '</div>';
             }
         } else {

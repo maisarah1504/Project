@@ -11,7 +11,7 @@
 <body>
     <?php include('MAIN.php'); ?>
 
-    <div class="container-details">
+    <div class="container-details-confirmed">
         <div class="text">
             <h3>BOOKING DETAILS</h3>
         </div>

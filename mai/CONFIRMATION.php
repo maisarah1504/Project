@@ -47,7 +47,6 @@
 
 </head>
 <body>
-<main>
         <div class="container">
             <div class="card-header">
                 <h2 class="display">Booking Form</h2>
@@ -81,11 +80,10 @@
                     <button class="submit" type="submit" name="submit"><a href="CONFIRMED.php" <?php 
                         urlencode('fname') . urlencode('fvehicle') . urlencode('ftime') . urlencode('fdate'); 
                     ?>>SUBMIT</a></button>
-                    <button> <a href="NEW_BOOKING.php" class="btn btn-success"> BACK </a></button>
+                    <button> <a href="NEW_BOOKING.php" class="back"> BACK </a></button>
                 </form>
             </div>
         </div>
-    </main>
 
     <script src="script.js"></script>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>

@@ -1,9 +1,41 @@
 /* Apply styles to the booking form */
 .display {
     margin-top: 20px; /* Adjust the margin as needed */
+    flex:0;
+    margin-left: 150px;
+    padding: 10px;
+    position: relative;
 }
 
 /* Apply styles to the rest of the content */
 .container {
     margin-top: 10px;
+    
 }
+
+.body{
+    flex: 0;
+    margin-left: 150px; /* Space for the sidebar */
+    padding: 15px;
+}
+
+.submit {
+    text-decoration: none; /* Ensures there is no underline */
+    display: inline-block; /* Ensures the padding is applied correctly */
+    padding: 10px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: darkgreen; /* Optional: change color on hover for better UX */
+}
+
+
+.submit a:visited, .back a:active {
+    color: #fff; /* Ensures the color doesn't change on click or visit */
+}
+
