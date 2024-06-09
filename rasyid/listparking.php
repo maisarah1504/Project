@@ -150,8 +150,8 @@
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">event_available</span>
-                <a href="availability.php">Parking Availability</a>
+            <span class="material-symbols-outlined">person</span>
+            <a href="userprofile.php">user management</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>

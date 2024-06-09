@@ -30,4 +30,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<p><a href="admindasnboard.php">Return to Dashboard</a></p>
+<p><a href="parkingArea.php">Return to Dashboard</a></p>
