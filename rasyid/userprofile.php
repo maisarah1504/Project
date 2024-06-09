@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FKPark - Parking Availability</title>
+    <title>FKPark - User Profile Management</title>
     <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="styles.css">
     <style>
-       body {
+        body {
             display: flex;
             flex-direction: column;
             background-image: url("../images/ground.jpg");
@@ -20,7 +20,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
         }
-        
+
         .sidebar {
             width: 120px;
             background-color: #184A92;
@@ -82,7 +82,8 @@
             width: 100%;
             padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
         .content {
@@ -90,8 +91,25 @@
             margin: 0 auto;
         }
 
-        .parking-availability {
+        .user-profile-management {
             margin-top: 20px;
+            width: 100%;
+            position: relative;
+        }
+
+        .new-button {
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            background-color: #184A92;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            align-self: flex-end; /* Align button to the right */
+        }
+
+        .new-button:hover {
+            background-color: #002b6e;
         }
 
         table {
@@ -141,7 +159,8 @@
             background-color: #184A92;
             color: white;
             position: fixed;
-            width: 100%;
+            width: calc(100% - 250px);
+            left: 250px;
             bottom: 0;
         }
     </style>
@@ -181,19 +200,21 @@
         </ul>
     </aside>
     <main>
-        <h1>Parking Availability</h1>
+        <h1>User Profile Management</h1>
         <div class="content-wrapper">
             <div class="content">
-                <div class="parking-availability">
-                    <table class="parking-table">
+                <div class="user-profile-management">
+                    <button class="new-button" onclick="location.href='new_user.php'">New</button>
+                    <table class="user-table">
                         <thead>
                             <tr>
-                                <th>Space ID</th>
-                                <th>Status</th>
+                                <th>User ID</th>
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="parkingTableBody">
+                        <tbody id="userTableBody">
                             <!-- Data will be inserted here by JavaScript -->
                         </tbody>
                     </table>
@@ -209,33 +230,58 @@
     <script>
         const rowsPerPage = 10;
         let currentPage = 1;
-        let parkingData = [];
+        let userData = [];
 
         // Fetch data from the database
-        async function fetchData() {
-            const response = await fetch('get_parking_data.php');
+        async function fetchUserData() {
+            const response = await fetch('get_user_data.php');
             const data = await response.json();
-            parkingData = data;
-            renderTable();
+            userData = data;
+            renderUserProfileTable();
         }
 
         // Render table with pagination
-        function renderTable() {
-            const tableBody = document.getElementById('parkingTableBody');
+        function renderUserProfileTable() {
+            const tableBody = document.getElementById('userTableBody');
             tableBody.innerHTML = '';
 
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const pageData = parkingData.slice(start, end);
+            const pageData = userData.slice(start, end);
 
             for (const row of pageData) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${row.spaceID}</td>
-                    <td>${row.status}</td>
-                    <td><button>change</button></td>
+                    <td>${row.userID}</td>
+                    <td>${row.username}</td>
+                    <td>${row.password}</td>
+                    <td>
+                        <button onclick="viewUser(${row.userID})">View</button>
+                        <button onclick="deleteUser(${row.userID})">Delete</button>
+                    </td>
                 `;
                 tableBody.appendChild(tr);
+            }
+        }
+
+        // View user details
+        function viewUser(userID) {
+            // Redirect to the view user page with the userID
+            window.location.href = `view_user.php?userID=${userID}`;
+        }
+
+        // Delete user
+        async function deleteUser(userID) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                const response = await fetch(`delete_user.php?userID=${userID}`, {
+                    method: 'DELETE'
+                });
+                if (response.ok) {
+                    // Refresh the data
+                    fetchUserData();
+                } else {
+                    alert('Failed to delete user');
+                }
             }
         }
 
@@ -243,20 +289,20 @@
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
-                renderTable();
+                renderUserProfileTable();
             }
         }
 
         // Go to the next page
         function nextPage() {
-            if ((currentPage * rowsPerPage) < parkingData.length) {
+            if ((currentPage * rowsPerPage) < userData.length) {
                 currentPage++;
-                renderTable();
+                renderUserProfileTable();
             }
         }
 
         // Initialize the table on page load
-        window.onload = fetchData;
+        window.onload = fetchUserData;
     </script>
 </body>
 </html>
