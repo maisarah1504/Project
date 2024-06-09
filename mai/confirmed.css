@@ -1,31 +1,31 @@
-.container-details {
+.container-details-confirmed {
     display: block;
     position: relative;
-    margin-top: 10px; /* Adjust margin-top to create space between container-details and top */
-    margin-left: 120px; /* Adjust margin-left to accommodate the sidebar */
-    margin-right: 20px; /* Adjust margin-right for spacing */
-    margin-bottom: 80%; /* Add margin-bottom to create space between container-details and footer */
-    background-color: #f9f9f9;
-    padding: 20px;
+    margin-top: 30px; /* Adjust margin-top to create space between container-details and top */
+    flex:0;
+    margin-left: 150px;
+    padding: 10px;
+    width:inherit;
+    position: relative;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Styles for the text inside the container-details */
-.container-details h3 {
+.container-details-confirmed h3 {
     color: #333;
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.container-details p {
+.container-details-confirmed p {
     color: #666;
     font-size: 16px;
     margin-bottom: 5px;
 }
 
 /* Styles for the image inside the container-details */
-.container-details img {
+.container-details-confirmed img {
     max-width: 100%;
     height: auto;
     margin-top: 20px;
