@@ -136,10 +136,10 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
-                <a href="#">Booking Page</a>
+                <a href="../mai/BOOKING_DETAILS.php">Booking Page</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">local_parking</span>
+                <span class="material-symbols-outlined">directions_car</span>
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
             <li>
@@ -153,7 +153,7 @@
         <hr>
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
+                <a href="../MODULE_1/weblogout.php">Logout</a>
             </li>
         </ul>
     </aside>

@@ -146,7 +146,7 @@
                 <a href="#">Booking Page</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">local_parking</span>
+                <span class="material-symbols-outlined">directions_car</span>
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
             <li>
@@ -160,7 +160,7 @@
             <hr>
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
+                <a href="../MODULE_1/weblogout.php">Logout</a>
             </li>
         </ul>
     </aside>
@@ -219,11 +219,16 @@
     tr.innerHTML = `
         <td>${row.spaceID}</td>
         <td>${row.location}</td>
-        <td><a href="${row.qrCode}" target="_blank"><img src="${row.qrCode}" alt="QR Code" style="width: 64px;"></a></td>
+        <td>
+            <a href="${row.qrCode}" target="_blank">
+                <img src="../images/qrcodeview.png" alt="QR Code View" style="width: 64px;">
+            </a>
+        </td>
         <td>${row.status}</td>
     `;
     tableBody.appendChild(tr);
 }
+
 
         }
 
