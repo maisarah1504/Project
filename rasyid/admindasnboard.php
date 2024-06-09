@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FKPark</title>
-    <!-- Linking Google font link for icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -19,6 +18,7 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            height: 100vh;
         }
 
         .sidebar {
@@ -68,9 +68,11 @@
         }
 
         main {
-            margin-left: 250px;
+            margin-left: 150px;
             padding: 20px;
             flex-grow: 1;
+            overflow-y: auto;
+            height: calc(100vh - 40px);
         }
 
         h1 {
@@ -88,6 +90,20 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        hr {
+            border: 2px solid #184A92;
+            margin: 20px 0;
+        }
+
+        .charts-container {
+            width: 90%; /* Adjusted width */
+            margin: 20px auto 0 auto; /* Removed bottom margin */
+        }
+
+        .chart {
+            margin: 20px 0;
         }
 
         table {
@@ -122,6 +138,7 @@
             bottom: 0;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <aside class="sidebar">
@@ -147,15 +164,14 @@
                 <a href="availability.php">Parking Availability</a>
             </li>
             <li>
-            <span class="material-symbols-outlined">local_parking</span>
-            <a href="listparking.php">List of Parking</a>
-        </li>
-        <hr>
+                <span class="material-symbols-outlined">local_parking</span>
+                <a href="listparking.php">List of Parking</a>
+            </li>
+            <hr>
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
                 <a href="../MODULE_1/weblogout.php">Logout</a>
-            </li>
-        </ul>
+            </ul>
     </aside>
     <main>
         <h1>ADMIN DASHBOARD</h1>
@@ -163,30 +179,19 @@
             <div class="calendar-container">
                 <?php
                 function draw_calendar($month, $year) {
-                    // Draw table for calendar
                     $calendar = '<table>';
-                    
-                    // Table headings
                     $headings = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                     $calendar .= '<tr><th>' . implode('</th><th>', $headings) . '</th></tr>';
-                    
-                    // Days and weeks vars now ...
                     $running_day = date('w', mktime(0, 0, 0, $month, 1, $year));
                     $days_in_month = date('t', mktime(0, 0, 0, $month, 1, $year));
                     $days_in_week = 1;
                     $day_counter = 0;
                     $dates_array = [];
-                    
-                    // Row for week one
                     $calendar .= '<tr>';
-                    
-                    // Print "blank" days until the first of the current week
-                    for ($x = 0; $x < $running_day; $x++) {
+                    for ($x = 0; $running_day > $x; $x++) {
                         $calendar .= '<td> </td>';
                         $days_in_week++;
                     }
-                    
-                    // Keep going with days...
                     for ($day = 1; $day <= $days_in_month; $day++) {
                         $today = ($day == date('j') && $month == date('n') && $year == date('Y')) ? 'today' : '';
                         $calendar .= "<td class='$today'>$day</td>";
@@ -202,30 +207,84 @@
                         $running_day++;
                         $day_counter++;
                     }
-                    
-                    // Finish the rest of the days in the week
                     if ($days_in_week < 8) {
-                        for ($x = 1; $x <= (8 - $days_in_week); $x++) {
+                        for ($x = 1; (8 - $days_in_week) >= $x; $x++) {
                             $calendar .= '<td> </td>';
                         }
                     }
-                    
                     $calendar .= '</tr>';
                     $calendar .= '</table>';
-                    
                     return $calendar;
                 }
-                
-                // Get current month and year
                 $month = date('n');
                 $year = date('Y');
-                
-                // Draw calendar
                 echo draw_calendar($month, $year);
                 ?>
             </div>
         </div>
+        <hr>
+        <h2 style="text-align: center; border-bottom: 2px solid #184A92; padding-bottom: 10px;">AVERAGE PARKING AVAILABILITY</h2>
+        <div class="charts-container">
+            <div class="chart">
+                <canvas id="parkingStatusChart"></canvas>
+            </div>
+        </div>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const parkingStatusCtx = document.getElementById('parkingStatusChart').getContext('2d');
+
+            // Fetch the data from the server
+            fetch('fetch_parking_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    const statusData = {
+    labels: data.statusLabels,
+    datasets: [{
+        label: 'Parking Status',
+        data: data.statusCounts,
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.5)', // Red
+            'rgba(255, 159, 64, 0.5)', // Orange
+            'rgba(255, 205, 86, 0.5)', // Yellow
+            'rgba(75, 192, 192, 0.5)', // Teal
+            'rgba(54, 162, 235, 0.5)', // Blue
+            'rgba(153, 102, 255, 0.5)', // Purple
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(153, 102, 255, 1)',
+        ],
+        borderWidth: 1
+    }]
+};
+
+                    new Chart(parkingStatusCtx, {
+    type: 'pie',
+    data: statusData,
+    options: {
+        responsive: true,
+        aspectRatio: 1.7, // Adjust this value to make the chart smaller
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Parking Status Distribution'
+            }
+        }
+    }
+                    });
+                })
+                .catch(error => console.error('Error fetching parking data:', error));
+        });
+    </script>
 </body>
 </html>
