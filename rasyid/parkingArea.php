@@ -164,7 +164,7 @@
         </ul>
     </aside>
     <main>
-        <h1>Admin Parking Area</h1>
+        <h1>Admin Parking Space</h1>
         <div class="content-wrapper" style="width: 70%;">
             <form id="parkingForm" method="post">
                 <table class="parking-table">
