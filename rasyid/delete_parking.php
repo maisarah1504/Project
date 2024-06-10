@@ -24,6 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $conn->close();
 
 // Redirect back to the admin parking area page
-header("Location: PAGE7.php");
+header("Location: parkingArea.php");
 exit();
 ?>
