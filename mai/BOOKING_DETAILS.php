@@ -7,12 +7,12 @@
         $bookingID = $_GET['submit'];
 
         // Fetch booking details from the database based on the booking ID
-        $query = "SELECT * FROM booking 
+        $queryy = "SELECT * FROM booking 
                   INNER JOIN parking_space ON booking.spaceID = parking_space.spaceID 
                   INNER JOIN user ON booking.userID = user.userID 
                   INNER JOIN vehicle ON user.userID = vehicle.userID 
                   WHERE booking.bookingID = '$bookingID'";
-        $result = mysqli_query($conn, $query);
+        $result = mysqli_query($conn, $queryy);
 
         // Check if query was successful and if there is any data
         if ($result && mysqli_num_rows($result) > 0) {

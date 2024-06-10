@@ -26,7 +26,7 @@
                 <span class="material-symbols-outlined">expand_more</span>
                 <div class="dropdown-content">
                     <a href="NEW_BOOKING.php">New Booking</a>
-                    <a href="BOOKING_HISTORY.php">Booking History</a>
+                    <a href="BOOKING_LIST.php">Booking History</a>
                 </div>
             </li>
             <hr style="color: black;">
