@@ -15,7 +15,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-image: url("images/img-bg.jpg");
+    background-image: url("../images/fkom.jpg");
     background-position: center;
     background-size: cover;
     backdrop-filter: blur(2.5px);
@@ -32,7 +32,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: #ff0000;
+    background: #b7d7f1;
     border-right: 1px solid rgba(255, 255, 255, 0.7);
     transition: width 0.3s ease;
     overflow: auto;
