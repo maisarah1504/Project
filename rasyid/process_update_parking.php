@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         echo "Parking space updated successfully.";
     } else {
-        echo "Error updating parking space: " . htmlspecialchars($stmt->error);
+        echo "Error updating parking space.";
     }
 
     $stmt->close();
