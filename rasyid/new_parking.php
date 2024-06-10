@@ -4,7 +4,7 @@ require('db_connect.php');
 
 session_start();
 if ($_SESSION['Role'] != 'Administrator') {
-    header("Location: ../Layout/errorPage.php");
+    header("Location: ../new_parking.php");
     exit();
 }
 ?>
@@ -34,4 +34,3 @@ if ($_SESSION['Role'] != 'Administrator') {
     </form>
 </body>
 </html>
-

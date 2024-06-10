@@ -1,12 +1,11 @@
 <?php
-include 'db_connect.php';
-
-// Debugging: Check if spaceID is set
-if (isset($_GET['spaceID'])) {
-    echo "spaceID is set: " . $_GET['spaceID'];
-} else {
-    echo "spaceID is not set";
+session_start();
+if ($_SESSION['Role'] != 'Administrator') {
+    header("Location: ../admindasnboard.php");
+    exit();
 }
+
+include 'db_connect.php';
 
 // Get spaceID from URL parameter
 $id = isset($_GET['spaceID']) ? $_GET['spaceID'] : '';
@@ -47,3 +46,4 @@ if (!empty($id)) {
 
 $conn->close();
 ?>
+<p><a href="parkingArea.php">Return to previous page</a></p>
