@@ -184,24 +184,21 @@
                             <th>Location</th>
                             <th>QR Code</th>
                             <th>Status Space</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Include the database connection script
                         include 'db_connect.php';
 
-                        // Number of records per page
                         $records_per_page = 5;
                         $page = isset($_GET['page']) ? $_GET['page'] : 1;
                         $offset = ($page - 1) * $records_per_page;
 
-                        // SQL query to fetch data from the database with pagination
                         $sql = "SELECT spaceID, location, qrCode, status FROM parking_space LIMIT $offset, $records_per_page";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
-                            // Output data of each row
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
                                 echo "<td><input type='checkbox' name='selectedSpaces[]' value='" . $row["spaceID"] . "'></td>";
@@ -209,29 +206,26 @@
                                 echo "<td>" . $row["location"] . "</td>";
                                 echo "<td><a href='" . $row["qrCode"] . "' target='_blank'><img src='../images/qrcodeview.png' alt='QR Code View' style='width: 64px;'></a></td>";
                                 echo "<td>" . $row["status"] . "</td>";
+                                echo "<td><a href='update_parking.php?spaceID=" . $row["spaceID"] . "'>Update</a></td>";
                                 echo "</tr>";
                             }
-                       
                         } else {
-                            echo "<tr><td colspan='5'>No parking spaces found.</td></tr>";
+                            echo "<tr><td colspan='6'>No parking spaces found.</td></tr>";
                         }
 
-                        // Get the total number of records
                         $sql_total = "SELECT COUNT(*) AS total FROM parking_space";
                         $result_total = $conn->query($sql_total);
                         $row_total = $result_total->fetch_assoc();
                         $total_records = $row_total['total'];
                         $total_pages = ceil($total_records / $records_per_page);
 
-                        // Close the database connection
                         $conn->close();
                         ?>
                     </tbody>
                 </table>
                 <div class="button-group">
                     <button type="button" onclick="location.href='new_parking.php'">New</button>
-                    <button type="button" onclick="if (confirmDeletion()) submitForm('delete_parking.php')">Delete</button>
-                    <button type="button" onclick="submitForm('update_parking.php')">Update</button>
+                    <button type="button" onclick="if (confirm('Are you sure you want to delete the selected parking spaces?')) submitForm('delete_parking.php')">Delete</button>
                 </div>
             </form>
             <div class="pagination" style="background-color: white;">
@@ -245,5 +239,12 @@
         </div>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+    <script>
+        function submitForm(action) {
+            var form = document.getElementById('parkingForm');
+            form.action = action;
+            form.submit();
+        }
+    </script>
 </body>
 </html>

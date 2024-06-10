@@ -1,26 +1,20 @@
 <?php
-session_start();
-if ($_SESSION['Role'] != 'Administrator') {
-    header("Location: ../Layout/errorPage.php");
-    exit();
-}
-
-require_once '../../Database/db_connect.php';
+require('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $spaceID = $_POST['spaceID'];
     $location = $_POST['location'];
+    $capacity = $_POST['capacity'];
     $status = $_POST['status'];
     $qrCode = $_POST['qrCode'];
 
     $conn = connectDatabase();
-    $stmt = $conn->prepare("UPDATE parking_space SET location = ?, status = ?, qrCode = ? WHERE spaceID = ?");
-    $stmt->bind_param("sssi", $location, $status, $qrCode, $spaceID);
+    $stmt = $conn->prepare("INSERT INTO parking_space (location, capacity, status, qrCode) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("siss", $location, $capacity, $status, $qrCode);
 
     if ($stmt->execute()) {
-        echo "Parking space updated successfully.";
+        echo "New parking space created successfully.";
     } else {
-        echo "Error updating parking space.";
+        echo "Error creating new parking space.";
     }
 
     $stmt->close();
