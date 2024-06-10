@@ -10,6 +10,11 @@
 /* Apply styles to the rest of the content */
 .container {
     margin-top: 10px;
+    margin-left: 10px;
+    display: block;
+    background-color: white;
+    color: black;
+    padding-left: 20px;
     
 }
 
