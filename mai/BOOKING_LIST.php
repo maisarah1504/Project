@@ -1,19 +1,35 @@
 <?php 
-    include('BOOKING_HISTORY.php');
+    include('MAIN.php');
     require('connection.php');
 
-    //$s_userID = $_SESSION['userID'];
-    //$ftype = $_POST['filter-history'];
-    $sql ="SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate
-    FROM booking AS b
-    JOIN parking_space AS ps ON b.spaceID = ps.spaceID
-    join vehicle as v on v.userID = b.userID
-    WHERE b.userID = 1009";
-
-    $result = mysqli_query($conn, $sql);
-
 ?>
+<?php 
+// Uncomment and set $s_userID to test with actual session user ID
+//$s_userID = $_SESSION['userID'];
+//$ftype = $_POST['filter-history'];
 
+// Debug: Print the user ID
+// echo "User ID: " . $s_userID;
+
+// Adjust the query to match the structure of your database
+$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate
+        FROM booking AS b
+        JOIN parking_space AS ps ON b.spaceID = ps.spaceID
+        JOIN vehicle AS v ON v.userID = b.userID
+        WHERE b.bookingID = 1009 "; // Adjust userID for testing
+
+$result = mysqli_query($conn, $sql);
+
+// Debug: Check for SQL errors
+if (!$result) {
+    die("Query Failed: " . mysqli_error($conn));
+}
+
+// Debug: Check the number of rows returned
+if (mysqli_num_rows($result) == 0) {
+    echo "No bookings found.";
+}
+?>
 <!DOCTYPE html> 
 <html lang="en">
 <head>
@@ -23,13 +39,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <script src="script.js"></script>
     <style>
+        .filter-history {
+            display: flex;
+            padding-top: 20px;
+            padding-left: 150px; /* Adjust the left padding to leave space for the sidebar */
+        }
+
+    </style>
+    <style>
         body {
             display: flex;
         }
         .table-list {
             border: solid 1px black;
             padding: 10px;
-            margin-top: 0; /* Remove any top margin */
+            margin-top: 0;
             width: 100%;
             border-collapse: collapse;
         }
@@ -45,9 +69,9 @@
             display: flex;
             flex-direction: column;
             flex: 1;
-            margin-top: 0; /* Ensure there is no top margin */
-            padding: 20px 20px 20px 120px; /* Adjust padding to avoid overlap with the sidebar */
-            overflow: hidden; /* Ensure no overflow */
+            margin-top: 0;
+            padding: 20px 20px 20px 120px;
+            overflow: hidden;
         }
         .btn-edit, .btn-delete {
             background-color: blue;
@@ -62,39 +86,40 @@
         }
     </style>
 </head>
-<body>
-<div class="book-list">
-        <div class="details-book">
+    <body>
+        <div class="filter-history">
+            <h2>MY BOOKING</h2>
+        </div>
+        <div class="book-list">
+            <div class="details-book">
             <table class="table-list">
                 <tr>
                     <th>Booking ID</th>
                     <th>Parking Space</th>
                     <th>Date</th>
                     <th>Time</th>
-                    <th>Status</th>
                     <th>Vehicle ID</th>
                     <th>Plate Number</th>
-                    <th>Actions</th>
+                    <th colspan="2">Actions</th>
                 </tr>
                 <?php 
-                    while($row = mysqli_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <tr>
                     <td><?php echo $row['bookingID']; ?></td>
                     <td><?php echo $row['location']; ?></td>
                     <td><?php echo $row['startDate']; ?></td>
                     <td><?php echo $row['startTime']; ?></td>
-                    <td><?php echo $row['status']; ?></td>
                     <td><?php echo $row['vehicleID']; ?></td>
                     <td><?php echo $row['licencePlate']; ?></td>
-                    <td><a href="edit_booking.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-edit">Edit</a></td>
-                    <td><a href="delete_booking.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-delete">Delete</a></td>
+                    <td><a href="EDIT_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-edit">Edit</a></td>
+                    <td><a href="DELETE_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-delete">Delete</a></td>
                 </tr>
                 <?php 
-                    }
+                }
                 ?>
             </table>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
