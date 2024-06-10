@@ -27,6 +27,8 @@ button {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 button:hover {
@@ -48,6 +50,8 @@ img.avatar {
   font-size: 1.5em;
   font-weight: bold;
   margin-top: 10px;
+  text-align: center;
+  text-transform: uppercase; /* Make text uppercase */
 }
 
 .container {
@@ -64,20 +68,30 @@ input[type=text], input[type=password], select {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 5px;
 }
 
-span.psw {
-  align-self: flex-end;
+.forgot-psw {
+  text-align: center;
   margin-top: 4px;
 }
 
-span.psw a {
+.forgot-psw a {
   color: blue;
   text-decoration: underline;
+  font-style: italic;
+}
+
+.forgot-psw a:hover {
+  color: darkblue; /* Change color when hovered */
+}
+
+label .required {
+  color: red;
 }
 
 @media screen and (max-width: 300px) {
-  span.psw {
+  .forgot-psw {
     display: block;
     float: none;
   }
