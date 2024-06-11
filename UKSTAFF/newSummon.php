@@ -12,7 +12,7 @@
     <aside class="sidebar">
         <div class="logo">
             <a href="dashboard.php">
-            <img src="images/Logo FKPark.png" alt="logo">
+            <img src="../images/Logo FKPark.png" alt="logo">
             </a>
             <h2>FKPark</h2>
         </div>
@@ -159,7 +159,7 @@
 
                             // Display the QR code image
                             const qrCodeImage = document.getElementById('qrCode');
-                            qrCodeImage.src = 'images/qrcode.png';
+                            qrCodeImage.src = '../images/qrcode.png';
                             qrCodeImage.alt = "Qr Code";
 
                             // Display the submitted data in the table

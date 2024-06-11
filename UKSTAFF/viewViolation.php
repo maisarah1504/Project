@@ -59,7 +59,7 @@ $uploadEvidence = $row['uploadEvidence'];
     <aside class="sidebar">
         <div class="logo">
             <a href="dashboard.php">
-            <img src="images/Logo FKPark.png" alt="logo">
+            <img src="../images/Logo FKPark.png" alt="logo">
             </a>
             <h2>FKPark</h2>
         </div>
