@@ -1,10 +1,10 @@
 <?php
-require('db_connect.php');
+include('db_connect.php');
 
 $spaceID = isset($_GET['spaceID']) ? $_GET['spaceID'] : '';
 
 if (!empty($spaceID)) {
-    $conn = connectDatabase();
+    
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -32,7 +32,6 @@ if (!empty($spaceID)) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

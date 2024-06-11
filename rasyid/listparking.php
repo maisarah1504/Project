@@ -58,9 +58,10 @@
             margin-top: auto;
         }
         main {
-            margin-left: 250px;
+            margin-left: 140px;
             padding: 20px;
-            flex-grow: 1;
+            flex: 1;
+            overflow-y: auto; /* Enable vertical scroll if needed */
         }
         h1 {
             text-align: center;
@@ -68,15 +69,20 @@
         }
         .content-wrapper {
             display: flex;
-            justify-content: center; /* Center the content horizontally */
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
+            width: 100%;
+            margin-bottom: auto; /* Adjust margin to push footer to the bottom */
         }
         .table-container {
-            flex: 1;
-        }
+    width: 100%;
+    overflow-x: auto;
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin-bottom: 50px; /* Add some margin at the bottom */
+}
         table {
-            width: 100%; /* Set table width to 100% */
-            max-width: 800px; /* Set maximum width for the table */
+            width: 100%;
             border-collapse: collapse;
             background-color: white;
         }
@@ -110,15 +116,21 @@
             background-color: #002b6e;
         }
         .image-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .image-container img {
-            max-width: 100%;
-            border: 2px solid #184A92;
-            border-radius: 10px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+    width: 100%;
+    max-width: 800px; /* Adjust the maximum width as needed */
+    margin-bottom: 20px; /* Add some margin at the bottom */
+}
+
+.image-container img {
+    width: 50%; /* Set the image width to 50% of its container */
+    height: auto; /* Maintain the aspect ratio */
+    border: 2px solid #184A92;
+    border-radius: 10px;
+    margin-right: 20px; /* Add some space between the image and the table */
+}
         footer {
             text-align: center;
             padding: 10px;
@@ -166,7 +178,10 @@
     </aside>
     <main>
         <h1>List of Parking</h1>
-        <div class="content-wrapper" style="width: 70%;">
+        <div class="image-container">
+        <img src="../images/1.png" alt="Parking Image">
+    </div>
+        <div class="content-wrapper">
             <div class="table-container">
                 <table class="parking-table">
                     <thead>
@@ -180,20 +195,17 @@
                     <tbody id="parkingTableBody">
                         <!-- Data will be inserted here by JavaScript -->
                     </tbody>
-                </table>
-                <div class="pagination">
+                    <div class="pagination">
                     <button onclick="prevPage()">Previous</button>
                     <button onclick="nextPage()">Next</button>
                 </div>
-            </div>
-            <div class="image-container">
-                <img src="../images/1.png" alt="Parking Image">
+                </table>
             </div>
         </div>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
     <script>
-        const rowsPerPage = 10;
+        const rowsPerPage = 8;
         let currentPage = 1;
         let parkingData = [];
 
@@ -215,21 +227,19 @@
             const pageData = parkingData.slice(start, end);
 
             for (const row of pageData) {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-        <td>${row.spaceID}</td>
-        <td>${row.location}</td>
-        <td>
-            <a href="${row.qrCode}" target="_blank">
-                <img src="../images/qrcodeview.png" alt="QR Code View" style="width: 64px;">
-            </a>
-        </td>
-        <td>${row.status}</td>
-    `;
-    tableBody.appendChild(tr);
-}
-
-
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.spaceID}</td>
+                    <td>${row.location}</td>
+                    <td>
+                        <a href="${row.qrCode}" target="_blank">
+                            <img src="../images/qrcodeview.png" alt="QR Code View" style="width: 64px;">
+                        </a>
+                    </td>
+                    <td>${row.status}</td>
+                `;
+                tableBody.appendChild(tr);
+            }
         }
 
         // Go to the previous page

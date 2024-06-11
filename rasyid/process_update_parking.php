@@ -1,5 +1,5 @@
 <?php
-require('db_connect.php');
+include('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $spaceID = $_POST['spaceID'];
@@ -7,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $_POST['status'];
     $qrCode = $_POST['qrCode'];
 
-    $conn = connectDatabase();
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -17,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die('Prepare failed: ' . htmlspecialchars($conn->error));
     }
 
-    $stmt->bind_param("sssi", $location, $status, $qrCode, $spaceID);
+    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCode);
 
     if ($stmt->execute()) {
         echo "Parking space updated successfully.";

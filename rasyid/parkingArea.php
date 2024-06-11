@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
+       body {
             display: flex;
             flex-direction: column;
             background-image: url("../images/ground.jpg");
@@ -106,25 +106,29 @@
             bottom: 0;
         }
         .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .pagination a {
-            color: #184A92;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            margin: 0 4px;
-        }
-        .pagination a.active {
-            background-color: #184A92;
-            color: white;
-            border: 1px solid #184A92;
-        }
-        .pagination a:hover:not(.active) {
-            background-color: #ddd;
-        }
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: #184A92;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    border-radius: 5px; /* Add border radius to buttons */
+}
+
+.pagination a.active {
+    background-color: #184A92;
+    color: white;
+    border: 1px solid #184A92;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
     </style>
     <script>
         function submitForm(action) {
@@ -136,16 +140,26 @@
         function confirmDeletion() {
             return confirm('Are you sure you want to delete the selected parking spaces?');
         }
+
+        function updateSpace() {
+            var checkboxes = document.querySelectorAll('input[name="selectedSpaces[]"]:checked');
+            if (checkboxes.length !== 1) {
+                alert('Please select exactly one space to update.');
+                return;
+            }
+            var spaceID = checkboxes[0].value;
+            window.location.href = 'update_parking.php?spaceID=' + spaceID;
+        }
     </script>
 </head>
 <body>
-    <aside class="sidebar">
+<aside class="sidebar">
         <div class="logo">
             <img src="../images/logo.jpeg" alt="logo">
             <h2>FKPark</h2>
         </div>
         <ul class="links">
-            <li>
+        <li>
                 <span class="material-symbols-outlined">dashboard</span>
                 <a href="admindasnboard.php">Admin Dashboard</a>
             </li>
@@ -158,8 +172,8 @@
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
             <li>
-                <span class="material-symbols-outlined">person</span>
-                <a href="userprofile.php">user management</a>
+            <span class="material-symbols-outlined">person</span>
+            <a href="userprofile.php">user management</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
@@ -189,7 +203,7 @@
                     <tbody>
                         <?php
                         // Include the database connection script
-                        include 'db_connect.php';
+                        include '../mai/connection.php';
 
                         // Number of records per page
                         $records_per_page = 5;
@@ -211,7 +225,6 @@
                                 echo "<td>" . $row["status"] . "</td>";
                                 echo "</tr>";
                             }
-                       
                         } else {
                             echo "<tr><td colspan='5'>No parking spaces found.</td></tr>";
                         }
@@ -231,19 +244,18 @@
                 <div class="button-group">
                     <button type="button" onclick="location.href='new_parking.php'">New</button>
                     <button type="button" onclick="if (confirmDeletion()) submitForm('delete_parking.php')">Delete</button>
-                    <button type="button" onclick="submitForm('update_parking.php')">Update</button>
+                    <button type="button" onclick="updateSpace()">Update</button>
                 </div>
             </form>
             <div class="pagination" style="background-color: white;">
                 <?php
                 for ($i = 1; $i <= $total_pages; $i++) {
                     $active = ($i == $page) ? "class='active'" : "";
-                    echo "<a href='parkingArea.php?page=$i' $active>$i</a>";
+                    echo "<a href='?page=$i' $active>$i</a>";
                 }
                 ?>
             </div>
         </div>
     </main>
-    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 </body>
 </html>

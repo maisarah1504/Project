@@ -81,17 +81,19 @@
         }
 
         .calendar-wrapper {
-            width: 40%;
-            margin: 0 auto;
-        }
+    width: 90%;
+    margin: 0 auto;
+}
 
-        .calendar-container {
-            background-color: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
+.calendar-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Set width to 100% */
+    max-width: 600px; /* Set a maximum width to maintain readability */
+    margin: 0 auto; /* Center the calendar container */
+}
         hr {
             border: 2px solid #184A92;
             margin: 20px 0;

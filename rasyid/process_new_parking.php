@@ -2,19 +2,18 @@
 require('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $spaceID = $_POST['spaceID'];
     $location = $_POST['location'];
-    $capacity = $_POST['capacity'];
     $status = $_POST['status'];
     $qrCode = $_POST['qrCode'];
 
-    $conn = connectDatabase();
-    $stmt = $conn->prepare("INSERT INTO parking_space (location, capacity, status, qrCode) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("siss", $location, $capacity, $status, $qrCode);
+    $stmt = $conn->prepare("INSERT INTO parking_space (spaceID, location, status, qrCode) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCode);
 
     if ($stmt->execute()) {
         echo "New parking space created successfully.";
     } else {
-        echo "Error creating new parking space.";
+        echo "Error creating new parking space: " . $stmt->error;
     }
 
     $stmt->close();
