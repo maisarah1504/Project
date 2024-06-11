@@ -9,20 +9,21 @@ $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect the form data
-    $userID = $_POST['user-id'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
-    $role = $_POST['role'];
+    $role = strtolower($_POST['role']);;
 
     // Check the credentials in the database
-    $sql = "SELECT * FROM user WHERE userID = ? AND password = ? AND role = ?";
+    $sql = "SELECT * FROM user WHERE username = ? AND role = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sss", $userID, $password, $role);
+    mysqli_stmt_bind_param($stmt, "ss", $username, $role);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
 
-    if (mysqli_num_rows($result) > 0) {
+    if ($row && password_verify($password, $row['password'])) {
         // Credentials are correct, start session and store user data
-        $_SESSION['userID'] = $userID;
+        $_SESSION['userID'] = $row['userID'];
         $_SESSION['role'] = $role;
 
         // Redirect based on role
@@ -36,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         // Credentials are incorrect, show error message
-        $message = "User ID, Password, or Role is incorrect.";
+        $message = "Username, Password, or Role is incorrect.";
     }
 
     // Close the database connection
@@ -69,8 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1 class="login-text">LOGIN</h1>
         <form method="POST" action="weblogin.php">
             <div class="form-group">
-                <label for="user-id"><strong>User ID</strong><span class="required">*</span></label>
-                <input type="text" id="user-id" name="user-id" required>
+                <label for="username"><strong>Username</strong><span class="required">*</span></label>
+                <input type="text" id="username" name="username" required>
             </div>
 
             <div class="form-group">
