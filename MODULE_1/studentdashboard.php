@@ -138,10 +138,10 @@
         </div>
         <ul class="links">
             <li>
-                <a href="studentdashboard.php"><span class="material-symbols-outlined">dashboard</span>Student Dashboard</a>
+                <a href="studentdashboard.php"><span class="material-symbols-outlined">dashboard</span>User Dashboard</a>
             </li>
             <li>
-                <a href="#"><span class="material-symbols-outlined">person</span>Student Profile</a>
+                <a href="#"><span class="material-symbols-outlined">person</span>User Profile</a>
             </li>
             <li>
                 <a href="vehicleregistration.php"><span class="material-symbols-outlined">directions_car</span>Vehicle Registration</a>
