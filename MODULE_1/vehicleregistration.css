@@ -47,7 +47,8 @@ label .required {
 }
 
 input[type="text"],
-select {
+select,
+input[type="file"] {
     display: block;
     width: 100%;
     padding: 10px;
@@ -77,4 +78,17 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.file-note {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 300px) {
+    span.back-to-login {
+        display: block;
+        float: none;
+    }
 }
