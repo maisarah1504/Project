@@ -41,7 +41,7 @@
             <li><span class="material-symbols-outlined">flag</span><a href="newSummon.php">Issue Traffic Summon</a></li>
             <li><span class="material-symbols-outlined">monitoring</span><a href="trafficViolationRecord.php">Traffic Violation Record</a></li>
             <hr>
-            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a href="#">Logout</a></li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
         </ul>
     </aside>
     <main style="background-color: white; margin-left: 110px;">
@@ -54,31 +54,38 @@
                 <canvas id="violationCountChart"></canvas>
             </div>
             <div class="chart-box">
-            <div class="controls">
-                
-            <h2>Total Violations By Month</h2>
-            <label for="monthSelect">Select Month:</label>
-            <select id="monthSelect">
-                <option value="01">January</option>
-                <option value="02">February</option>
-                <option value="03">March</option>
-                <option value="04">April</option>
-                <option value="05">May</option>
-                <option value="06">June</option>
-                <option value="07">July</option>
-                <option value="08">August</option>
-                <option value="09">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-            </div>
+                <div class="controls">
+                    <h2>Total Violations By Month</h2>
+                    <label for="monthSelect">Select Month:</label>
+                    <select id="monthSelect">
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
                 <canvas id="violationTypeChart"></canvas>
             </div>
         </div>
     </main>
     <footer style="color: black;">&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
     <script>
+        document.getElementById('logoutLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            const userConfirmed = confirm('Are you sure you want to logout?'); // Show the confirmation dialog
+            if (userConfirmed) {
+                window.location.href = '../MODULE_1/weblogin.php'; // Redirect if the user confirms
+            }
+        });
+
         document.getElementById('monthSelect').addEventListener('change', updateViolationTypeChart);
 
         function updateViolationTypeChart() {
