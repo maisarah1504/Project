@@ -141,7 +141,7 @@
                 <a href="studentdashboard.php"><span class="material-symbols-outlined">dashboard</span>Student Dashboard</a>
             </li>
             <li>
-                <a href="#"><span class="material-symbols-outlined">person</span>User Profile</a>
+                <a href="#"><span class="material-symbols-outlined">person</span>Student Profile</a>
             </li>
             <li>
                 <a href="vehicleregistration.php"><span class="material-symbols-outlined">directions_car</span>Vehicle Registration</a>
