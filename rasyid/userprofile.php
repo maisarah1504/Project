@@ -185,8 +185,8 @@
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
             <li>
-            <span class="material-symbols-outlined">person</span>
-            <a href="userprofile.php">user management</a>
+                <span class="material-symbols-outlined">person</span>
+                <a href="userprofile.php">User Management</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
@@ -234,7 +234,7 @@
 
         // Fetch data from the database
         async function fetchUserData() {
-            const response = await fetch('get_user_data.php');
+            const response = await fetch('db.connect.php');
             const data = await response.json();
             userData = data;
             renderUserProfileTable();
@@ -267,7 +267,7 @@
         // View user details
         function viewUser(userID) {
             // Redirect to the view user page with the userID
-            window.location.href = `view_user.php?userID=${userID}`;
+            window.location.href = `db.connect.php?userID=${userID}`;
         }
 
         // Delete user
