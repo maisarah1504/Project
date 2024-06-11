@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="newSummon.css">
 </head>
-<body>
+<body style="display: flex; background-image: url('../images/img-bg.jpg'); background-position: center; background-size: cover; backdrop-filter: blur(2.5px); overflow: hidden;)">
     <aside class="sidebar">
         <div class="logo">
             <a href="dashboard.php">
