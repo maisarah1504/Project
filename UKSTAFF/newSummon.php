@@ -34,81 +34,68 @@
     </aside>
     <main margin-left: 110px;>
         <form id="summonForm" action="submit.php" method="POST" enctype="multipart/form-data">
-            
-                <h2 style="text-align:center;">New Summon</h2>
-            
-                <label for="violationType">Violation Type * </label>
-                <select name="violationType" id="violationType" required>
-                    <option value="Parking Violation">Parking Violation</option>
-                    <option value="Campus Traffic">Not comply in campus traffic</option>
-                    <option value="Accident">Accident Caused</option>
-                </select>
+            <h2 style="text-align:center;">New Summon</h2>
 
-                <br><br>
+            <label for="violationType">Violation Type * </label>
+            <select name="violationType" id="violationType" required>
+                <option value="Parking Violation">Parking Violation</option>
+                <option value="Not comply in campus traffic">Not Comply in Campus Traffic</option>
+                <option value="Accident Caused">Accident Caused</option>
+            </select>
+            <br><br>
 
-                <label for="plateNum">Plate Number * </label>
-                <input type="text" name="plateNum" id="plateNum" placeholder="Enter the vehicle plate number" required>
+            <label for="plateNum">Plate Number * </label>
+            <input type="text" name="plateNum" id="plateNum" placeholder="Enter the vehicle plate number" required>
+            <br><br>
 
-                <br><br>
+            <label for="vehicleType">Vehicle Type *</label>
+            <br>
+            <input type="radio" name="vehicleType" id="motor" value="Motorcycle">
+            <label for="motor">Motorcycle</label>
+            <input type="radio" name="vehicleType" id="car" value="Car">
+            <label for="car">Car</label>
+            <br><br>
 
-                <label for="vehicleType">Vehicle Type *</label>
-                <br>
-                <input type="radio" name="vehicleType" id="motor" value="Motorcycle">
-                <label for="motor">Motorcycle</label>
-                <input type="radio" name="vehicleType" id="car" value="Car">
-                <label for="car">Car</label>
-        
-                <br><br>
+            <label for="violationLocation">Violation Location *</label>
+            <input type="text" name="violationLocation" id="violationLocation" placeholder="Enter the location of the violation" required>
+            <br><br>
 
-                <label for="violationLocation">Violation Location *</label>
-                <input type="text" name="violationLocation" id="violationLocation" placeholder="Enter the location of the violation" required>
-            
-                <br><br>
+            <label for="violationDate">Violation Date *</label>
+            <input type="date" name="violationDate" id="violationDate" required>
+            <br><br>
 
-                <label for="violationDate">Violation Date *</label>
-                <input type="date" name="violationDate" id="violationDate" required>
+            <label for="violationTime">Violation Time *</label>
+            <input type="time" name="violationTime" id="violationTime" required>
+            <br><br>
 
-                <br><br>
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" placeholder="Enter the description of the violation">
+            <br><br>
 
-                <label for="violationTime">Violation Time *</label>
-                <input type="time" name="violationTime" id="violationTime" required>
+            <label for="demeritPoint">Demerit Point</label>
+            <input style="text-align: center;" type="number" name="demeritPoint" id="demeritPoint" readonly>
+            <br><br>
 
-                <br><br>
+            <label for="UKStaffID">Unit Keselamatan Staff ID *</label>
+            <input type="text" name="UKStaffID" id="UKStaffID"  placeholder="Enter Staff ID" required>
+            <br><br>
 
-                <label for="description">Description</label>
-                <input type="text" name="description" id="description" placeholder="Enter the description of the violation">
+            <label for="UKStaffName">Unit Keselamatan Staff Name *</label>
+            <input type="text" name="UKStaffName" id="UKStaffName" placeholder="Enter Staff name" required>
+            <br><br>
 
-                <br><br>
+            <label for="uploadEvidence">Upload Evidence *</label>
+            <input type="file" name="uploadEvidence" id="uploadEvidence">
+            <br><br><br>
 
-                <label for="demeritPoint">Demerit Point</label>
-                <input style="text-align: center;" type="number" name="demeritPoint" id="demeritPoint" readonly>
-
-                <br><br>
-
-                <label for="UKStaffID">Unit Keselamatan Staff ID *</label>
-                <input type="text" name="UKStaffID" id="UKStaffID"  placeholder="Enter Staff ID" required>
-
-                <br><br>
-
-                <label for="UKStaffName">Unit Keselamatan Staff Name *</label>
-                <input type="text" name="UKStaffName" id="UKStaffName" placeholder="Enter Staff name" required>
-
-                <br><br>
-
-                <label for="uploadEvidence">Upload Evidence *</label>
-                <input type="file" name="uploadEvidence" id="uploadEvidence">
-
-                <br><br><br>
-
-                <button id="submit" type="submit">Submit</button>
-                <br>
-                <button id="cancel" type="reset">Cancel</button>
-        
+            <button id="submit" type="submit">Submit</button>
+            <br>
+            <button id="cancel" type="reset">Cancel</button>
         </form>
         <div id="confirmationMessage" style="display:none;">
             <h2>New Summon Issued</h2>
             <div class="qrCodeContainer">
-            <img id="qrCode" src="images/qrcode.png" alt="QR Code" style="max-width: 151px; max-height: 126px; width: 238px; height: 208px; top:5%; left: 5%;">
+                <img id="qrCode" src="images/qrcode.png" alt="QR Code" style="max-width: 151px; max-height: 126px; width: 238px; height: 208px; top:5%; left: 5%;">
             </div>
 
             <table id="submittedDataTable"></table>
@@ -126,7 +113,7 @@
                 case 'Parking Violation':
                     demeritPoints = 10;
                     break;
-                case 'Not Comply in Campus Traffic':
+                case 'Not comply in campus traffic':
                     demeritPoints = 15;
                     break;
                 case 'Accident Caused':
@@ -155,7 +142,6 @@
                         if (data.success) {
                             document.getElementById('summonForm').style.display = 'none';
                             document.getElementById('confirmationMessage').style.display = 'block';
-
 
                             // Display the QR code image
                             const qrCodeImage = document.getElementById('qrCode');
