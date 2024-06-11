@@ -7,17 +7,31 @@ $message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect the form data
     $fullName = $_POST['full-name'];
-    $idCardNo = $_POST['id-card-no'];
+    $username = $_POST['username'];
     $role = $_POST['role'];
+	$password = $_POST['password'];
 
+
+// Check if the user already exists
+    $checkSql = "SELECT * FROM user WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $checkSql);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_num_rows($result) > 0) {
+        // User already exists
+        $message = "Duplicate detected. This user already exists.";
+    } else {
     // Insert the data into the database
-    $sql = "INSERT INTO user (userID, username, role) VALUES ('$idCardNo', '$fullName', '$role')";
+    $sql = "INSERT INTO user (fullname, username, role, password) VALUES ('$fullName', '$username', '$role', '$password')";
 
     if (mysqli_query($conn, $sql)) {
         $message = "New record created successfully";
     } else {
         $message = "Error: " . $sql . "\\n" . mysqli_error($conn);
     }
+	}
 
     // Close the database connection
     mysqli_close($conn);
@@ -50,8 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="form-group">
-                <label for="id-card-no">Student/Staff ID<span class="required">*</span></label>
-                <input type="text" id="id-card-no" name="id-card-no" required>
+                <label for="username">Student/Staff ID<span class="required">*</span></label>
+                <input type="text" id="username" name="username" required>
             </div>
 
             <div class="form-group">
@@ -61,6 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="staff">Staff</option>
                     <option value="administrator">Administrator</option>
                 </select>
+            </div>
+			
+			<div class="form-group">
+                <label for="password">Password<span class="required">*</span></label>
+                <input type="text" id="password" name="password" required>
             </div>
 
             <div class="form-group-button">
