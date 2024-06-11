@@ -25,8 +25,6 @@ if ($result->num_rows == 1) {
     exit;
 }
 
-$conn->close();
-
 // Function to determine status based on demerit points
 function determineStatus($points) {
     if ($points < 20) {
@@ -42,6 +40,16 @@ function determineStatus($points) {
 
 // Determine the status for the fetched record
 $status = determineStatus($row['demeritPoint']);
+
+// Update the status in the database
+$update_sql = "UPDATE traffic_violation SET status = ? WHERE violationID = ?";
+$stmt = $conn->prepare($update_sql);
+$stmt->bind_param("si", $status, $violationID);
+$stmt->execute();
+$stmt->close();
+
+$conn->close();
+
 $uploadEvidence = $row['uploadEvidence'];
 ?>
 
@@ -109,4 +117,3 @@ $uploadEvidence = $row['uploadEvidence'];
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 </body>
 </html>
-
