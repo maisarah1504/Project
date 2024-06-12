@@ -9,7 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<<<<<<< HEAD
     <link rel="stylesheet" href="studentsidebar.css">
+=======
+>>>>>>> 749976a17f401733af792a9e82a8edb1c69c6dad
     <link rel="stylesheet" href="main.css">
 </head>
 <body onload="showMessage('<?php echo $message; ?>')">
