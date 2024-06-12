@@ -8,17 +8,15 @@ h3 {
 }
 
 main {
-    flex: 0;
-    margin-left: 150px; /* Space for the sidebar */
     padding-top: 10px;
 }
 
 .form {
     margin: 20px;
     display: block;
-    background-color: white;
+    background-color: rgb(126, 116, 116);
     width: 90%;
-    height: 500%;
+    height: 40%;
 }
 label {
     margin: 10px;
