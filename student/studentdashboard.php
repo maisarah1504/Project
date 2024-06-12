@@ -2,6 +2,9 @@
     // Include the database connection file
     include 'webconnect.php';
 
+    //include sidebar 
+    include '..//navigation/sidebarStudent.php';
+
     // Fetch vehicle information
     $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
     $vehicle_query = "SELECT vehicleType, licensePlate, vehicleModel, approvalStatus FROM vehicle WHERE userID = '$userID'";
