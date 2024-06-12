@@ -1,6 +1,5 @@
 <?php 
-    include "../rasyid/admindasnboard.php";
-
+include ""
 ?>
 
 <!DOCTYPE html>

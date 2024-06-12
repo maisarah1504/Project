@@ -155,7 +155,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
-                <a href="../mai/admin_booking.php">Booking Page</a>
+                <a href="admin_booking.php">Booking Page</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">directions_car</span>
