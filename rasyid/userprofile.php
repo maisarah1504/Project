@@ -235,9 +235,13 @@
         // Fetch data from the database
         async function fetchUserData() {
             const response = await fetch('db.connect.php');
-            const data = await response.json();
-            userData = data;
-            renderUserProfileTable();
+            if (response.ok) {
+                const data = await response.json();
+                userData = data;
+                renderUserProfileTable();
+            } else {
+                console.error('Failed to fetch data from the database');
+            }
         }
 
         // Render table with pagination
@@ -267,7 +271,7 @@
         // View user details
         function viewUser(userID) {
             // Redirect to the view user page with the userID
-            window.location.href = `db.connect.php?userID=${userID}`;
+            window.location.href = `view_user.php?userID=${userID}`;
         }
 
         // Delete user

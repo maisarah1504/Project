@@ -1,5 +1,5 @@
 <?php
-require('db_connect.php');
+include('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $spaceID = $_POST['spaceID'];
@@ -7,13 +7,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $_POST['status'];
     $qrCode = $_POST['qrCode'];
 
-    $stmt = $conn->prepare("INSERT INTO parking_space (spaceID, location, status, qrCode) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCode);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $stmt = $conn->prepare("UPDATE parking_space SET location = ?, status = ?, qrCode = ? WHERE spaceID = ?");
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+
+    $stmt->bind_param("sssi", $location, $status, $qrCode, $spaceID);
 
     if ($stmt->execute()) {
-        echo "New parking space created successfully.";
+        echo "Parking space updated successfully.";
     } else {
-        echo "Error creating new parking space: " . $stmt->error;
+        echo "Error updating parking space: " . htmlspecialchars($stmt->error);
     }
 
     $stmt->close();

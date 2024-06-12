@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die('Prepare failed: ' . htmlspecialchars($conn->error));
     }
 
-    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCode);
+    $stmt->bind_param("sssi", $location, $status, $qrCode, $spaceID);
 
     if ($stmt->execute()) {
         echo "Parking space updated successfully.";

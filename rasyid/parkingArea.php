@@ -203,7 +203,7 @@
                     <tbody>
                         <?php
                         // Include the database connection script
-                        include '../mai/connection.php';
+                        include 'db_connect.php';
 
                         // Number of records per page
                         $records_per_page = 5;
