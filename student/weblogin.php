@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body onload="showMessage('<?php echo $message; ?>')">
     <div class="login-box">
         <div class="imgcontainer">
-            <img src="img_310910.png" alt="Avatar" class="avatar">
+            <img src="../images/img_310910.png" alt="Avatar" class="avatar">
         </div>
         <h1 class="login-text">LOGIN</h1>
         <form method="POST" action="weblogin.php">
