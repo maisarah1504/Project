@@ -27,12 +27,14 @@
             <li>
                 <a href="vehicleregistration.php"><span class="material-symbols-outlined">directions_car</span>Vehicle Registration</a>
             </li>
-            <li class="dropdown-link">
-                <a href="#"><span class="material-symbols-outlined">book</span>Bookings</a>
-                <ul class="dropdown">
-                    <li><a href="#">New Booking</a></li>
-                    <li><a href="#">Booking History</a></li>
-                </ul>
+            <li class="dropdown">               
+                <span class="material-symbols-outlined">book</span>
+                <a href="#" class="dropdown-btn">Bookings</a>                    
+                <span class="material-symbols-outlined">expand_more</span>
+                <div class="dropdown-content">
+                    <a href="../mai//NEW_BOOKING.php">New Booking</a>
+                    <a href="../mai/BOOKING_LIST.php">Booking History</a>
+                </div>
             </li>
             <li>
                 <a href="#"><span class="material-symbols-outlined">local_parking</span>My Summon</a>
