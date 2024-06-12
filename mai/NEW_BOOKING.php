@@ -1,6 +1,7 @@
 <?php 
-include('sidebar.php');
+include('../MODULE_1/MAIN.php');
 require('connection.php');
+require "../MODULE_1/weblogin.php"
 ?>
 
 <!DOCTYPE html>
