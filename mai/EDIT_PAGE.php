@@ -1,5 +1,5 @@
 <?php
-include 'MAIN.php';
+include 'sidebar.php';
 require 'connection.php';
 
 // Start session to get userID
@@ -21,12 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Update the booking details
     $update_sql = "UPDATE booking
-                   SET startDate = '$startDate', startTime = '$startTime', status = '$status'
+                   SET startDate = '$startDate', startTime = '$startTime'
                    WHERE bookingID = '$bookingID'";
+
     if (mysqli_query($conn, $update_sql)) {
         echo "<script>
                 alert('Booking updated successfully!');
-                window.location.href = 'BOOKING_HISTORY.php';
+                window.location.href = 'BOOKING_LIST.php';
               </script>";
         exit;
     } else {
@@ -79,7 +80,7 @@ $booking = mysqli_fetch_assoc($result);
         input[type="text"],
         input[type="date"],
         input[type="time"],
-        input[type="submit"] {
+        .submit-link {
             width: 100%;
             padding: 8px;
             margin-bottom: 20px;
@@ -87,14 +88,15 @@ $booking = mysqli_fetch_assoc($result);
             border-radius: 4px;
             box-sizing: border-box;
         }
-        input[type="submit"] {
+        .submit-link {
             background-color: green;
+            text-decoration: none;
             color: #fff;
             border: none;
             cursor: pointer;
         }
-        input[type="submit"]:hover {
-            background-color: greenyellow;
+        .submit-link:hover {
+            background-color: #1D8348;
         }
         .form-group {
             margin-bottom: 15px;
@@ -128,12 +130,8 @@ $booking = mysqli_fetch_assoc($result);
                 <label for="startTime">Start Time:</label>
                 <input type="time" id="startTime" name="startTime" value="<?php echo $booking['startTime']; ?>">
             </div>
-            <div class="form-group">
-                <label for="status">Status:</label>
-                <input type="text" id="status" name="status" value="<?php echo $booking['status']; ?>">
-            </div>
-            <input type="submit" value="Update">
-            <a href="MY_BOOKING.php" class="cancel-link">Cancel</a>
+            <a href="BOOKING_LIST.php" class="submit-link">Submit</a>
+            <a href="BOOKING_LIST.php" class="cancel-link">Cancel</a>
         </form>
     </div>
 </body>

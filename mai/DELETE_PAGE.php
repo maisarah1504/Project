@@ -1,5 +1,5 @@
 <?php
-include "MAIN.php";
+include "sidebar.php";
 require('connection.php');
 
 // Check if bookingID is set in the query string

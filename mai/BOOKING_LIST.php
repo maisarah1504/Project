@@ -1,5 +1,5 @@
 <?php 
-    include('MAIN.php');
+    include('sidebar.php');
     require('connection.php');
 
 ?>
