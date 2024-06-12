@@ -1,5 +1,5 @@
 <?php 
-include "sidebaradmin.php";
+    include "sidebaradmin.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ include "sidebaradmin.php";
     <script src="script.js"></script>
 </head>
     <body>
-
+        
 
     </body>
 </html>
