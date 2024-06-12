@@ -208,9 +208,10 @@
                     <table class="user-table">
                         <thead>
                             <tr>
-                                <th>User ID</th>
-                                <th>Username</th>
-                                <th>Password</th>
+                                <th>userID</th>
+                                <th>userName</th>
+                                <th>password</th>
+                                <th>Role</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -234,7 +235,7 @@
 
         // Fetch data from the database
         async function fetchUserData() {
-            const response = await fetch('db.connect.php');
+            const response = await fetch('db_connect.php');
             if (response.ok) {
                 const data = await response.json();
                 userData = data;
@@ -256,12 +257,13 @@
             for (const row of pageData) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${row.userID}</td>
+                    <td>${row.userid}</td>
                     <td>${row.username}</td>
                     <td>${row.password}</td>
+                    <td>${row.role}</td>
                     <td>
-                        <button onclick="viewUser(${row.userID})">View</button>
-                        <button onclick="deleteUser(${row.userID})">Delete</button>
+                        <button onclick="viewUser(${row.id})">View</button>
+                        <button onclick="deleteUser(${row.id})">Delete</button>
                     </td>
                 `;
                 tableBody.appendChild(tr);
