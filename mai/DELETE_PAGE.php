@@ -1,29 +1,35 @@
 <?php
-include "sidebar.php";
-require('connection.php');
-
-// Check if bookingID is set in the query string
-//if (!isset($_GET['bookingID'])) {
-    //die('Error: bookingID parameter is missing.');
-//}
+include 'sidebar.php';
+require 'connection.php';
 
 // Get bookingID from query string
-//$bookingID = $_GET['bookingID'];
-
-// Check if the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Delete the booking
-    $sql = "DELETE FROM booking WHERE bookingID = 1009";
-    
-    if (mysqli_query($conn, $sql)) {
-        echo "Booking deleted successfully!";
-        // Redirect to the booking list page after deletion
-        header("Location: MY_BOOKING.php");
-        exit;
-    } else {
-        echo "Error deleting booking: " . mysqli_error($conn);
-    }
+if (!isset($_GET['bookingID'])) {
+    die('Error: bookingID parameter is missing.');
 }
+
+$bookingID = $_GET['bookingID'];
+
+// Delete the booking using a prepared statement
+$delete_sql = "DELETE FROM booking WHERE bookingID = ?";
+$stmt = $conn->prepare($delete_sql);
+
+if ($stmt === false) {
+    die('Prepare failed: ' . htmlspecialchars($conn->error));
+}
+
+$stmt->bind_param('i', $bookingID);
+
+if ($stmt->execute()) {
+    echo "<script>
+            alert('Booking deleted successfully!');
+            window.location.href = 'booking_list.php';
+          </script>";
+    exit;
+} else {
+    echo "Error deleting booking: " . htmlspecialchars($stmt->error);
+}
+
+$stmt->close();
 ?>
 
 <!DOCTYPE html>

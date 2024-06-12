@@ -17,33 +17,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get form data
     $startDate = $_POST['startDate'];
     $startTime = $_POST['startTime'];
-    $status = $_POST['status'];
 
-    // Update the booking details
-    $update_sql = "UPDATE booking
-                   SET startDate = '$startDate', startTime = '$startTime'
-                   WHERE bookingID = '$bookingID'";
+    // Update the booking details using a prepared statement
+    $update_sql = "UPDATE booking SET startDate = ?, startTime = ? WHERE bookingID = ?";
+    $stmt = $conn->prepare($update_sql);
 
-    if (mysqli_query($conn, $update_sql)) {
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($conn->error));
+    }
+
+    $stmt->bind_param('ssi', $startDate, $startTime, $bookingID);
+
+    if ($stmt->execute()) {
         echo "<script>
                 alert('Booking updated successfully!');
                 window.location.href = 'BOOKING_LIST.php';
               </script>";
         exit;
     } else {
-        echo "Error updating booking: " . mysqli_error($conn);
+        echo "Error updating booking: " . htmlspecialchars($stmt->error);
     }
+
+    $stmt->close();
 }
 
-// Fetch the booking details
+// Fetch the booking details using a prepared statement
 $sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, b.status, v.vehicleID, v.licencePlate
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
-        WHERE b.bookingID = 1009";
+        WHERE b.bookingID = ?";
+$stmt = $conn->prepare($sql);
 
-$result = mysqli_query($conn, $sql);
-$booking = mysqli_fetch_assoc($result);
+if ($stmt === false) {
+    die('Prepare failed: ' . htmlspecialchars($conn->error));
+}
+
+$stmt->bind_param('i', $bookingID);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    die('Error: No booking found with the specified bookingID.');
+}
+
+$booking = $result->fetch_assoc();
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -79,8 +98,7 @@ $booking = mysqli_fetch_assoc($result);
         }
         input[type="text"],
         input[type="date"],
-        input[type="time"],
-        .submit-link {
+        input[type="time"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 20px;
@@ -88,18 +106,17 @@ $booking = mysqli_fetch_assoc($result);
             border-radius: 4px;
             box-sizing: border-box;
         }
-        .submit-link {
+        .submit-button {
             background-color: green;
-            text-decoration: none;
             color: #fff;
+            text-decoration: none;
             border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
             cursor: pointer;
         }
-        .submit-link:hover {
+        .submit-button:hover {
             background-color: #1D8348;
-        }
-        .form-group {
-            margin-bottom: 15px;
         }
         .cancel-link {
             background-color: red;
@@ -120,17 +137,17 @@ $booking = mysqli_fetch_assoc($result);
         <form action="edit_booking.php?bookingID=<?php echo $bookingID; ?>" method="post">
             <div class="form-group">
                 <label for="location">Location:</label>
-                <input type="text" id="location" name="location" value="<?php echo $booking['location']; ?>" disabled>
+                <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($booking['location']); ?>" disabled>
             </div>
             <div class="form-group">
                 <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate" name="startDate" value="<?php echo $booking['startDate']; ?>">
+                <input type="date" id="startDate" name="startDate" value="<?php echo htmlspecialchars($booking['startDate']); ?>">
             </div>
             <div class="form-group">
                 <label for="startTime">Start Time:</label>
-                <input type="time" id="startTime" name="startTime" value="<?php echo $booking['startTime']; ?>">
+                <input type="time" id="startTime" name="startTime" value="<?php echo htmlspecialchars($booking['startTime']); ?>">
             </div>
-            <a href="BOOKING_LIST.php" class="submit-link">Submit</a>
+            <button type="submit" class="submit-button"><a href="BOOKING_LIST.php">SUBMIT</a></button>
             <a href="BOOKING_LIST.php" class="cancel-link">Cancel</a>
         </form>
     </div>
