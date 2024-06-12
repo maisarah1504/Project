@@ -90,9 +90,10 @@ CREATE TABLE `traffic_violation` (
 
 CREATE TABLE `user` (
   `userID` int(10) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL
+  `username` varchar(7) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `fullname` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -105,8 +106,10 @@ CREATE TABLE `vehicle` (
   `vehicleID` int(10) NOT NULL,
   `userID` int(10) NOT NULL,
   `vehicleType` varchar(50) NOT NULL,
-  `licencePlate` varchar(50) NOT NULL,
-  `vehicleColor` varchar(50) NOT NULL
+  `licensePlate` varchar(50) NOT NULL,
+  `vehicleModel` varchar(50) NOT NULL,
+  `documentsDirectory` varchar(100) NOT NULL,
+  `approvalStatus` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

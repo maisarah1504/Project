@@ -19,7 +19,7 @@ session_destroy();
 <div class="login-box">
   <form action="weblogin.php" method="get">
     <div class="imgcontainer">
-      <img src="logout.png" alt="Avatar" class="avatar">
+      <img src="../images/logout.png" alt="Avatar" class="avatar">
       <div class="login-text">LOGGED OUT</div>
     </div>
 
