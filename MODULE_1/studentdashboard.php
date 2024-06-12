@@ -1,5 +1,15 @@
 <?php 
-    //require '../session.php';
+    // Include the database connection file
+    include 'webconnect.php';
+
+    // Fetch vehicle information
+    $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
+    $vehicle_query = "SELECT vehicleType, licensePlate, vehicleModel, approvalStatus FROM vehicle WHERE userID = '$userID'";
+    $vehicle_result = mysqli_query($conn, $vehicle_query);
+
+    // Fetch booking information
+    $booking_query = "SELECT spaceID, startTime, endTime, status FROM booking WHERE userID = '$userID'";
+    $booking_result = mysqli_query($conn, $booking_query);
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
+    <title>Student Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="webregister.css">
     <style>
@@ -68,14 +78,44 @@
     <main>
         <h1 class="title">Student Dashboard</h1>
         <div class="dashboard">
-            <div class="box">
-                <h3>My Vehicle</h3>
-                <!-- Add content for My Vehicle here -->
-            </div>
-            <div class="box">
-                <h3>My Booking</h3>
-                <!-- Add content for My Booking here -->
-            </div>
+            <?php
+            // Display vehicle information
+            if (mysqli_num_rows($vehicle_result) > 0) {
+                while ($vehicle_row = mysqli_fetch_assoc($vehicle_result)) {
+                    ?>
+                    <div class="box">
+                        <h3>My Vehicle</h3>
+                        <p><strong>Type:</strong> <?php echo $vehicle_row['vehicleType']; ?></p>
+                        <p><strong>Plate Number:</strong> <?php echo $vehicle_row['licensePlate']; ?></p>
+                        <p><strong>Model:</strong> <?php echo $vehicle_row['vehicleModel']; ?></p>
+                        <p><strong>Approval Status:</strong> <?php echo $vehicle_row['approvalStatus']; ?></p>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<div class='box'><h3>My Vehicle</h3><p>No vehicle information found.</p></div>";
+            }
+            ?>
+            
+            <?php
+            // Display booking information
+            if (mysqli_num_rows($booking_result) > 0) {
+                while ($booking_row = mysqli_fetch_assoc($booking_result)) {
+                    ?>
+                    <div class="box">
+                        <h3>My Booking</h3>
+                        <p><strong>Space ID:</strong> <?php echo $booking_row['spaceID']; ?></p>
+                        <p><strong>Start Time:</strong> <?php echo $booking_row['startTime']; ?></p>
+                        <p><strong>End Time:</strong> <?php echo $booking_row['endTime']; ?></p>
+                        <p><strong>Status:</strong> <?php echo $booking_row['status']; ?></p>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<div class='box'><h3>My Booking</h3><p>No booking information found.</p></div>";
+            }
+            ?>
+            
             <div class="box">
                 <h3>Available Parking Spaces</h3>
                 <!-- Add content for Available Parking Spaces here -->
