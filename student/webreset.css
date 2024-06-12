@@ -1,0 +1,94 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('fkomputeran.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+}
+
+.login-box {
+  width: 400px;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 55%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.login-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input[type=text], input[type=password], select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+span.psw {
+  align-self: flex-end;
+  margin-top: 4px;
+}
+
+span.psw a {
+  color: blue;
+  text-decoration: underline;
+}
+
+span.back-to-login {
+  align-self: center;
+  margin-top: 8px;
+}
+
+span.back-to-login a {
+  color: blue;
+  text-decoration: underline;
+
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}

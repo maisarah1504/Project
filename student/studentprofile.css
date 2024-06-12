@@ -1,0 +1,84 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+main {
+    width: 90%; /* Reduce the width of the main container */
+    max-width: 800px; /* Adjust the maximum width */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-container {
+    width: 100%;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info-header h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.info-box {
+    width: 93%; /* Reduce the width of the inner boxes */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-box p {
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #184A92;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #163D6F;
+}
+
+.edit-button {
+    margin-right: 10px;
+}
+
+.vehicle-buttons {
+    display: flex;
+    gap: 10px;
+}
