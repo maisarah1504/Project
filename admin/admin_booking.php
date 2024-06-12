@@ -1,6 +1,5 @@
 <?php 
-    include "../rasyid/admindasnboard.php";
-
+include "sidebaradmin.php";
 ?>
 
 <!DOCTYPE html>
