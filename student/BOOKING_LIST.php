@@ -1,5 +1,5 @@
 <?php 
-    include('sidebar.php');
+    include('../navigation/sidebarStudent.php');
     require('connection.php');
 
 // Uncomment and set $s_userID to test with actual session user ID
@@ -14,7 +14,7 @@ $sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, 
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
-        WHERE b.bookingID = 1009"; // Adjust userID for testing
+        WHERE b.bookingID = 1017"; // Adjust userID for testing
 
 $result = mysqli_query($conn, $sql);
 
@@ -110,7 +110,7 @@ if (mysqli_num_rows($result) == 0) {
                     <td><?php echo $row['vehicleID']; ?></td>
                     <td><?php echo $row['licencePlate']; ?></td>
                     <td><a href="EDIT_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-edit">Edit</a></td>
-                    <td><a href="DELETE_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a></td>
+                    <td><a href="DELETE_PAGE.php" class="btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a></td>
                 </tr>
                 <?php 
                 }

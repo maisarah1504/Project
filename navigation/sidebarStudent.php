@@ -170,7 +170,7 @@ body {
 }
 
 .links .dropdown:hover .dropdown-content {
-    display: flex; /* Show dropdown content when dropdown is hovered */
+    display:contents; /* Show dropdown content when dropdown is hovered */
 }
 
 
