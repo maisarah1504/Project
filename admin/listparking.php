@@ -67,6 +67,16 @@
             text-align: center;
             margin-top: 20px;
         }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         .content-wrapper {
             display: flex;
             flex-direction: column;
@@ -123,7 +133,6 @@
             max-width: 800px; /* Adjust the maximum width as needed */
             margin-bottom: 20px; /* Add some margin at the bottom */
         }
-
         .image-container img {
             width: 50%; /* Set the image width to 50% of its container */
             height: auto; /* Maintain the aspect ratio */
@@ -178,6 +187,9 @@
     </aside>
     <main>
         <h1>List of Parking</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search Space ID">
+        </div>
         <div class="image-container">
             <img src="../images/1.png" alt="Parking Image">
         </div>
@@ -195,11 +207,11 @@
                     <tbody id="parkingTableBody">
                         <!-- Data will be inserted here by JavaScript -->
                     </tbody>
-                    <div class="pagination">
-                        <button onclick="prevPage()">Previous</button>
-                        <button onclick="nextPage()">Next</button>
-                    </div>
                 </table>
+                <div class="pagination">
+                    <button onclick="prevPage()">Previous</button>
+                    <button onclick="nextPage()">Next</button>
+                </div>
             </div>
         </div>
     </main>
@@ -208,6 +220,7 @@
         const rowsPerPage = 8;
         let currentPage = 1;
         let parkingData = [];
+        let filteredData = [];
 
         // Fetch data from the database
         async function fetchData() {
@@ -218,6 +231,7 @@
                 }
                 const data = await response.json();
                 parkingData = data;
+                filteredData = data;
                 renderTable();
             } catch (error) {
                 console.error('Error fetching data:', error.message);
@@ -231,7 +245,7 @@
 
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const pageData = parkingData.slice(start, end);
+            const pageData = filteredData.slice(start, end);
 
             for (const row of pageData) {
                 const tr = document.createElement('tr');
@@ -257,11 +271,22 @@
 
         // Go to the next page
         function nextPage() {
-            if ((currentPage * rowsPerPage) < parkingData.length) {
+            if ((currentPage * rowsPerPage) < filteredData.length) {
                 currentPage++;
                 renderTable();
             }
         }
+
+        // Filter data based on search input
+        function filterData() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            filteredData = parkingData.filter(row => row.spaceID.toLowerCase().includes(searchInput));
+            currentPage = 1; // Reset to the first page
+            renderTable();
+        }
+
+        // Add event listener to search input
+        document.getElementById('searchInput').addEventListener('input', filterData);
 
         // Initialize the table on page load
         window.onload = fetchData;
