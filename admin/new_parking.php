@@ -11,26 +11,55 @@
         body {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             background-image: url("../images/ground.jpg");
             background-position: center;
             background-size: cover;
             backdrop-filter: blur(2.5px);
-            overflow-x: hidden;
             margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
         }
-        .content-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        table {
-            width: 1000px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: white; /* Set table background to white */
+        h1 {
+            margin-bottom: 20px;
+            color: #184A92;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #184A92;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #002b6e;
         }
         .sidebar {
             width: 120px;
@@ -39,35 +68,6 @@
             color: white;
             height: 100vh;
             position: fixed;
-        }
-        th {
-            height: 50px;
-            background-color: #184A92;
-            color: white;
-            font-weight: bold;
-        }
-        td {
-            height: 50px;
-            text-align: center;
-            vertical-align: top;
-            border: 1px solid #ddd;
-        }
-        .button-group {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-            justify-content: center; /* Center the buttons */
-        }
-        .button-group button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #184A92;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .button-group button:hover {
-            background-color: #002b6e;
         }
         .links {
             list-style-type: none;
@@ -91,11 +91,6 @@
         .logout-link {
             margin-top: auto;
         }
-        main {
-            margin-left: 250px;
-            padding: 20px;
-            flex-grow: 1;
-        }
         footer {
             text-align: center;
             padding: 10px;
@@ -105,54 +100,26 @@
             width: 100%;
             bottom: 0;
         }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .pagination a {
-            color: #184A92;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            margin: 0 4px;
-        }
-        .pagination a.active {
-            background-color: #184A92;
-            color: white;
-            border: 1px solid #184A92;
-        }
-        .pagination a:hover:not(.active) {
-            background-color: #ddd;
-        }
     </style>
-    <script>
-        function submitForm(action) {
-            var form = document.getElementById('parkingForm');
-            form.action = action;
-            form.submit();
-        }
-
-        function confirmDeletion() {
-            return confirm('Are you sure you want to delete the selected parking spaces?');
-        }
-    </script>
+</head>
 <body>
-    <h1>Create New Parking Space</h1>
-    <form action="process_new_parking.php" method="post">
-        <label for="location">spaceID:</label>
-        <input type="text" id="spaceID" name="spaceID" required><br>
+    <div class="form-container">
+        <h1>Create New Parking Space</h1>
+        <form action="process_new_parking.php" method="post">
+            <label for="spaceID">Space ID:</label>
+            <input type="text" id="spaceID" name="spaceID" required>
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" required><br>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
 
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status" required><br>
+            <label for="status">Status:</label>
+            <input type="text" id="status" name="status" required>
 
-        <label for="qrCode">QR Code:</label>
-        <input type="text" id="qrCode" name="qrCode" required><br>
+            <label for="qrCode">QR Code:</label>
+            <input type="text" id="qrCode" name="qrCode" required>
 
-        <button type="submit">Create</button>
-    </form>
+            <button type="submit">Create</button>
+        </form>
+    </div>
 </body>
 </html>

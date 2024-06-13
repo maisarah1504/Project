@@ -151,7 +151,7 @@
         <ul class="links">
             <li>
                 <span class="material-symbols-outlined">dashboard</span>
-                <a href="admindasnboard.php">Admin Dashboard</a>
+                <a href="admindashboard.php">Admin Dashboard</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
