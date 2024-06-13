@@ -7,21 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $_POST['status'];
     $qrCode = $_POST['qrCode'];
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $stmt = $conn->prepare("UPDATE parking_space SET location = ?, status = ?, qrCode = ? WHERE spaceID = ?");
+    // Prepare INSERT statement
+    $stmt = $conn->prepare("INSERT INTO parking_space (spaceID, location, status, qrCode) VALUES (?, ?, ?, ?)");
     if ($stmt === false) {
         die('Prepare failed: ' . htmlspecialchars($conn->error));
     }
 
-    $stmt->bind_param("sssi", $location, $status, $qrCode, $spaceID);
+    // Bind parameters and execute the statement
+    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCode);
 
     if ($stmt->execute()) {
-        echo "Parking space updated successfully.";
+        echo "New parking space created successfully.";
     } else {
-        echo "Error updating parking space: " . htmlspecialchars($stmt->error);
+        echo "Error creating parking space: " . htmlspecialchars($stmt->error);
     }
 
     $stmt->close();

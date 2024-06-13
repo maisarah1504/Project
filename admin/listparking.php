@@ -76,11 +76,11 @@
             margin-bottom: auto; /* Adjust margin to push footer to the bottom */
         }
         .table-container {
-    width: 100%;
-    overflow-x: auto;
-    max-width: 800px; /* Adjust the maximum width as needed */
-    margin-bottom: 50px; /* Add some margin at the bottom */
-}
+            width: 100%;
+            overflow-x: auto;
+            max-width: 800px; /* Adjust the maximum width as needed */
+            margin-bottom: 50px; /* Add some margin at the bottom */
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -116,21 +116,21 @@
             background-color: #002b6e;
         }
         .image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center horizontally */
-    width: 100%;
-    max-width: 800px; /* Adjust the maximum width as needed */
-    margin-bottom: 20px; /* Add some margin at the bottom */
-}
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center horizontally */
+            width: 100%;
+            max-width: 800px; /* Adjust the maximum width as needed */
+            margin-bottom: 20px; /* Add some margin at the bottom */
+        }
 
-.image-container img {
-    width: 50%; /* Set the image width to 50% of its container */
-    height: auto; /* Maintain the aspect ratio */
-    border: 2px solid #184A92;
-    border-radius: 10px;
-    margin-right: 20px; /* Add some space between the image and the table */
-}
+        .image-container img {
+            width: 50%; /* Set the image width to 50% of its container */
+            height: auto; /* Maintain the aspect ratio */
+            border: 2px solid #184A92;
+            border-radius: 10px;
+            margin-right: 20px; /* Add some space between the image and the table */
+        }
         footer {
             text-align: center;
             padding: 10px;
@@ -151,7 +151,7 @@
         <ul class="links">
             <li>
                 <span class="material-symbols-outlined">dashboard</span>
-                <a href="admindasnboard.php">Admin Dashboard</a>
+                <a href="admindashboard.php">Admin Dashboard</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
@@ -162,8 +162,8 @@
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
             <li>
-            <span class="material-symbols-outlined">person</span>
-            <a href="userprofile.php">user management</a>
+                <span class="material-symbols-outlined">person</span>
+                <a href="userprofile.php">User Management</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
@@ -179,8 +179,8 @@
     <main>
         <h1>List of Parking</h1>
         <div class="image-container">
-        <img src="../images/1.png" alt="Parking Image">
-    </div>
+            <img src="../images/1.png" alt="Parking Image">
+        </div>
         <div class="content-wrapper">
             <div class="table-container">
                 <table class="parking-table">
@@ -196,9 +196,9 @@
                         <!-- Data will be inserted here by JavaScript -->
                     </tbody>
                     <div class="pagination">
-                    <button onclick="prevPage()">Previous</button>
-                    <button onclick="nextPage()">Next</button>
-                </div>
+                        <button onclick="prevPage()">Previous</button>
+                        <button onclick="nextPage()">Next</button>
+                    </div>
                 </table>
             </div>
         </div>
@@ -211,10 +211,17 @@
 
         // Fetch data from the database
         async function fetchData() {
-            const response = await fetch('get_parking_data.php');
-            const data = await response.json();
-            parkingData = data;
-            renderTable();
+            try {
+                const response = await fetch('get_parking_data.php');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                parkingData = data;
+                renderTable();
+            } catch (error) {
+                console.error('Error fetching data:', error.message);
+            }
         }
 
         // Render table with pagination
@@ -232,9 +239,7 @@
                     <td>${row.spaceID}</td>
                     <td>${row.location}</td>
                     <td>
-                        <a href="${row.qrCode}" target="_blank">
-                            <img src="../images/qrcodeview.png" alt="QR Code View" style="width: 64px;">
-                        </a>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(JSON.stringify(row))}" alt="QR Code View">
                     </td>
                     <td>${row.status}</td>
                 `;
