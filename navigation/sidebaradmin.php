@@ -1,3 +1,4 @@
+<?php ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +57,7 @@
         }
 
         .links a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
 
         .links .material-symbols-outlined {
@@ -129,15 +130,17 @@
         .today {
             background: #FFD500;
         }
-
         footer {
             text-align: center;
-            padding: 10px;
-            background-color: #184A92;
-            color: white;
-            position: fixed;
+            color: black;
             width: 100%;
+            position: fixed;
             bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #184A92;
+            backdrop-filter: blur(17px);
+            transition: margin-left 0.3s ease;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -151,7 +154,7 @@
         <ul class="links">
             <li>
                 <span class="material-symbols-outlined">dashboard</span>
-                <a href="admindasnboard.php">Admin Dashboard</a>
+                <a href="admindashboard.php">Admin Dashboard</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">book</span>
@@ -163,7 +166,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">person</span>
-                <a href="userprofile.php">user management</a>
+                <a href="userprofile.php">User management</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
@@ -175,5 +178,6 @@
                 <a href="../student/weblogout.php">Logout</a>
             </ul>
     </aside>
+    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
     </body>
     </HTML>

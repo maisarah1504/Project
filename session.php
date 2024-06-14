@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE){
 //check session variables
 if (!isset($_SESSION['userID']) || !isset($_SESSION['expire_time'])) {
     echo "Session variable not set.";
-    header("Location: .../weblogin.php");
+    header("Location: ");
     exit();
 }
 
@@ -23,3 +23,4 @@ if (time() > $_SESSION['expire_time']){
 }
 
 $_SESSION['expire_time'] = time() + 3600; 
+?>
