@@ -2,11 +2,11 @@
 include 'db_connect.php';
 
 $statusCounts = [
-    'Faculty event' => 30,
-    'building maintenance' => 10,
-    'mowing the lawns' => 20,
-    'cleaning windows' => 20,
-    'available' => 30
+    'Faculty event' => 0,
+    'building maintenance' => 0,
+    'mowing the lawns' => 0,
+    'cleaning windows' => 0,
+    'available' => 0
 ];
 $locationCounts = [];
 
@@ -20,6 +20,8 @@ if ($result->num_rows > 0) {
         
         if (isset($statusCounts[$status])) {
             $statusCounts[$status]++;
+        } else {
+            $statusCounts[$status] = 1;
         }
 
         if (isset($locationCounts[$location])) {
@@ -29,7 +31,13 @@ if ($result->num_rows > 0) {
         }
     }
 } else {
-    echo "0 results";
+    echo json_encode([
+        'statusLabels' => [],
+        'statusCounts' => [],
+        'locationLabels' => [],
+        'locationCounts' => []
+    ]);
+    exit();
 }
 
 $conn->close();
