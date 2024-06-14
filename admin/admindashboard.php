@@ -81,31 +81,36 @@
         }
 
         .calendar-wrapper {
-    width: 90%;
-    margin: 0 auto;
-}
+            width: 90%;
+            margin: 0 auto;
+        }
 
-.calendar-container {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Set width to 100% */
-    max-width: 600px; /* Set a maximum width to maintain readability */
-    margin: 0 auto; /* Center the calendar container */
-}
+        .calendar-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         hr {
             border: 2px solid #184A92;
             margin: 20px 0;
         }
 
         .charts-container {
-            width: 90%; /* Adjusted width */
-            margin: 20px auto 0 auto; /* Removed bottom margin */
+            width: 90%;
+            margin: 20px auto 0 auto;
         }
 
         .chart {
             margin: 20px 0;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         table {
@@ -243,46 +248,50 @@
                 .then(response => response.json())
                 .then(data => {
                     const statusData = {
-    labels: data.statusLabels,
-    datasets: [{
-        label: 'Parking Status',
-        data: data.statusCounts,
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.5)', // Red
-            'rgba(255, 159, 64, 0.5)', // Orange
-            'rgba(255, 205, 86, 0.5)', // Yellow
-            'rgba(75, 192, 192, 0.5)', // Teal
-            'rgba(54, 162, 235, 0.5)', // Blue
-            'rgba(153, 102, 255, 0.5)', // Purple
-        ],
-        borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 159, 64, 1)',
-            'rgba(255, 205, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(153, 102, 255, 1)',
-        ],
-        borderWidth: 1
-    }]
-};
+                        labels: data.statusLabels,
+                        datasets: [{
+                            label: 'Parking Status',
+                            data: data.statusCounts,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.8)', // Red
+                                'rgba(255, 159, 64, 0.8)', // Orange
+                                'rgba(255, 205, 86, 0.8)', // Yellow
+                                'rgba(75, 192, 192, 0.8)', // Teal
+                                'rgba(54, 162, 235, 0.8)', // Blue
+                                'rgba(153, 102, 255, 0.8)', // Purple
+                                'rgba(186, 225, 255, 0.8)', // Light Blue
+                                'rgba(204, 204, 255, 0.8)' // Light Purple
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(186, 225, 255, 1)',
+                                'rgba(204, 204, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    };
 
                     new Chart(parkingStatusCtx, {
-    type: 'pie',
-    data: statusData,
-    options: {
-        responsive: true,
-        aspectRatio: 1.7, // Adjust this value to make the chart smaller
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Parking Status Distribution'
-            }
-        }
-    }
+                        type: 'pie',
+                        data: statusData,
+                        options: {
+                            responsive: true,
+                            aspectRatio: 1.7, // Adjust this value to make the chart smaller
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Parking Status Distribution'
+                                }
+                            }
+                        }
                     });
                 })
                 .catch(error => console.error('Error fetching parking data:', error));

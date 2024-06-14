@@ -5,7 +5,7 @@ $statusCounts = [
     'Faculty event' => 0,
     'building maintenance' => 0,
     'mowing the lawns' => 0,
-    'cleaning windows' => 0,
+    'windows cleaning' => 0,
     'available' => 0
 ];
 $locationCounts = [];
