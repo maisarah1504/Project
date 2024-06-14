@@ -51,13 +51,13 @@ require('connection.php');
                 <h3>Parking List</h3>
 
                 <label for="filter_date">Date</label>
-                <input type="date" id="filterDate" name="filterDate" >
+                <input type="date" id="filterDate" name="filterDate" required>
 
                 <label for="filter_time">Time</label>
-                <input type="time" id="filterTime" name="filterTime" >
+                <input type="time" id="filterTime" name="filterTime" required>
                 
                 <label for="filter_park_space">Location</label>
-                <input type="text" id="filterSpace" name="filterSpace"  >
+                <input type="text" id="filterSpace" name="filterSpace" required>
 
                 <button type="submit">Submit</button>
             </form>
