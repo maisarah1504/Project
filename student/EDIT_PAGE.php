@@ -1,15 +1,12 @@
 <?php
-include 'sidebar.php';
-require 'connection.php';
+include('../navigation/sidebarStudent.php');
+require('connection.php');
 
-// Start session to get userID
-// session_start();
-
-// Get bookingID from query string
+// Check if bookingID is set in the query string
 if (!isset($_GET['bookingID'])) {
     die('Error: bookingID parameter is missing.');
-}    
-    
+}
+
 $bookingID = $_GET['bookingID'];
 
 // Check if the form has been submitted
@@ -18,31 +15,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $startDate = $_POST['startDate'];
     $startTime = $_POST['startTime'];
 
-    // Update the booking details using a prepared statement
-    $update_sql = "UPDATE booking SET startDate = ?, startTime = ? WHERE bookingID = ?";
-    $stmt = $conn->prepare($update_sql);
-
-    if ($stmt === false) {
-        die('Prepare failed: ' . htmlspecialchars($conn->error));
-    }
-
-    $stmt->bind_param('ssi', $startDate, $startTime, $bookingID);
-
-    if ($stmt->execute()) {
-        echo "<script>
-                alert('Booking updated successfully!');
-                window.location.href = 'BOOKING_LIST.php';
-              </script>";
-        exit;
+    // Validate form data
+    if (empty($startDate) || empty($startTime)) {
+        echo "Error: All fields are required.";
     } else {
-        echo "Error updating booking: " . htmlspecialchars($stmt->error);
-    }
+        // Update the booking details in the database
+        $update_sql = "UPDATE booking SET startDate = ?, startTime = ? WHERE bookingID = ?";
+        $stmt = $conn->prepare($update_sql);
+        
+        if ($stmt === false) {
+            die('Prepare failed: ' . htmlspecialchars($conn->error));
+        }
 
-    $stmt->close();
+        $stmt->bind_param('ssi', $startDate, $startTime, $bookingID);
+
+        if ($stmt->execute()) {
+            echo "<script>
+                    alert('Booking updated successfully!');
+                    window.location.href = 'BOOKING_LIST.php';
+                  </script>";
+            exit;
+        } else {
+            echo "Error updating booking: " . htmlspecialchars($stmt->error);
+        }
+
+        $stmt->close();
+    }
 }
 
-// Fetch the booking details using a prepared statement
-$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, b.status, v.vehicleID, v.licencePlate
+// Fetch the booking details
+$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
@@ -109,7 +111,6 @@ $stmt->close();
         .submit-button {
             background-color: green;
             color: #fff;
-            text-decoration: none;
             border: none;
             padding: 10px 15px;
             border-radius: 4px;
@@ -134,7 +135,7 @@ $stmt->close();
 <body>
     <div class="container">
         <h2>Edit Booking</h2>
-        <form action="edit_booking.php?bookingID=<?php echo $bookingID; ?>" method="post">
+        <form action="EDIT_PAGE.php?bookingID=<?php echo $bookingID; ?>" method="post">
             <div class="form-group">
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location" value="<?php echo htmlspecialchars($booking['location']); ?>" disabled>
@@ -147,7 +148,7 @@ $stmt->close();
                 <label for="startTime">Start Time:</label>
                 <input type="time" id="startTime" name="startTime" value="<?php echo htmlspecialchars($booking['startTime']); ?>">
             </div>
-            <button type="submit" class="submit-button"><a href="BOOKING_LIST.php">SUBMIT</a></button>
+            <button type="submit" class="submit-button">Submit</button>
             <a href="BOOKING_LIST.php" class="cancel-link">Cancel</a>
         </form>
     </div>

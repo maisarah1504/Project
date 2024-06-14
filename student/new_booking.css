@@ -3,20 +3,23 @@
 }
 
 h3 {
-    padding: 10px;
+    padding-left: 200px;
     margin: auto;
 }
 
 main {
     padding-top: 10px;
+    padding-left: 150px;
 }
 
-.form {
+.filter-form {
     margin: 20px;
+    padding-left: 250px;
     display: block;
-    background-color: rgb(126, 116, 116);
-    width: 90%;
-    height: 40%;
+    background-color: white;
+    width: 80%;
+    height: max-content;
+    position: inherit;
 }
 label {
     margin: 10px;

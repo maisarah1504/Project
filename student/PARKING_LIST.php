@@ -1,5 +1,5 @@
 <?php 
-include('MAIN.php');
+include('../navigation/sidebarStudent.php');
 include_once('NEW_BOOKING.php');
 require ('connection.php');
 
@@ -27,21 +27,30 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 
     <style>
+
         .parking-list {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .parking-item {
+        p {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
             display: flex;
             justify-content: space-between;
             width: 60%;
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+        }
+        .parking-item {
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            padding: 10px;
+            background-color: #fff;
         }
 
         .book-button {

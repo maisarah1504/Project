@@ -4,23 +4,21 @@
     flex:0;
     margin-left: 150px;
     padding: 10px;
-    position: relative;
 }
 
 /* Apply styles to the rest of the content */
 .container {
-    margin-top: 10px;
-    margin-left: 10px;
-    display: block;
-    background-color: white;
-    color: black;
-    padding-left: 20px;
-    
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 60%;
+    height: 80%;    
+    margin-left: 150px; 
+    margin-top: 10px;   
 }
 
 .body{
     flex: 0;
-    margin-left: 150px; /* Space for the sidebar */
     padding: 15px;
 }
 
@@ -29,6 +27,16 @@
     display: inline-block; /* Ensures the padding is applied correctly */
     padding: 10px;
     background-color: green;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.back {
+    text-decoration: none; /* Ensures there is no underline */
+    display: inline-block; /* Ensures the padding is applied correctly */
+    padding: 10px;
+    background-color: red;
     color: white;
     border-radius: 5px;
     border: none;
