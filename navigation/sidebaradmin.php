@@ -132,15 +132,13 @@
         }
         footer {
             text-align: center;
-            color: black;
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            padding: 10px;
             background-color: #184A92;
-            backdrop-filter: blur(17px);
-            transition: margin-left 0.3s ease;
+            color: white;
+            position: fixed;
+            width: 140%;
+            bottom: 0;
+            margin-left: 514px;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

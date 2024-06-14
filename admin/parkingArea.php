@@ -113,7 +113,6 @@ include "../navigation/sidebaradmin.php";
             justify-content: center;
             margin-top: 20px;
         }
-
         .pagination a {
             color: #184A92;
             padding: 8px 16px;
@@ -122,15 +121,23 @@ include "../navigation/sidebaradmin.php";
             margin: 0 4px;
             border-radius: 5px; /* Add border radius to buttons */
         }
-
         .pagination a.active {
             background-color: #184A92;
             color: white;
             border: 1px solid #184A92;
         }
-
         .pagination a:hover:not(.active) {
             background-color: #ddd;
+        }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
     <script>
@@ -156,16 +163,21 @@ include "../navigation/sidebaradmin.php";
     </script>
 </head>
 <body>
-
     <main>
         <h1>Admin Parking Space</h1>
+        <div class="search-container">
+            <form method="get" action="">
+                <input type="text" name="search" id="searchInput" placeholder="Search Space ID" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                <button type="submit">Search</button>
+            </form>
+        </div>
         <div class="content-wrapper" style="width: 70%;">
             <form id="parkingForm" method="post">
                 <table class="parking-table">
                     <thead>
                         <tr>
                             <th>Select</th>
-                            <th>spaceID</th>
+                            <th>Space ID</th>
                             <th>Location</th>
                             <th>QR Code</th>
                             <th>Status Space</th>
@@ -181,8 +193,15 @@ include "../navigation/sidebaradmin.php";
                         $page = isset($_GET['page']) ? $_GET['page'] : 1;
                         $offset = ($page - 1) * $records_per_page;
 
-                        // SQL query to fetch data from the database with pagination
-                        $sql = "SELECT spaceID, location, qrCode, status FROM parking_space LIMIT $offset, $records_per_page";
+                        // Check if a search query is set
+                        $search_query = isset($_GET['search']) ? $_GET['search'] : '';
+
+                        // Modify the SQL query to include search functionality
+                        $sql = "SELECT spaceID, location, qrCode, status FROM parking_space";
+                        if ($search_query != '') {
+                            $sql .= " WHERE spaceID LIKE '%" . $conn->real_escape_string($search_query) . "%'";
+                        }
+                        $sql .= " LIMIT $offset, $records_per_page";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -204,6 +223,9 @@ include "../navigation/sidebaradmin.php";
 
                         // Get the total number of records
                         $sql_total = "SELECT COUNT(*) AS total FROM parking_space";
+                        if ($search_query != '') {
+                            $sql_total .= " WHERE spaceID LIKE '%" . $conn->real_escape_string($search_query) . "%'";
+                        }
                         $result_total = $conn->query($sql_total);
                         $row_total = $result_total->fetch_assoc();
                         $total_records = $row_total['total'];
@@ -220,11 +242,14 @@ include "../navigation/sidebaradmin.php";
                     <button type="button" onclick="updateSpace()">Update</button>
                 </div>
             </form>
-            <div class="pagination" style="background-color: white;">
+            <div class="pagination" style="background: white; width: 1000px; margin: 0 auto;">
                 <?php
                 for ($i = 1; $i <= $total_pages; $i++) {
-                    $active = ($i == $page) ? "class='active'" : "";
-                    echo "<a href='?page=$i' $active>$i</a>";
+                    echo "<a href='?page=$i&search=" . urlencode($search_query) . "'";
+                    if ($i == $page) {
+                        echo " class='active'";
+                    }
+                    echo ">$i</a>";
                 }
                 ?>
             </div>
