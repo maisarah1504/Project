@@ -130,6 +130,12 @@ include "../navigation/sidebaradmin.php";
         .pagination button:hover {
             background-color: #002b6e;
         }
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
         .image-container {
             display: flex;
             align-items: center;
@@ -144,6 +150,32 @@ include "../navigation/sidebaradmin.php";
             border: 2px solid #184A92;
             border-radius: 10px;
             margin-right: 20px; /* Add some space between the image and the table */
+        }
+        .parking-list-wrapper {
+            display: flex;
+            gap: 20px;
+        }
+        .parking-list {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .parking-list h3 {
+            margin-bottom: 10px;
+            color: #184A92;
+            text-align: center;
+        }
+        .parking-list ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        .parking-list li {
+            margin-bottom: 5px;
+            color: #184A92;
         }
         footer {
             text-align: center;
@@ -163,8 +195,29 @@ include "../navigation/sidebaradmin.php";
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search Space ID">
         </div>
-        <div class="image-container">
-            <img src="../images/1.png" alt="Parking Image">
+        <div class="centered-content">
+            <div class="image-container">
+                <img src="../images/1.png" alt="Parking Image">
+            </div>
+            <div class="parking-list-wrapper">
+                <div class="parking-list">
+                    <h3>Staff Parking</h3>
+                    <ul>
+                        <li>1A</li>
+                        <li>2A</li>
+                        <li>3A</li>
+                        <li>4A</li>
+                    </ul>
+                </div>
+                <div class="parking-list">
+                    <h3>Student Parking</h3>
+                    <ul>
+                        <li>1B</li>
+                        <li>2B</li>
+                        <li>3B</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="content-wrapper">
             <div class="table-container">
@@ -246,7 +299,8 @@ include "../navigation/sidebaradmin.php";
         function nextPage() {
             if ((currentPage * rowsPerPage) < filteredData.length) {
                 currentPage++;
-                renderTable();
+                renderTable
+                ();
             }
         }
 

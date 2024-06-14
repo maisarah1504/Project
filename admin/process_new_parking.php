@@ -5,7 +5,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $spaceID = $_POST['spaceID'];
     $location = $_POST['location'];
     $status = $_POST['status'];
-    $qrCode = $_POST['qrCode'];
+
+    // Generate QR code URL
+    $data = json_encode(['spaceID' => $spaceID, 'location' => $location, 'status' => $status]);
+    $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' . urlencode($data);
 
     // Prepare INSERT statement
     $stmt = $conn->prepare("INSERT INTO parking_space (spaceID, location, status, qrCode) VALUES (?, ?, ?, ?)");
@@ -14,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Bind parameters and execute the statement
-    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCode);
+    $stmt->bind_param("isss", $spaceID, $location, $status, $qrCodeUrl);
 
     if ($stmt->execute()) {
         echo "New parking space created successfully.";

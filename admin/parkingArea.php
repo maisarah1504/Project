@@ -1,7 +1,5 @@
 <?php
-
 include "../navigation/sidebaradmin.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,29 +109,29 @@ include "../navigation/sidebaradmin.php";
             bottom: 0;
         }
         .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.pagination a {
-    color: #184A92;
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    margin: 0 4px;
-    border-radius: 5px; /* Add border radius to buttons */
-}
+        .pagination a {
+            color: #184A92;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+            border-radius: 5px; /* Add border radius to buttons */
+        }
 
-.pagination a.active {
-    background-color: #184A92;
-    color: white;
-    border: 1px solid #184A92;
-}
+        .pagination a.active {
+            background-color: #184A92;
+            color: white;
+            border: 1px solid #184A92;
+        }
 
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
     </style>
     <script>
         function submitForm(action) {
@@ -190,11 +188,13 @@ include "../navigation/sidebaradmin.php";
                         if ($result->num_rows > 0) {
                             // Output data of each row
                             while ($row = $result->fetch_assoc()) {
+                                $qrData = json_encode($row);
+                                $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=" . urlencode($qrData);
                                 echo "<tr>";
                                 echo "<td><input type='checkbox' name='selectedSpaces[]' value='" . $row["spaceID"] . "'></td>";
                                 echo "<td>" . $row["spaceID"] . "</td>";
                                 echo "<td>" . $row["location"] . "</td>";
-                                echo "<td><a href='" . $row["qrCode"] . "' target='_blank'><img src='../images/qrcodeview.png' alt='QR Code View' style='width: 64px;'></a></td>";
+                                echo "<td><a href='" . $qrCodeUrl . "' target='_blank'><img src='" . $qrCodeUrl . "' alt='QR Code View' style='width: 64px;'></a></td>";
                                 echo "<td>" . $row["status"] . "</td>";
                                 echo "</tr>";
                             }
