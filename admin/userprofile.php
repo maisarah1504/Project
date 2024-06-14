@@ -1,3 +1,8 @@
+<?php
+
+include "../navigation/sidebaradmin.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,39 +171,7 @@
     </style>
 </head>
 <body>
-    <aside class="sidebar">
-        <div class="logo">
-            <img src="../images/logo.jpeg" alt="logo">
-            <h2>FKPark</h2>
-        </div>
-        <ul class="links">
-            <li>
-                <span class="material-symbols-outlined">dashboard</span>
-                <a href="admindashboard.php">Admin Dashboard</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">book</span>
-                <a href="#">Booking Page</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">directions_car</span>
-                <a href="parkingArea.php">Admin Parking Space</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">person</span>
-                <a href="userprofile.php">User Management</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">local_parking</span>
-                <a href="listparking.php">List of Parking</a>
-            </li>
-            <hr>
-            <li class="logout-link">
-                <span class="material-symbols-outlined">logout</span>
-                <a href="../MODULE_1/weblogout.php">Logout</a>
-            </li>
-        </ul>
-    </aside>
+    
     <main>
         <h1>User Profile Management</h1>
         <div class="content-wrapper">

@@ -1,3 +1,8 @@
+<?php
+
+include "../navigation/sidebaradmin.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,38 +153,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <aside class="sidebar">
-        <div class="logo">
-            <img src="../images/logo.jpeg" alt="logo">
-            <h2>FKPark</h2>
-        </div>
-        <ul class="links">
-            <li>
-                <span class="material-symbols-outlined">dashboard</span>
-                <a href="admindashboard.php">Admin Dashboard</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">book</span>
-                <a href="admin_booking.php">Booking Page</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">directions_car</span>
-                <a href="parkingArea.php">Admin Parking Space</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">person</span>
-                <a href="userprofile.php">user management</a>
-            </li>
-            <li>
-                <span class="material-symbols-outlined">local_parking</span>
-                <a href="listparking.php">List of Parking</a>
-            </li>
-            <hr>
-            <li class="logout-link">
-                <span class="material-symbols-outlined">logout</span>
-                <a href="../student/weblogout.php">Logout</a>
-            </ul>
-    </aside>
+    
     <main>
         <h1>ADMIN DASHBOARD</h1>
         <div class="calendar-wrapper">
