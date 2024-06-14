@@ -110,7 +110,7 @@ if (mysqli_num_rows($result) == 0) {
                     <td><?php echo $row['vehicleID']; ?></td>
                     <td><?php echo $row['licencePlate']; ?></td>
                     <td><a href="EDIT_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-edit">Edit</a></td>
-                    <td><a href="DELETE_PAGE.php" class="btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a></td>
+                    <td><a href="DELETE_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a></td>
                 </tr>
                 <?php 
                 }

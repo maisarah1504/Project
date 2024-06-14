@@ -1,6 +1,6 @@
 <?php 
     // Include the database connection file
-    include 'webconnect.php';
+    include '../webconnect.php';
 
     //include sidebar 
     include '..//navigation/sidebarStudent.php';

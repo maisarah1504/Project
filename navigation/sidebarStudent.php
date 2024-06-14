@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    
+    <script src="../script.js"></script>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
     margin: 0;
@@ -40,23 +40,25 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 110px;
+    width: 110px; /* Initial width of the sidebar */
     height: 100%;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     background: #184A92;
+    color: black; /* Text color */
+    backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
     border-right: 1px solid rgba(255, 255, 255, 0.7);
     transition: width 0.3s ease;
-    overflow: auto;
+    overflow: hidden; /* Ensure no overflow */
 }
 
 .sidebar:hover {
-    width: 260px;
+    width: 260px; /* Expanded width on hover */
 }
 
 .sidebar .logo {
-    color: #000;
     display: flex;
     align-items: center;
     padding: 25px 10px 15px;
@@ -71,11 +73,11 @@ body {
     font-size: 1.15rem;
     font-weight: 600;
     margin-left: 15px;
-    display: none;
+    display: none; /* Initially hidden */
 }
 
 .sidebar:hover .logo h2 {
-    display: block;
+    display: block; /* Display on hover */
 }
 
 .sidebar .links {
@@ -83,130 +85,78 @@ body {
     margin-top: 20px;
     overflow-y: auto;
     scrollbar-width: none;
-    height: calc(100% - 140px);
+    height: calc(100% - 140px); /* Adjust height */
 }
 
 .sidebar .links::-webkit-scrollbar {
-    display: none;
+    display: none; /* Hide scrollbar */
 }
 
 .links li {
     display: flex;
-    border-radius: 4px;
     align-items: center;
+    padding: 5px 10px;
 }
 
 .links li:hover {
     cursor: pointer;
-    background: #fff;
-}
-
-.links h4 {
-    color: #222;
-    font-weight: 500;
-    display: none;
-    margin-bottom: 10px;
-}
-
-.sidebar:hover .links h4 {
-    display: block;
-}
-
-.links hr {
-    margin: 10px 8px;
-    border: 1px solid black;
-}
-
-.sidebar:hover .links hr {
-    border-color: black;
-}
-
-.links li span {
-    padding: 12px 10px;
+    background: #fff; /* Background color on hover */
 }
 
 .links li a {
+    display: flex; /* Flex to align items */
+    align-items: center;
+    color: black; /* Text color */
     padding: 10px;
-    color: #000;
-    display: none;
     font-weight: 500;
-    white-space: nowrap;
     text-decoration: none;
 }
 
-.sidebar:hover .links li a {
-    display: block;
+.links li a span {
+    margin-right: 10px; /* Space between icon and text */
 }
 
-.links .dropdown {
-    position: relative; /* Ensure dropdown content is positioned relative to this element */
-    cursor: pointer; /* Change cursor to pointer on hover */
+.links .link-text {
+    display: none; /* Initially hidden */
 }
 
+.sidebar:hover .links .link-text {
+    display: block; /* Display on hover */
+}
 
 .links .dropdown-content {
-    display: none; /* Initially hide the dropdown content */
-    flex-direction: column;
-    background-color: #fff;
+    display: none; /* Initially hidden */
+    position: absolute;
+    left: 110px; /* Adjust position */
+    top: 0;
+    background-color: #184A92; /* Background color */
     min-width: 160px;
-    overflow:hidden;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    left: 110px; /* Adjust the position of the dropdown content */
-    top: 0; /* Position the dropdown content below the dropdown */
+    color: black; /* Text color */
 }
 
 .links .dropdown-content a {
+    display: block;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
-    color: #333;
+    color: #fff; /* Text color */
     transition: background-color 0.3s ease;
 }
 
 .links .dropdown-content a:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2); /* Background color on hover */
 }
 
 .links .dropdown:hover .dropdown-content {
-    display:contents; /* Show dropdown content when dropdown is hovered */
-}
-
-
-.container-details {
-    display: block;
-    position: relative;
-    margin: 20px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.container-details h3 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.container-details p {
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.container-details img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    display: block; /* Display on hover */
 }
 
 footer {
     text-align: center;
-    color: black;
+    color: #fff;
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -214,10 +164,9 @@ footer {
     transform: translateX(-50%);
     background-color: #184A92;
     backdrop-filter: blur(17px);
-    transition: margin-left 0.3s ease;
 }
 
-    </style>
+</style>
 </head>
 <body onload="showMessage('<?php echo $message; ?>')">
     <aside class="sidebar">
@@ -238,8 +187,8 @@ footer {
             <li class="dropdown-link">
                 <a href="#"><span class="material-symbols-outlined">book</span>Bookings</a>
                 <ul class="dropdown">
-                    <li><a href="#">New Booking</a></li>
-                    <li><a href="#">Booking History</a></li>
+                    <li><a href="../student/NEW_BOOKING.php">New Booking</a></li>
+                    <li><a href="../student/BOOKING_LIST.php">Booking History</a></li>
                 </ul>
             </li>
             <li>

@@ -1,6 +1,6 @@
 <?php
 include('../navigation/sidebarStudent.php');
-require('connection.php');
+require('../webconnect.php');
 
 if (isset($_GET['bookingID'])) {
     $bookingID = $_GET['bookingID'];
@@ -63,7 +63,8 @@ if (isset($_GET['bookingID'])) {
     }
 
     $stmt->close();
-} else {
+} 
+else {
     echo "Error: bookingID parameter is missing.";
 }
 ?>

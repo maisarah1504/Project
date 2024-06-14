@@ -8,7 +8,7 @@
 <div class="login-box">
   <form action="action_page.php" method="post">
     <div class="imgcontainer">
-      <img src="../images/reset.png" alt="Avatar" class="avatar">
+      <img src="./images/reset.png" alt="Avatar" class="avatar">
       <div class="login-text">RESET PASSWORD</div>
     </div>
 
