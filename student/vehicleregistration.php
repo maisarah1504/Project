@@ -1,9 +1,14 @@
-<?php
-// Start the session
-session_start();
+<?php 
+    session_start(); // Start the session
 
-// Include the database connection file
-include 'webconnect.php';
+    // Include the database connection file
+    include "../navigation/sidebarStudent.php";
+    include 'connection.php';
+
+    // Check if userID is set in the session
+    if (!isset($_SESSION['userID'])) {
+        die("User not logged in");
+    }
 
 $message = "";
 
