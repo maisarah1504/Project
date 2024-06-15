@@ -1,3 +1,7 @@
+<?php 
+session_start();
+include '../webconnect.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +17,6 @@
         <div class="profile-container">
             <h1 class="title">Student Profile</h1>
             <?php
-            // Include the database connection file
-            include 'webconnect.php';
-
             // Fetch user information
             $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
             $user_query = "SELECT fullname, username FROM user WHERE userID = '$userID'";

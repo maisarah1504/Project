@@ -2,8 +2,7 @@
     session_start();
 
     include "../navigation/sidebaradmin.php";
-    require "../session.php";
-    include "../student/webconnect.php";
+    include "../webconnect.php";
 
     // Fetch booking data
     $sql = "SELECT bookingID, userID, spaceID FROM booking";
@@ -36,6 +35,7 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
+            margin-left: 120px;
         }
         .chart-container {
             width: 80%;
@@ -51,7 +51,8 @@
             padding: 8px;
         }
         .table-list th {
-            background-color: #f2f2f2;
+            background-color: white;
+            color: black;
             text-align: left;
         }
     </style>

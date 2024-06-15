@@ -38,7 +38,7 @@ if (isset($_GET['bookingID'])) {
 
     if ($stmt->execute()) {
         // Update the parking space status to 'available'
-        $update_sql = "UPDATE parking_space SET status = 'available' WHERE spaceID = ?";
+        $update_sql = "UPDATE parking_space SET status = 'AVAILABLE' WHERE spaceID = ?";
         $stmt = $conn->prepare($update_sql);
 
         if ($stmt === false) {

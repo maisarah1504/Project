@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../navigation/sidebarStudent.php');
 require('connection.php');
 

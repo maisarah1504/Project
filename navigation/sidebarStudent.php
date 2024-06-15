@@ -1,5 +1,5 @@
 <?php 
-    //require '../session.php';
+    require '../session.php';
 ?>
 
 <!DOCTYPE html>
@@ -196,7 +196,7 @@ footer {
             </li>
             <hr>
             <li class="logout-link">
-                <a href="weblogout.php"><span class="material-symbols-outlined">logout</span>Logout</a>
+                <a href="../weblogout.php"><span class="material-symbols-outlined">logout</span>Logout</a>
             </li>
         </ul>
     </aside>
