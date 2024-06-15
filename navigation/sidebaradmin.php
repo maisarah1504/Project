@@ -135,13 +135,9 @@
                 <span class="material-symbols-outlined">directions_car</span>
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
-            <li class="dropdown-link">
+            <li>
                 <span class="material-symbols-outlined">person</span>
-                <a href="#">User Management</a>
-                <div class="dropdown-content">
-                    <a href="userlist.php">User List</a>
-                    <a href="webregister.php">User Registration</a>
-                </div>
+                <a href="webregister.php">user management</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
