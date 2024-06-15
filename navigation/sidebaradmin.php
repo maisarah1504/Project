@@ -64,6 +64,28 @@
             margin-right: 10px;
         }
 
+        .dropdown-link {
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            background-color: #262626;
+            padding-left: 20px;
+        }
+
+        .dropdown-content a {
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #333;
+        }
+
         .logout-link {
             margin-top: auto;
         }
@@ -80,6 +102,7 @@
             text-align: center;
             margin-top: 20px;
         }
+
         footer {
             text-align: center;
             padding: 10px;
@@ -112,9 +135,13 @@
                 <span class="material-symbols-outlined">directions_car</span>
                 <a href="parkingArea.php">Admin Parking Space</a>
             </li>
-            <li>
+            <li class="dropdown-link">
                 <span class="material-symbols-outlined">person</span>
-                <a href="webregister.php">User Registration</a>
+                <a href="#">User Management</a>
+                <div class="dropdown-content">
+                    <a href="userlist.php">User List</a>
+                    <a href="webregister.php">User Registration</a>
+                </div>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
@@ -124,8 +151,20 @@
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
                 <a href="../weblogout.php">Logout</a>
-            </ul>
+            </li>
+        </ul>
     </aside>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
-    </body>
-    </HTML>
+    
+    <script>
+        document.querySelector(".dropdown-link").addEventListener("click", function() {
+            var dropdownContent = this.querySelector(".dropdown-content");
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
