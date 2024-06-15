@@ -1,14 +1,14 @@
 <?php 
-    session_start(); // Start the session
+session_start(); // Start the session
 
-    // Include the database connection file
-    include "../navigation/sidebarStudent.php";
-    include 'connection.php';
+// Include the sidebar and database connection file
+include "../navigation/sidebarStudent.php";
+include '../student/connection.php';
 
-    // Check if userID is set in the session
-    if (!isset($_SESSION['userID'])) {
-        die("User not logged in");
-    }
+// Check if userID is set in the session
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
+}
 
 $message = "";
 
@@ -20,15 +20,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userID = $_SESSION['userID']; // Assuming you have a session variable storing the userID
 
     // Directory where the documents will be stored
-    $uploadDir = 'docs/';
+    $uploadDir = '../admin/docs/';
+
+    // Ensure the upload directory exists
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
 
     // Handle file uploads and move them to the docs directory
     foreach ($_FILES as $key => $file) {
-        $fileName = $file['name'];
+        $fileName = basename($file['name']); // Ensure only the file name is used
         $filePath = $uploadDir . $fileName;
 
         if (!move_uploaded_file($file['tmp_name'], $filePath)) {
-            $message = "Error uploading files.";
+            $message = "Error uploading file: " . $fileName;
             break;
         }
     }
@@ -41,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_query($conn, $sql)) {
             $message = "New vehicle record created successfully";
         } else {
-            $message = "Error: " . $sql . "\\n" . mysqli_error($conn);
+            $message = "Error: " . $sql . "\n" . mysqli_error($conn);
         }
     }
 
@@ -52,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Vehicle Registration</title>
     <link rel="stylesheet" href="vehicleregistration.css">
@@ -63,10 +67,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 window.location.href = "vehicleregistration.php";
             }
         }
+
+        <?php if ($message): ?>
+        window.onload = function() {
+            alert('<?php echo addslashes($message); ?>');
+            window.location.href = "vehicleregistration.php";
+        }
+        <?php endif; ?>
     </script>
 </head>
-
-<body onload="showMessage('<?php echo $message; ?>')">
+<body>
     <div class="container">
         <h1 class="title">Vehicle Registration</h1>
         <form method="POST" action="vehicleregistration.php" enctype="multipart/form-data">
@@ -112,5 +122,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
-
 </html>
