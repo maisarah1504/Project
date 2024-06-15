@@ -164,7 +164,7 @@
             </li>
             <li>
                 <span class="material-symbols-outlined">person</span>
-                <a href="userprofile.php">User management</a>
+                <a href="webregister.php">User Registration</a>
             </li>
             <li>
                 <span class="material-symbols-outlined">local_parking</span>
