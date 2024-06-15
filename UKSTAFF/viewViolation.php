@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-$servername = "127.0.0.1";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "fkpark";
