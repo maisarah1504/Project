@@ -8,7 +8,7 @@
 <div class="login-box">
   <form action="forgot_password_action.php" method="post">
     <div class="imgcontainer">
-      <img src="../images/forgot.png" alt="Avatar" class="avatar">
+      <img src="./images/forgot.png" alt="Avatar" class="avatar">
       <div class="login-text">FORGOT PASSWORD</div>
     </div>
 

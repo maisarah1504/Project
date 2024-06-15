@@ -5,6 +5,10 @@ session_start(); // Start the session
 include "../navigation/sidebaradmin.php";
 include '../webconnect.php'; // Adjust the path to the correct location
 
+// Check if userID is set in the session
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
+}
 
 $message = "";
 

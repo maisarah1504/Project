@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if the user is logged in and has the 'administrator' role
+if (!isset($_SESSION['userID']) || $_SESSION['role'] !== 'administrator') {
+    // Redirect to login page if not authenticated or not an administrator
+    header("Location: ../weblogin.php");
+    exit();
+}
 
 include "../navigation/sidebaradmin.php";
 
