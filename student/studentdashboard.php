@@ -1,9 +1,14 @@
 <?php 
-    // Include the database connection file
-    include '../webconnect.php';
+    session_start(); // Start the session
 
-    //include sidebar 
-    include '..//navigation/sidebarStudent.php';
+    // Include the database connection file
+    include "../navigation/sidebarStudent.php";
+    include 'connect.php';
+
+    // Check if userID is set in the session
+    if (!isset($_SESSION['userID'])) {
+        die("User not logged in");
+    }
 
     // Fetch vehicle information
     $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
@@ -22,7 +27,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-    <link rel="stylesheet" href="webregister.css">
+    <link rel="stylesheet" href="studentdashboard.css">
     <style>
         body {
             display: flex;
