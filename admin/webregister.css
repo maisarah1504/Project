@@ -82,3 +82,13 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #184A92;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
