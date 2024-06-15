@@ -1,10 +1,15 @@
-// Include the database connection file
-include 'webconnect.php';
+<?php 
+session_start(); // Start the session
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+// Include the sidebar and database connection file
+include "../navigation/sidebarstaffK.php";
+include '../student/connection.php'; // Adjust the path to the correct location
+
+// Check if userID is set in the session
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
 }
+
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -34,6 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $sql = "SELECT vehicleID, userID, vehicleType, licensePlate, vehicleModel, documentsDirectory FROM vehicle WHERE approvalStatus = 'Pending'";
 $result = mysqli_query($conn, $sql);
 
+// Check if the query was successful
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
 ?>
 
 <!DOCTYPE html>
