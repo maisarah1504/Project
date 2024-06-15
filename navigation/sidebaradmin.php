@@ -80,56 +80,6 @@
             text-align: center;
             margin-top: 20px;
         }
-
-        .calendar-wrapper {
-    width: 90%;
-    margin: 0 auto;
-}
-
-.calendar-container {
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Set width to 100% */
-    max-width: 600px; /* Set a maximum width to maintain readability */
-    margin: 0 auto; /* Center the calendar container */
-}
-        hr {
-            border: 2px solid #184A92;
-            margin: 20px 0;
-        }
-
-        .charts-container {
-            width: 90%; /* Adjusted width */
-            margin: 20px auto 0 auto; /* Removed bottom margin */
-        }
-
-        .chart {
-            margin: 20px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            height: 50px;
-            text-align: center;
-            vertical-align: middle;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background: #184A92;
-            color: white;
-            font-weight: bold;
-        }
-
-        .today {
-            background: #FFD500;
-        }
         footer {
             text-align: center;
             padding: 10px;
@@ -173,7 +123,7 @@
             <hr>
             <li class="logout-link">
                 <span class="material-symbols-outlined">logout</span>
-                <a href="../student/weblogout.php">Logout</a>
+                <a href="../weblogout.php">Logout</a>
             </ul>
     </aside>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>

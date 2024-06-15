@@ -3,7 +3,7 @@ session_start(); // Start the session
 
 // Include the sidebar and database connection file
 include "../navigation/sidebaradmin.php";
-include '../student/connection.php'; // Adjust the path to the correct location
+include '../webconnect.php'; // Adjust the path to the correct location
 
 // Check if userID is set in the session
 if (!isset($_SESSION['userID'])) {
