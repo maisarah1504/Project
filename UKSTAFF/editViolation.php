@@ -9,41 +9,49 @@
     <link rel="stylesheet" href="editViolation.css">
 
     <script>
-function handleResponse(response) {
-    if (response.success) {
-        // If update successful, show alert and return to previous page
-        alert('Record updated successfully');
-        window.location.href = 'trafficViolationRecord.php';
-    } else {
-        // If update failed, show error message
-        alert(response.message);
-    }
-}
+        document.getElementById('logoutLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            const userConfirmed = confirm('Are you sure you want to logout?'); // Show the confirmation dialog
+            if (userConfirmed) {
+                window.location.href = '../weblogin.php'; // Redirect if the user confirms
+            }
+        });
 
-function updateViolation(event) {
-    event.preventDefault(); // Prevent default form submission behavior
-    console.log('Form submitted');
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "updateViolation.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            handleResponse(response);
+        function handleResponse(response) {
+            if (response.success) {
+                // If update successful, show alert and return to previous page
+                alert('Record updated successfully');
+                window.location.href = 'trafficViolationRecord.php';
+            } else {
+                // If update failed, show error message
+                alert(response.message);
+            }
         }
-    };
 
-    // Serialize form data
-    var formData = new FormData(document.getElementById('updateForm'));
-    var serializedFormData = '';
-    for (var pair of formData.entries()) {
-        serializedFormData += encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]) + '&';
-    }
-    serializedFormData = serializedFormData.slice(0, -1); // Remove the last '&'
+        function updateViolation(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+            console.log('Form submitted');
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "updateViolation.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    handleResponse(response);
+                }
+            };
 
-    // Send serialized form data
-    xhr.send(serializedFormData);
-}
+            // Serialize form data
+            var formData = new FormData(document.getElementById('updateForm'));
+            var serializedFormData = '';
+            for (var pair of formData.entries()) {
+                serializedFormData += encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]) + '&';
+            }
+            serializedFormData = serializedFormData.slice(0, -1); // Remove the last '&'
+
+            // Send serialized form data
+            xhr.send(serializedFormData);
+        }
 </script>
 </head>
 <body>
@@ -63,16 +71,14 @@ function updateViolation(event) {
                 <span class="material-symbols-outlined">monitoring</span>
                 <a href="trafficViolationRecord.php">Traffic Violation Record</a>
             </li>
+            <li><span class="material-symbols-outlined">check</span><a href="vehicleApproval.php">Vehicle Approval</a></li>
             <hr>
-            <li class="logout-link">
-                <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
-            </li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
         </ul>
     </aside>
     <main margin-left: 110px;>
         <?php
-        $servername = "127.0.0.1";
+        $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "fkpark";
@@ -111,7 +117,7 @@ function updateViolation(event) {
                 <select name="violationType">
                     <option value="Parking Violation" <?php if($row['violationType'] == "Parking Violation") echo "selected"; ?>>Parking Violation</option>
                     <option value="Not Comply in Campus Traffic" <?php if($row['violationType'] == "Not Comply in Campus Traffic") echo "selected"; ?>>Not Comply in Campus Traffic</option>
-                    <option value="Accident caused" <?php if($row['violationType'] == "Accident caused") echo "selected"; ?>>Accident caused</option>
+                    <option value="Accident caused" <?php if($row['violationType'] == "Accident Caused") echo "selected"; ?>>Accident Caused</option>
                 </select>
 
                 <br>
@@ -122,9 +128,9 @@ function updateViolation(event) {
                 <br>
 
                 <label for="vehicleType">Vehicle Type:</label><br>
-                <input type="radio" name="vehicleType" id="motor" value="motorcycle" <?php if($row['vehicleType'] == "motorcycle") echo "checked"; ?>>
+                <input type="radio" name="vehicleType" id="motor" value="Motorcycle" <?php if($row['vehicleType'] == "Motorcycle") echo "checked"; ?>>
                 <label for="motor">Motorcycle</label><br>
-                <input type="radio" name="vehicleType" id="car" value="car" <?php if($row['vehicleType'] == "car") echo "checked"; ?>>
+                <input type="radio" name="vehicleType" id="car" value="Car" <?php if($row['vehicleType'] == "Car") echo "checked"; ?>>
                 <label for="car">Car</label><br>
 
                 <br>

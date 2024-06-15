@@ -80,11 +80,9 @@ $uploadEvidence = $row['uploadEvidence'];
                 <span class="material-symbols-outlined">monitoring</span>
                 <a href="trafficViolationRecord.php">Traffic Violation Record</a>
             </li>
+            <li><span class="material-symbols-outlined">check</span><a href="vehicleApproval.php">Vehicle Approval</a></li>
             <hr>
-            <li class="logout-link">
-                <span class="material-symbols-outlined">logout</span>
-                <a href="#">Logout</a>
-            </li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
         </ul>
     </aside>
     <main margin-left: 110px;>
@@ -115,5 +113,15 @@ $uploadEvidence = $row['uploadEvidence'];
         </form>
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+
+    <script>
+        document.getElementById('logoutLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+            const userConfirmed = confirm('Are you sure you want to logout?'); // Show the confirmation dialog
+            if (userConfirmed) {
+                window.location.href = '../weblogin.php'; // Redirect if the user confirms
+            }
+        });
+    </script>
 </body>
 </html>
