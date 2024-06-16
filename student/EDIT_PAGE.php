@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die('Prepare failed: ' . htmlspecialchars($conn->error));
         }
 
-        $stmt->bind_param('ssi', $startDate, $startTime, $bookingID, $duration);
+        $stmt->bind_param('ssi', $startDate, $startTime, $duration, $bookingID);
 
         if ($stmt->execute()) {
             echo "<script>
