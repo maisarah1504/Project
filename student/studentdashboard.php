@@ -16,7 +16,7 @@ $vehicle_query = "SELECT vehicleType, licensePlate, vehicleModel, approvalStatus
 $vehicle_result = mysqli_query($conn, $vehicle_query);
 
 // Fetch booking information
-$booking_query = "SELECT spaceID, startTime, duration, status FROM booking WHERE userID = '$userID'";
+$booking_query = "SELECT spaceID, startDate, startTime, duration FROM booking WHERE userID = '$userID'";
 $booking_result = mysqli_query($conn, $booking_query);
 ?>
 
@@ -111,9 +111,9 @@ $booking_result = mysqli_query($conn, $booking_query);
                     <div class="box">
                         <h3>My Booking</h3>
                         <p><strong>Space ID:</strong> <?php echo $booking_row['spaceID']; ?></p>
+                        <p><strong>Start Date:</strong> <?php echo $booking_row['startDate']; ?></p>
                         <p><strong>Start Time:</strong> <?php echo $booking_row['startTime']; ?></p>
-                        <p><strong>End Time:</strong> <?php echo $booking_row['endTime']; ?></p>
-                        <p><strong>Status:</strong> <?php echo $booking_row['status']; ?></p>
+                        <p><strong>Duration:</strong> <?php echo $booking_row['duration']; ?></p>
                     </div>
                     <?php
                 }
