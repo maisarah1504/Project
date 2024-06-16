@@ -13,38 +13,55 @@ if (!isset($_SESSION['userID'])) {
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect the form data
-    $fullName = $_POST['full-name'];
-    $username = $_POST['username'];
-    $role = $_POST['role'];
-    $password = $_POST['password'];
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Check if the user already exists
-    $checkSql = "SELECT * FROM user WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $checkSql);
-    mysqli_stmt_bind_param($stmt, "s", $username);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if (mysqli_num_rows($result) > 0) {
-        // User already exists
-        $message = "Duplicate detected. This user already exists.";
-    } else {
-        // Insert the data into the database
-        $sql = "INSERT INTO user (fullname, username, role, password) VALUES (?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "ssss", $fullName, $username, $role, $hashed_password);
-
-        if (mysqli_stmt_execute($stmt)) {
-            $message = "New record created successfully";
+    if (isset($_POST['delete'])) {
+        // Handle delete operation
+        if (isset($_POST['selected_users'])) {
+            $selected_users = $_POST['selected_users'];
+            foreach ($selected_users as $user_id) {
+                $deleteSql = "DELETE FROM user WHERE id = ?";
+                $stmt = mysqli_prepare($conn, $deleteSql);
+                mysqli_stmt_bind_param($stmt, "i", $user_id);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+            }
+            $message = "Selected users deleted successfully.";
         } else {
-            $message = "Error: " . $sql . "\\n" . mysqli_error($conn);
+            $message = "No users selected for deletion.";
         }
-    }
+    } else {
+        // Handle user registration
+        $fullName = $_POST['full-name'];
+        $username = $_POST['username'];
+        $role = $_POST['role'];
+        $password = $_POST['password'];
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Close the database connection
-    mysqli_stmt_close($stmt);
+        // Check if the user already exists
+        $checkSql = "SELECT * FROM user WHERE username = ?";
+        $stmt = mysqli_prepare($conn, $checkSql);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) > 0) {
+            // User already exists
+            $message = "Duplicate detected. This user already exists.";
+        } else {
+            // Insert the data into the database
+            $sql = "INSERT INTO user (fullname, username, role, password) VALUES (?, ?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $sql);
+            mysqli_stmt_bind_param($stmt, "ssss", $fullName, $username, $role, $hashed_password);
+
+            if (mysqli_stmt_execute($stmt)) {
+                $message = "New record created successfully.";
+            } else {
+                $message = "Error: " . $sql . "\n" . mysqli_error($conn);
+            }
+        }
+
+        // Close the database connection
+        mysqli_stmt_close($stmt);
+    }
 }
 
 // Fetch all users from the database
@@ -61,58 +78,58 @@ mysqli_close($conn);
     <title>User Registration</title>
     <link rel="stylesheet" href="webregister.css">
     <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
-    .container {
-        flex: 1;
-        padding: 20px;
-        background-color: #f5f5f5;
-        display: flex;
-        flex-direction: column;
-        overflow-x: auto; /* Enable horizontal scrolling if needed */
-    }
-    .form-section, .table-section {
-        margin-bottom: 20px;
-    }
-    .content {
-        flex: 1;
-        overflow-y: auto;
-        background: white;
-        padding: 20px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 16px; /* Adjust font size as needed */
-        text-align: left;
-        table-layout: fixed; /* Forces table to distribute width evenly */
-    }
-    th, td {
-        padding: 15px; /* Increased padding for better readability */
-        border-bottom: 1px solid #ddd;
-        white-space: nowrap; /* Prevent text wrapping */
-        overflow: hidden; /* Hide content that exceeds cell width */
-        text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
-    }
-    th {
-        background-color: #184A92;
-        color: white;
-    }
-    footer {
-        background-color: #184A92;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-</style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            flex: 1;
+            padding: 20px;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+        .form-section, .table-section {
+            margin-bottom: 20px;
+        }
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            text-align: left;
+            table-layout: fixed;
+        }
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        th {
+            background-color: #184A92;
+            color: white;
+        }
+        footer {
+            background-color: #184A92;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
     <script type="text/javascript">
         function showMessage(message) {
             if (message !== "") {
@@ -158,33 +175,40 @@ mysqli_close($conn);
         </div>
         <div class="table-section">
             <h2>Registered Users</h2>
-            <div class="content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Full Name</th>
-                            <th>Username</th>
-                            <th>Role</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            // Output data of each row
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($row["fullname"]) . "</td>";
-                                echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
-                                echo "<td>" . htmlspecialchars($row["role"]) . "</td>";
-                                echo "</tr>";
+            <form method="POST" action="webregister.php">
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Full Name</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                // Output data of each row
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<td><input type='checkbox' name='selected_users[]' value='" . $row['userID'] . "'></td>";
+                                    echo "<td>" . htmlspecialchars($row["fullname"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row["role"]) . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>No registered users found.</td></tr>";
                             }
-                        } else {
-                            echo "<tr><td colspan='3'>No registered users found.</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group-button">
+                    <button type="submit" name="delete">DELETE SELECTED</button>
+                </div>
+            </form>
         </div>
     </div>
     <footer>

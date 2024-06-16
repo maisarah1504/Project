@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 include "../navigation/sidebaradmin.php";
 ?>
 <!DOCTYPE html>
