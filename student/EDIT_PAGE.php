@@ -150,6 +150,10 @@ $stmt->close();
                 <label for="startTime">Start Time:</label>
                 <input type="time" id="startTime" name="startTime" value="<?php echo htmlspecialchars($booking['startTime']); ?>">
             </div>
+            <div class="form-group"> 
+                <label for="duration">Duration:</label>
+                <input type="number" name="duration" id="duration" value="<?php echo htmlspecialchars($booking['duration']); ?>">
+            </div>
             <button type="submit" class="submit-button">Submit</button>
             <a href="BOOKING_LIST.php" class="cancel-link">Cancel</a>
         </form>
