@@ -19,9 +19,10 @@ if (isset($_POST['submit'])) {
     $fdate = $_POST['fdate'];
     $ftime = $_POST['ftime'];
     $spaceID = $_POST['spaceID'];
+    $duration = $_POST['duration'];
 
     // Insert booking into the database
-    $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime) VALUES ('$spaceID', '$userID', '$fdate', '$ftime')";
+    $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime, duration) VALUES ('$spaceID', '$userID', '$fdate', '$ftime', '$duration)";
 
     if ($conn->query($sql) === TRUE) {
         // Update parking space status to 'BOOKED'
@@ -36,7 +37,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Generate QR code
-    $qrContent = "Parking Space ID: $spaceID\nFull Name: $fname\nVehicle Plate Number: $fvehicle\nStart Date: $fdate\nStart Time: $ftime";
+    $qrContent = "Parking Space ID: $spaceID\nFull Name: $fname\nVehicle Plate Number: $fvehicle\nStart Date: $fdate\nStart Time: $ftime\nDuration: $duration";
     $pngTempDir = '../qr_codes/';
     if (!file_exists($pngTempDir)) {
         mkdir($pngTempDir, 0777, true);
@@ -73,6 +74,7 @@ if (isset($_POST['submit'])) {
             <p>Vehicle Plate Number: <?php echo htmlspecialchars($fvehicle); ?></p>
             <p>Start Date: <?php echo htmlspecialchars($fdate); ?></p>
             <p>Start Time: <?php echo htmlspecialchars($ftime); ?></p>
+            <p>Duration: <?php echo htmlspecialchars($duration); ?></p>
         </div>
     </div>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
