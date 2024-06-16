@@ -105,12 +105,14 @@ $uploadEvidence = $row['uploadEvidence'];
 
         <br>
 
-        <form action="trafficViolationRecord.php">
-            <button type="submit">Back to Records</button>
-        </form>
         <form action="editViolation.php?id=<?php echo $violationID; ?>" method="post">
             <button type="submit">Edit</button>
         </form>
+
+        <form action="trafficViolationRecord.php">
+            <button type="submit">Back to Records</button>
+        </form>
+        
     </main>
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 
