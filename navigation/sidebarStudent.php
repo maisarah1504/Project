@@ -164,14 +164,6 @@
             backdrop-filter: blur(17px);
         }
 
-        main {
-            margin-left: 110px;
-            padding: 20px;
-            flex-grow: 1;
-            overflow-y: auto;
-            height: calc(100vh - 40px);
-        }
-
         h1 {
             text-align: center;
             margin-top: 20px;
