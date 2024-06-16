@@ -41,7 +41,7 @@
             <li><span class="material-symbols-outlined">flag</span><a href="newSummon.php">Issue Traffic Summon</a></li>
             <li><span class="material-symbols-outlined">monitoring</span><a href="trafficViolationRecord.php">Traffic Violation Record</a></li>
             <hr>
-            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="../weblogout.php">Logout</a></li>
         </ul>
     </aside>
 </body>
