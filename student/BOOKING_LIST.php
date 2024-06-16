@@ -4,19 +4,22 @@
     include('../navigation/sidebarStudent.php');
     require('../webconnect.php');
 
-// Uncomment and set $s_userID to test with actual session user ID
-$s_userID = $_SESSION['userID'];
-$ftype = $_POST['filter-history'];
+    if (!isset($_SESSION['userID'])) {
+        die("User not logged in");
+    }
+
+    // Uncomment and set $s_userID to test with actual session user ID
+    $userID = $_SESSION['userID'];
 
 // Debug: Print the user ID
-echo "User ID: " . $s_userID;
+echo "User ID: " . $userID;
 
 // Adjust the query to match the structure of your database
 $sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
-        WHERE b.userID = $s_userID"; 
+        WHERE b.userID = $userID"; 
 
 $result = mysqli_query($conn, $sql);
 
