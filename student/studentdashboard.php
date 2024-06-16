@@ -1,23 +1,23 @@
 <?php 
-    session_start(); // Start the session
+session_start(); // Start the session
 
-    // Include the database connection file
-    include "../navigation/sidebarStudent.php";
-    include '../webconnect.php';
+// Include the database connection file and sidebar
+include "../navigation/sidebarStudent.php";
+include '../webconnect.php'; // Adjust the path to the correct location
 
-    // Check if userID is set in the session
-    if (!isset($_SESSION['userID'])) {
-        die("User not logged in");
-    }
+// Check if userID is set in the session
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
+}
 
-    // Fetch vehicle information
-    $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
-    $vehicle_query = "SELECT vehicleType, licensePlate, vehicleModel, approvalStatus FROM vehicle WHERE userID = '$userID'";
-    $vehicle_result = mysqli_query($conn, $vehicle_query);
+// Fetch vehicle information
+$userID = $_SESSION['userID']; // Assuming userID is stored in session after login
+$vehicle_query = "SELECT vehicleType, licensePlate, vehicleModel, approvalStatus FROM vehicle WHERE userID = '$userID'";
+$vehicle_result = mysqli_query($conn, $vehicle_query);
 
-    // Fetch booking information
-    $booking_query = "SELECT spaceID, startTime, endTime, status FROM booking WHERE userID = '$userID'";
-    $booking_result = mysqli_query($conn, $booking_query);
+// Fetch booking information
+$booking_query = "SELECT spaceID, startTime, endTime, status FROM booking WHERE userID = '$userID'";
+$booking_result = mysqli_query($conn, $booking_query);
 ?>
 
 <!DOCTYPE html>
@@ -54,14 +54,14 @@
 
         .dashboard {
             display: flex;
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
             justify-content: space-between;
-            width: 100%;
+            gap: 20px; /* Adjusted to add space between boxes */
             margin-top: 20px;
-            height: 250px;
         }
 
         .box {
-            width: 30%;
+            width: calc(30% - 20px); /* Adjusted width to allow space between boxes */
             background-color: #f0f0f0;
             padding: 20px;
             border-radius: 8px;
@@ -82,12 +82,12 @@
         }
     </script>
 </head>
-<body onload="showMessage('<?php echo $message; ?>')">
+<body onload="showMessage('<?php echo isset($message) ? $message : ''; ?>')">
     <main>
         <h1 class="title">Student Dashboard</h1>
         <div class="dashboard">
             <?php
-            // Display vehicle information
+            // Display vehicle information if available
             if (mysqli_num_rows($vehicle_result) > 0) {
                 while ($vehicle_row = mysqli_fetch_assoc($vehicle_result)) {
                     ?>
@@ -103,10 +103,8 @@
             } else {
                 echo "<div class='box'><h3>My Vehicle</h3><p>No vehicle information found.</p></div>";
             }
-            ?>
-            
-            <?php
-            // Display booking information
+
+            // Display booking information if available
             if (mysqli_num_rows($booking_result) > 0) {
                 while ($booking_row = mysqli_fetch_assoc($booking_result)) {
                     ?>
