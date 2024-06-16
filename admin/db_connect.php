@@ -1,14 +1,14 @@
 <?php
- $dbname = "fkpark";
- $servername = "localhost";
- $username = "root";
- $password = "";
+    $serverhost = "10.26.30.17";
+    $username = "ca22076";
+    $password = "ca22076";
+    $database = "ca22076";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    // Create connection
+    $conn = mysqli_connect($serverhost, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    if(mysqli_connect_errno()) {
+        echo "Connection Error: " . mysqli_connect_error();
+        exit();
+    }
 ?>
