@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $duration = $_POST['duration'];
 
     // Insert booking into the database
-    $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime, duration) VALUES ('$spaceID', '$userID', '$fdate', '$ftime', '$duration)";
+    $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime, duration) VALUES ('$spaceID', '$userID', '$fdate', '$ftime', '$duration')";
 
     if ($conn->query($sql) === TRUE) {
         // Update parking space status to 'BOOKED'
