@@ -1,5 +1,6 @@
 <?php 
-    require('connection.php');
+    require('../webconnect.php');
+    include '../navigation/sidebarStudent.php'; 
 
     if(isset($_GET['submit']))
     {

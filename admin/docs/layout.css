@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+  }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Ensure the whole page can scroll */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A67C00;
+    color: white;
+    padding: 10px;
+}
+
+.logoTitle{
+    display:flex;
+    align-items: center;
+    margin-left: 25px;
+}
+
+.logoTitle .logo{
+    margin-right: 20px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    border-radius: 50%;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.dropdown-profile {
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 60px; /* Adjust the width */
+    height: 60px; /* Adjust the height */
+    border-radius: 50%; /* Make the button circular */
+    padding: 0; /* Remove padding to fit image inside */
+    color: white;
+    display: block;
+    background: white;
+    text-align: center; /* Center the image horizontally */
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.dropdown-profile img {
+    height: 40px;
+}
+
+.dropdown-profile.active {
+    background-color: rgb(4, 4, 4);
+
+}
+
+.profile-container {
+    display: none;
+    position: absolute;
+    top: 90px; /* Increased distance from the top */
+    right: 0;
+    background-color: white;
+    padding: 8px;
+    border: 2px solid gray;
+    transition: height 0.2s;
+}
+
+.profile-container:hover
+{
+    background-color: white;
+    color: black;
+}
+
+.profile-container a 
+{
+    text-decoration: none;
+    color: black; 
+    text-align: center;
+    float: none;
+    font-size: 18px;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.profile-container a:hover
+{
+    background-color: black;
+    color: white;
+}
+
+.layout-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidenav {
+    width: 340px;
+    background-color: #A67C00;
+    min-height: 100vh;
+
+}
+
+.sidenav header {
+    font-size: 22px;
+    color: white;
+    background-color:#BF9B30; 
+    text-align: left;
+    margin-top: 0;
+    padding: 20px;
+}
+
+.sidenav .dropdown-btn {
+    background-color: #A67C00;
+    color: white;
+    display: block;
+    border: 2px white;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    padding: 18px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.sidenav a:hover, .dropdown-btn:hover
+{
+    background-color: #BF9B30;
+    color: black;
+}
+
+.sidenav .dropdown-container {
+    display: none;
+    background-color: #BBB;
+}
+
+.sidenav .dropdown-container a {
+    padding: 15px;
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.fa-caret-down
+{
+    float: right;
+    padding-right: 8px;
+}
+
+

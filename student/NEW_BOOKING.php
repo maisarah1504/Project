@@ -1,7 +1,7 @@
 <?php 
-include "../navigation/sidebarStudent.php";
-require('connection.php');
-//require "../MODULE_1/weblogin.php"
+    session_start();
+    include "../navigation/sidebarStudent.php";
+    require '../webconnect.php';
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,8 @@ require('connection.php');
             background-color: white;
             width: 80%;
             height: 500%;
-            position: inherit;
+            position:inherit;
+            padding-top: 20px;
         }
         label {
             margin: 10px;

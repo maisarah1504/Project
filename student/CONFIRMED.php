@@ -54,9 +54,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="confirmed.css">
 </head>
-<body>
-    <?php include('MAIN.php'); ?>
-    
+<body>    
     <div class="container-details-confirmed">
         <div class="text">
             <h2>BOOKING DETAILS</h2>

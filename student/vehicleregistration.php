@@ -3,7 +3,7 @@ session_start(); // Start the session
 
 // Include the sidebar and database connection file
 include "../navigation/sidebarStudent.php";
-include '../webconnect.php';
+include '../webconnect.php'; // Adjust the path to the correct location
 
 // Check if userID is set in the session
 if (!isset($_SESSION['userID'])) {
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If files uploaded successfully, proceed to insert data into the database
     if (empty($message)) {
         // Insert the data into the database with the path to the documents directory
-        $sql = "INSERT INTO vehicle (vehicleType, licensePlate, vehicleModel, documentsDirectory, userID) VALUES ('$vehicleType', '$plateNumber', '$vehicleModel', '$uploadDir', '$userID')";
+        $sql = "INSERT INTO vehicle (vehicleType, licensePlate, vehicleModel, documentsDirectory, userID, approvalStatus) VALUES ('$vehicleType', '$plateNumber', '$vehicleModel', '$uploadDir', '$userID', 'Pending')";
 
         if (mysqli_query($conn, $sql)) {
             $message = "New vehicle record created successfully";

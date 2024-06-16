@@ -140,7 +140,7 @@
             display: block;
             padding: 12px 16px;
             text-decoration: none;
-            color: #fff; /* Text color */
+            color: black; /* Text color */
             transition: background-color 0.3s ease;
         }
 

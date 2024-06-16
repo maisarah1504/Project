@@ -10,32 +10,34 @@ if (!isset($_SESSION['userID'])) {
     die("User not logged in");
 }
 
-
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if the Approve button is clicked
+    // Check if the Approve or Reject button is clicked
     if (isset($_POST["approve"])) {
         // Update approval status to Successful
         $vehicleID = $_POST["vehicle_id"];
         $sql = "UPDATE vehicle SET approvalStatus = 'Successful' WHERE vehicleID = '$vehicleID'";
         if (mysqli_query($conn, $sql)) {
-            echo "Vehicle approval successful!";
+            $message = "Vehicle approval successful!";
         } else {
-            echo "Error updating record: " . mysqli_error($conn);
+            $message = "Error updating record: " . mysqli_error($conn);
         }
     } elseif (isset($_POST["reject"])) {
         // Update approval status to Rejected
         $vehicleID = $_POST["vehicle_id"];
         $sql = "UPDATE vehicle SET approvalStatus = 'Rejected' WHERE vehicleID = '$vehicleID'";
         if (mysqli_query($conn, $sql)) {
-            echo "Vehicle rejection successful!";
+            $message = "Vehicle rejection successful!";
         } else {
-            echo "Error updating record: " . mysqli_error($conn);
+            $message = "Error updating record: " . mysqli_error($conn);
         }
     }
+    // Redirect to the same page to show updated status
+    header("Location: vehicleApproval.php");
+    exit();
 }
 
-// Query to fetch vehicle details
+// Query to fetch vehicle details with pending approval status
 $sql = "SELECT vehicleID, userID, vehicleType, licensePlate, vehicleModel, documentsDirectory FROM vehicle WHERE approvalStatus = 'Pending'";
 $result = mysqli_query($conn, $sql);
 
@@ -57,6 +59,11 @@ if (!$result) {
     <div class="container">
         <h1>Vehicle Approval</h1>
         <?php
+        // Display any messages
+        if (isset($message)) {
+            echo "<p>$message</p>";
+        }
+
         // Check if there are pending vehicle registrations
         if (mysqli_num_rows($result) > 0) {
             // Output vehicle details in a table
