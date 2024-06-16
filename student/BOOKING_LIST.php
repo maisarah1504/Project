@@ -15,7 +15,7 @@
 echo "User ID: " . $userID;
 
 // Adjust the query to match the structure of your database
-$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate, b.duration
+$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licensePlate, b.duration
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
