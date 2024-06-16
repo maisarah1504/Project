@@ -51,6 +51,12 @@ $spaceID = isset($_POST['spaceID']) ? htmlspecialchars($_POST['spaceID']) : '';
                     </tr>
                     <tr>
                         <td>
+                            <label id='duration'>Duration: </label>
+                            <input type="number" name="duration" id="duration" min=1 max=10>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <label for="ftime">Start time: </label>
                             <input type="text" name="ftime" value="<?php echo htmlspecialchars($ftime); ?>" readonly>
                         </td>
