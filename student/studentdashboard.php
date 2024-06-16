@@ -16,7 +16,7 @@ $vehicle_query = "SELECT vehicleType, licensePlate, vehicleModel, approvalStatus
 $vehicle_result = mysqli_query($conn, $vehicle_query);
 
 // Fetch booking information
-$booking_query = "SELECT spaceID, startTime, endTime, status FROM booking WHERE userID = '$userID'";
+$booking_query = "SELECT spaceID, startTime, duration, status FROM booking WHERE userID = '$userID'";
 $booking_result = mysqli_query($conn, $booking_query);
 ?>
 
