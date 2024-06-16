@@ -53,7 +53,7 @@ if (!isset($_SESSION['userID']) || $_SESSION['role'] !== 'staff') {
             <li><span class="material-symbols-outlined">monitoring</span><a href="trafficViolationRecord.php">Traffic Violation Record</a></li>
             <li><span class="material-symbols-outlined">check</span><a href="vehicleApproval.php">Vehicle Approval</a></li>
             <hr>
-            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="../weblogout.php">Logout</a></li>
         </ul>
     </aside>
     <main style="background-color: white; margin-left: 110px;">

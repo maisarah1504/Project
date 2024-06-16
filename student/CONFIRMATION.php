@@ -1,15 +1,13 @@
 <?php
 session_start();
 include('../navigation/sidebarStudent.php');
-require_once('../webconnect.php'); 
+require('../webconnect.php'); 
 
 if (!isset($_SESSION['userID'])) {
     die("User not logged in");
 }
 
-// Uncomment and set $s_userID to test with actual session user ID
 $userID = $_SESSION['userID'];
-
 $ftime = isset($_POST['filterTime']) ? htmlspecialchars($_POST['filterTime']) : '';
 $fdate = isset($_POST['filterDate']) ? htmlspecialchars($_POST['filterDate']) : '';
 $spaceID = isset($_POST['spaceID']) ? htmlspecialchars($_POST['spaceID']) : '';
@@ -20,7 +18,7 @@ $spaceID = isset($_POST['spaceID']) ? htmlspecialchars($_POST['spaceID']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FKPark</title>
+    <title>Booking Form</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="confirmation.css">
 </head>
@@ -30,7 +28,6 @@ $spaceID = isset($_POST['spaceID']) ? htmlspecialchars($_POST['spaceID']) : '';
             <h2 class="display">Booking Form</h2>
         </div>
         <div class="body">
-            <?php echo isset($message) ? $message : ''; ?>
             <form method="POST" action="CONFIRMED.php" autocomplete="off">
                 <table class="table-bordered">
                     <tr>
@@ -42,31 +39,31 @@ $spaceID = isset($_POST['spaceID']) ? htmlspecialchars($_POST['spaceID']) : '';
                     <tr>
                         <td>
                             <label id="fvehicle">Vehicle Plate Number: </label>
-                            <select>
+                            <select name="fvehicle" required>
                                 <?php 
-                                    $vehicle = mysqli_query($conn, "select licensePlate from vehicle where userID = '$userID");
+                                    $vehicle = mysqli_query($conn, "SELECT licensePlate FROM vehicle WHERE userID = '$userID'");
                                     while($c = mysqli_fetch_array($vehicle)) {
                                 ?>
-                                <option value="<?php echo $c['licensePlate']?>"><?php echo $c['licensePlate']?></option>
+                                <option value="<?php echo $c['licensePlate']; ?>"><?php echo $c['licensePlate']; ?></option>
                                 <?php } ?>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Start time: <?php echo $ftime; ?>
-                            <input type="hidden" name="ftime" value="<?php echo $ftime; ?>">
+                            <label for="ftime">Start time: </label>
+                            <input type="text" name="ftime" value="<?php echo htmlspecialchars($ftime); ?>" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Start date: <?php echo $fdate; ?>
-                            <input type="hidden" name="fdate" value="<?php echo $fdate; ?>">
+                            <label for="fdate">Start date: </label>
+                            <input type="text" name="fdate" value="<?php echo htmlspecialchars($fdate); ?>" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="hidden" name="spaceID" value="<?php echo $spaceID; ?>">
+                            <input type="hidden" name="spaceID" value="<?php echo htmlspecialchars($spaceID); ?>">
                         </td>
                     </tr>
                 </table>

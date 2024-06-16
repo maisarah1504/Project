@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     include('../navigation/sidebarStudent.php');
     include_once('NEW_BOOKING.php');
     require ('../webconnect.php');
