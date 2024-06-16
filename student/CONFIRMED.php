@@ -1,6 +1,13 @@
 <?php
-include('MAIN.php');
-require_once('connection.php'); 
+include('../navigation/sidebarStudent.php');
+require_once('../webconnect.php'); 
+
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
+}
+
+// Uncomment and set $s_userID to test with actual session user ID
+$userID = $_SESSION['userID'];
 
 if (isset($_POST['submit'])) {
     // Fetch user inputs
@@ -9,16 +16,6 @@ if (isset($_POST['submit'])) {
     $fdate = $_POST['fdate'];
     $ftime = $_POST['ftime'];
     $spaceID = $_POST['spaceID'];
-
-    // Assume connection already established in 'connection.php'
-    $conn = new mysqli('localhost', 'root', '', 'fkpark');
-
-    // Fetch userID based on username
-    $userIDQuery = "SELECT userID FROM user WHERE username = '$fname'";
-    $userIDResult = mysqli_query($conn, $userIDQuery);
-    if ($userIDResult && mysqli_num_rows($userIDResult) > 0) {
-        $userIDRow = mysqli_fetch_assoc($userIDResult);
-        $userID = $userIDRow['userID'];
 
         // Insert booking into the database
         $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime) VALUES ('$spaceID', '$userID', '$fdate', '$ftime')";
@@ -41,7 +38,6 @@ if (isset($_POST['submit'])) {
               </script>";
         exit();
     }
-}
 ?>
 
 <!DOCTYPE html>

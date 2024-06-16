@@ -1,6 +1,14 @@
 <?php
+session_start();
 include('../navigation/sidebarStudent.php');
 require_once('../webconnect.php'); 
+
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
+}
+
+// Uncomment and set $s_userID to test with actual session user ID
+$userID = $_SESSION['userID'];
 
 $ftime = isset($_POST['filterTime']) ? htmlspecialchars($_POST['filterTime']) : '';
 $fdate = isset($_POST['filterDate']) ? htmlspecialchars($_POST['filterDate']) : '';
@@ -34,7 +42,14 @@ $spaceID = isset($_POST['spaceID']) ? htmlspecialchars($_POST['spaceID']) : '';
                     <tr>
                         <td>
                             <label id="fvehicle">Vehicle Plate Number: </label>
-                            <input type="text" name="fvehicle" required>
+                            <select>
+                                <?php 
+                                    $vehicle = mysqli_query($conn, "select licensePlate from vehicle where userID = '$userID");
+                                    while($c = mysqli_fetch_array($vehicle)) {
+                                ?>
+                                <option value="<?php echo $c['licensePlate']?>"><?php echo $c['licensePlate']?></option>
+                                <?php } ?>
+                            </select>
                         </td>
                     </tr>
                     <tr>
