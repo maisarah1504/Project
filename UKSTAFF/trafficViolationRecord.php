@@ -157,7 +157,7 @@ $result = $conn->query($sql);
             event.preventDefault(); // Prevent the default link behavior
             const userConfirmed = confirm('Are you sure you want to logout?'); // Show the confirmation dialog
             if (userConfirmed) {
-                window.location.href = '../weblogin.php'; // Redirect if the user confirms
+                window.location.href = '../weblogout.php'; // Redirect if the user confirms
             }
         });
 </script>
