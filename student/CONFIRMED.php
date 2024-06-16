@@ -1,13 +1,15 @@
 <?php
+session_start();
 include('../navigation/sidebarStudent.php');
-require_once('../webconnect.php'); 
+require('../webconnect.php'); 
+require_once('../phpqrcode/qrlib.php'); // Include the QR code library
 
 if (!isset($_SESSION['userID'])) {
     die("User not logged in");
 }
 
-// Uncomment and set $s_userID to test with actual session user ID
 $userID = $_SESSION['userID'];
+$message = "";
 
 if (isset($_POST['submit'])) {
     // Fetch user inputs
@@ -17,27 +19,26 @@ if (isset($_POST['submit'])) {
     $ftime = $_POST['ftime'];
     $spaceID = $_POST['spaceID'];
 
-        // Insert booking into the database
-        $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime) VALUES ('$spaceID', '$userID', '$fdate', '$ftime')";
-        $insert = "insert into vehicle (vehicleID, userID) values ('$fvehicle', '$userID')";
-        if ($conn->query($sql) === TRUE) {
-            // Update parking space status to 'BOOKED'
-            $updateSpaceStatusSql = "UPDATE parking_space SET status = 'BOOKED' WHERE spaceID = '$spaceID'";
-            if ($conn->query($updateSpaceStatusSql) === TRUE) {
-                $message = "<div class='alert-success'><b>Booking Successful</b></div>";
-            } else {
-                $message = "<div class='alert-fail'>Booking Successful but Parking Space Update Failed: " . $conn->error . "</div>";
-            }
+    // Insert booking into the database
+    $sql = "INSERT INTO booking (spaceID, userID, startDate, startTime) VALUES ('$spaceID', '$userID', '$fdate', '$ftime')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Update parking space status to 'BOOKED'
+        $updateSpaceStatusSql = "UPDATE parking_space SET status = 'BOOKED' WHERE spaceID = '$spaceID'";
+        if ($conn->query($updateSpaceStatusSql) === TRUE) {
+            $message = "<div class='alert-success'><b>Booking Successful</b></div>";
         } else {
-            $message = "<div class='alert-fail'>Booking Failed: " . $conn->error . "</div>";
+            $message = "<div class='alert-fail'>Booking Successful but Parking Space Update Failed: " . $conn->error . "</div>";
         }
     } else {
-        echo "<script>
-                alert('Booking Failed: User not found');
-                window.location.href = 'MAIN.php';
-              </script>";
-        exit();
+        $message = "<div class='alert-fail'>Booking Failed: " . $conn->error . "</div>";
     }
+
+    // Generate QR code
+    $qrContent = "Parking Space ID: $spaceID\nFull Name: $fname\nVehicle Plate Number: $fvehicle\nStart Date: $fdate\nStart Time: $ftime";
+    $qrFile = '../qr_codes/booking_' . $userID . '_' . time() . '.png'; // Ensure the path is correct and the directory is writable
+    QRcode::png($qrContent, $qrFile);
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,13 +51,14 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="confirmed.css">
 </head>
-<body>    
+<body>
     <div class="container-details-confirmed">
         <div class="text">
             <h2>BOOKING DETAILS</h2>
         </div>
         <?php echo isset($message) ? $message : ''; ?>
         <div class="details">
+            <p><img src="<?php echo $qrFile; ?>" alt="QR Code"></p>
             <p>Parking Space ID: <?php echo htmlspecialchars($spaceID); ?></p>
             <p>Full Name: <?php echo htmlspecialchars($fname); ?></p>
             <p>Vehicle Plate Number: <?php echo htmlspecialchars($fvehicle); ?></p>

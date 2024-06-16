@@ -1,14 +1,13 @@
 .container-details-confirmed {
     display: block;
-    position: relative;
+    position: inherit;
     margin-top: 30px; /* Adjust margin-top to create space between container-details and top */
-    flex:0;
     margin-left: 150px;
     padding: 10px;
     width:inherit;
-    position: relative;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    color: black;
 }
 
 /* Styles for the text inside the container-details */
