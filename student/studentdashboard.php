@@ -3,7 +3,7 @@
 
     // Include the database connection file
     include "../navigation/sidebarStudent.php";
-    include 'connection.php';
+    include '../webconnect.php';
 
     // Check if userID is set in the session
     if (!isset($_SESSION['userID'])) {
