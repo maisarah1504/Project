@@ -1,6 +1,6 @@
 <?php
 include('../navigation/sidebarStudent.php');
-require_once('connection.php'); 
+require_once('../webconnect.php'); 
 
 $ftime = isset($_POST['filterTime']) ? htmlspecialchars($_POST['filterTime']) : '';
 $fdate = isset($_POST['filterDate']) ? htmlspecialchars($_POST['filterDate']) : '';

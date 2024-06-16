@@ -30,7 +30,7 @@ if (!$result) {
 
 // Debug: Check the number of rows returned
 if (mysqli_num_rows($result) == 0) {
-    echo "No bookings found.";
+    echo "<p>No bookings found.</p>";
 }
 ?>
 <!DOCTYPE html> 
@@ -85,6 +85,12 @@ if (mysqli_num_rows($result) == 0) {
         }
         .btn-delete {
             background-color: red;
+        }
+        
+        p{
+            margin-left: 150px;
+            position: inherit;
+            display: flex;
         }
     </style>
 </head>
