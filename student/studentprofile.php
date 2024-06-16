@@ -23,72 +23,72 @@
 <body onload="showMessage()">
     <main>
         <h1 class="title">Student Profile</h1>
-        <?php 
-        session_start(); // Start the session
 
-        // Include the sidebar and database connection file
-        include "../navigation/sidebarStudent.php";
-        include '../webconnect.php'; // Adjust the path to the correct location
+        <form id="deleteForm" action="deletevehicle.php" method="POST" onsubmit="return confirmDelete();">
+            <?php
+            session_start(); // Start the session
 
-        // Check if userID is set in the session
-        if (!isset($_SESSION['userID'])) {
-            die("User not logged in");
-        }
+            // Include the sidebar and database connection file
+            include "../navigation/sidebarStudent.php";
+            include '../webconnect.php'; // Adjust the path to the correct location
 
-        // Fetch user information
-        $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
-        $user_query = "SELECT fullname, username FROM user WHERE userID = '$userID'";
-        $user_result = mysqli_query($conn, $user_query);
-        $user_row = mysqli_fetch_assoc($user_result);
+            // Check if userID is set in the session
+            if (!isset($_SESSION['userID'])) {
+                die("User not logged in");
+            }
 
-        // Fetch vehicle information
-        $vehicle_query = "SELECT vehicleID, vehicleType, vehicleModel, licensePlate, approvalStatus FROM vehicle WHERE userID = '$userID'";
-        $vehicle_result = mysqli_query($conn, $vehicle_query);
-        ?>
+            // Fetch user information
+            $userID = $_SESSION['userID']; // Assuming userID is stored in session after login
+            $user_query = "SELECT fullname, username FROM user WHERE userID = '$userID'";
+            $user_result = mysqli_query($conn, $user_query);
+            $user_row = mysqli_fetch_assoc($user_result);
+            ?>
 
-        <div class="info-section">
-            <div class="info-header">
-                <h2>Student Information</h2>
-                <button class="edit-button">Edit</button>
+            <div class="info-section">
+                <div class="info-header">
+                    <h2>Student Information</h2>
+                    <button class="edit-button" onclick="location.href='editstudent.php';">Edit</button>
+                </div>
+                <div class="info-box">
+                    <p><strong>Full Name:</strong> <?php echo $user_row['fullname']; ?></p>
+                    <p><strong>Student/Staff ID:</strong> <?php echo $user_row['username']; ?></p>
+                </div>
             </div>
-            <div class="info-box">
-                <p><strong>Full Name:</strong> <?php echo $user_row['fullname']; ?></p>
-                <p><strong>Student/Staff ID:</strong> <?php echo $user_row['username']; ?></p>
-            </div>
-        </div>
 
-        <?php
-        // Display vehicle information
-        if (mysqli_num_rows($vehicle_result) > 0) {
-            while ($vehicle_row = mysqli_fetch_assoc($vehicle_result)) {
-                ?>
-                <div class="info-section">
-                    <div class="info-header">
-                        <h2>Vehicle Information</h2>
-                        <div class="vehicle-buttons">
-                            <form action="deletevehicle.php" method="POST" onsubmit="return confirmDelete();">
+            <?php
+            // Fetch vehicle information
+            $vehicle_query = "SELECT vehicleID, vehicleType, vehicleModel, licensePlate, approvalStatus FROM vehicle WHERE userID = '$userID'";
+            $vehicle_result = mysqli_query($conn, $vehicle_query);
+
+            // Display vehicle information
+            if (mysqli_num_rows($vehicle_result) > 0) {
+                while ($vehicle_row = mysqli_fetch_assoc($vehicle_result)) {
+                    ?>
+                    <div class="info-section">
+                        <div class="info-header">
+                            <h2>Vehicle Information</h2>
+                            <div class="vehicle-buttons">
                                 <input type="checkbox" name="vehicle_ids[]" value="<?php echo $vehicle_row['vehicleID']; ?>">
+                                <button class="add-button" type="button" onclick="location.href='vehicleregistration.php';">Add</button>
+                                <button class="edit-button" type="button" onclick="location.href='editvehicle.php?id=<?php echo $vehicle_row['vehicleID']; ?>';">Edit</button>
                                 <button class="delete-button" type="submit">Delete</button>
-                            </form>
+                            </div>
+                        </div>
+                        <div class="info-box">
+                            <p><strong>Type:</strong> <?php echo $vehicle_row['vehicleType']; ?></p>
+                            <p><strong>Model:</strong> <?php echo $vehicle_row['vehicleModel']; ?></p>
+                            <p><strong>Plate Number:</strong> <?php echo $vehicle_row['licensePlate']; ?></p>
+                            <p><strong>Approval Status:</strong> <?php echo $vehicle_row['approvalStatus']; ?></p>
                         </div>
                     </div>
-                    <div class="info-box">
-                        <p><strong>Type:</strong> <?php echo $vehicle_row['vehicleType']; ?></p>
-                        <p><strong>Model:</strong> <?php echo $vehicle_row['vehicleModel']; ?></p>
-                        <p><strong>Plate Number:</strong> <?php echo $vehicle_row['licensePlate']; ?></p>
-                        <p><strong>Approval Status:</strong> <?php echo $vehicle_row['approvalStatus']; ?></p>
-                    </div>
-                </div>
-                <?php
+                    <?php
+                }
+            } else {
+                echo "<p>No vehicle information found.</p>";
             }
-        } else {
-            echo "<p>No vehicle information found.</p>";
-        }
-        ?>
+            ?>
+        </form>
 
-        <div class="vehicle-buttons">
-            <button class="add-button" onclick="location.href='vehicleregistration.php';">Add</button>
-        </div>
     </main>
 </body>
 </html>
