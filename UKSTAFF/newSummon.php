@@ -27,7 +27,7 @@
             </li>
             <li><span class="material-symbols-outlined">check</span><a href="vehicleApproval.php">Vehicle Approval</a></li>
             <hr>
-            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="../weblogout.php">Logout</a></li>
         </ul>
     </aside>
     <main margin-left: 110px;>
@@ -99,7 +99,7 @@
             <table id="submittedDataTable"></table>
         </div>
     </main>
-    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+    <footer style="color: white; background: #184A92;">&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 
     <script>
         document.getElementById('logoutLink').addEventListener('click', function(event) {

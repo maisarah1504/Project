@@ -44,7 +44,7 @@ function handle_login($conn) {
                 if ($role == "student") {
                     header("Location: studentdashboard.php");
                 } elseif ($role == "staff") {
-                    header("Location: staffdashboard.php");
+                    header("Location: dashboard.php");
                 } elseif ($role == "administrator") {
                     header("Location: admindashboard.php");
                 }

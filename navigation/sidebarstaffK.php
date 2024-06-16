@@ -173,4 +173,9 @@ footer {
         </ul>
     </aside>
 </body>
+<main>
+
+</main>
+
+<footer style="color: white; background: #184A92;">&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 </html>

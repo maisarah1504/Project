@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Check if the user is logged in and has the 'staff' role
+if (!isset($_SESSION['userID']) || $_SESSION['role'] !== 'staff') {
+    // Redirect to login page if not authenticated or not an staff
+    header("Location: ../weblogin.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +53,7 @@
             <li><span class="material-symbols-outlined">monitoring</span><a href="trafficViolationRecord.php">Traffic Violation Record</a></li>
             <li><span class="material-symbols-outlined">check</span><a href="vehicleApproval.php">Vehicle Approval</a></li>
             <hr>
-            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="#">Logout</a></li>
+            <li class="logout-link"><span class="material-symbols-outlined">logout</span><a id="logoutLink" href="../weblogout.php">Logout</a></li>
         </ul>
     </aside>
     <main style="background-color: white; margin-left: 110px;">
@@ -77,13 +88,13 @@
             </div>
         </div>
     </main>
-    <footer style="color: black;">&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+    <footer style="color: white; background: #184A92;">&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
     <script>
         document.getElementById('logoutLink').addEventListener('click', function(event) {
             event.preventDefault(); // Prevent the default link behavior
             const userConfirmed = confirm('Are you sure you want to logout?'); // Show the confirmation dialog
             if (userConfirmed) {
-                window.location.href = '../weblogin.php'; // Redirect if the user confirms
+                window.location.href = '../weblogout.php'; // Redirect if the user confirms
             }
         });
 
