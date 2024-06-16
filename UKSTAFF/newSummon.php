@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="newSummon.css">
 </head>
 <body style="display: flex; background-image: url('../images/img-bg.jpg'); background-position: center; background-size: cover; backdrop-filter: blur(2.5px); overflow: hidden;)">
-    <aside class="sidebar">
+    <aside  style="background: #184A92;" class="sidebar">
         <div class="logo">
             <a href="dashboard.php">
             <img src="../images/Logo FKPark.png" alt="logo">

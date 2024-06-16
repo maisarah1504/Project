@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="editViolation.css">
 </head>
 <body>
-    <aside class="sidebar">
+    <aside style="background: #184A92;" class="sidebar">
         <div class="logo">
             <a href="dashboard.php">
             <img src="../images/Logo FKPark.png" alt="logo">
