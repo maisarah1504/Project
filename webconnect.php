@@ -1,15 +1,14 @@
 <?php
-    $serverhost = "10.26.30.17";
-    $username = "ca22076";
-    $password = "ca22076";
-    $database = "ca22076";
+    $dbname = "fkpark";
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
 
     // Create connection
-    $conn = mysqli_connect($serverhost, $username, $password, $database);
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    if(mysqli_connect_errno()) {
-        echo "Connection Error: " . mysqli_connect_error();
-        exit();
+    if(!$conn) {
+        die("Connection Error: " . mysqli_connect_error());
     }
 ?>
 
