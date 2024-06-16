@@ -131,7 +131,7 @@
             </div>
         </form>
     </main>
-    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
+    <footer style="color: white; background: #184A92;">&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
