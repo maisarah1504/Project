@@ -21,10 +21,6 @@ main {
     align-items: center;
 }
 
-.profile-container {
-    width: 100%;
-}
-
 .title {
     font-size: 24px;
     font-weight: bold;
@@ -33,7 +29,7 @@ main {
 }
 
 .info-section {
-    width: 100%;
+    width: 100%; /* Ensure full width for both sections */
     margin-bottom: 20px;
 }
 
@@ -50,11 +46,12 @@ main {
 }
 
 .info-box {
-    width: 93%; /* Reduce the width of the inner boxes */
+    width: 100%; /* Full width for vehicle information */
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Ensure text alignment is left */
 }
 
 .info-box p {
@@ -80,5 +77,6 @@ button:hover {
 
 .vehicle-buttons {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
