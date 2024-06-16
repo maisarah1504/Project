@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../navigation/sidebarStudent.php');
-require('connection.php');
+require '../webconnect.php';
 
 // Check if bookingID is set in the query string
 if (!isset($_GET['bookingID'])) {
@@ -15,13 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get form data
     $startDate = $_POST['startDate'];
     $startTime = $_POST['startTime'];
+    $duration = $_POST['duration'];
 
     // Validate form data
     if (empty($startDate) || empty($startTime)) {
         echo "Error: All fields are required.";
     } else {
         // Update the booking details in the database
-        $update_sql = "UPDATE booking SET startDate = ?, startTime = ? WHERE bookingID = ?";
+        $update_sql = "UPDATE booking SET startDate = ?, startTime = ?, duration = ? WHERE bookingID = ?";
         $stmt = $conn->prepare($update_sql);
         
         if ($stmt === false) {
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Fetch the booking details
-$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate
+$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate, b.duration
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
