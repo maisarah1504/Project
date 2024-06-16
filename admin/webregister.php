@@ -211,8 +211,6 @@ mysqli_close($conn);
             </form>
         </div>
     </div>
-    <footer>
-        &copy; 2023 Your Company Name. All Rights Reserved.
-    </footer>
+    <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 </body>
 </html>

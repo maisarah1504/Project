@@ -55,6 +55,16 @@
             color: black;
             text-align: left;
         }
+         footer {
+            background-color: #184A92;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            margin-left: 109px;
+        }
     </style>
 </head>
 <body>
