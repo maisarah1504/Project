@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $duration = $_POST['duration'];
 
     // Validate form data
-    if (empty($startDate) || empty($startTime)) {
+    if (empty($startDate) || empty($startTime) || empty($duration)) {
         echo "Error: All fields are required.";
     } else {
         // Update the booking details in the database
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die('Prepare failed: ' . htmlspecialchars($conn->error));
         }
 
-        $stmt->bind_param('ssi', $startDate, $startTime, $bookingID);
+        $stmt->bind_param('ssi', $startDate, $startTime, $bookingID, $duration);
 
         if ($stmt->execute()) {
             echo "<script>
