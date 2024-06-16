@@ -1,21 +1,17 @@
 <?php 
-    session_start();
+session_start();
 
-    include('../navigation/sidebarStudent.php');
-    require('../webconnect.php');
+include('../navigation/sidebarStudent.php');
+require('../webconnect.php');
 
-    if (!isset($_SESSION['userID'])) {
-        die("User not logged in");
-    }
+if (!isset($_SESSION['userID'])) {
+    die("User not logged in");
+}
 
-    // Uncomment and set $s_userID to test with actual session user ID
-    $userID = $_SESSION['userID'];
-
-// Debug: Print the user ID
-echo "User ID: " . $userID;
+$userID = $_SESSION['userID'];
 
 // Adjust the query to match the structure of your database
-$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licencePlate, b.duration
+$sql = "SELECT b.bookingID, ps.location, b.startDate, b.startTime, v.vehicleID, v.licensePlate, b.duration, b.qrFilePath
         FROM booking AS b
         JOIN parking_space AS ps ON b.spaceID = ps.spaceID
         JOIN vehicle AS v ON v.userID = b.userID
@@ -94,42 +90,43 @@ if (mysqli_num_rows($result) == 0) {
         }
     </style>
 </head>
-    <body>
-        <div class="filter-history">
-            <h2>MY BOOKING</h2>
+<body>
+    <div class="filter-history">
+        <h2>MY BOOKING</h2>
+    </div>
+    <div class="book-list">
+        <div class="details-book">
+        <table class="table-list">
+            <tr>
+                <th>Booking ID</th>
+                <th>Parking Space</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Vehicle ID</th>
+                <th>Plate Number</th>
+                <th>Duration</th>
+                <th>QR Code</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            <?php 
+            while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+            <tr>
+                <td><?php echo $row['bookingID']; ?></td>
+                <td><?php echo $row['location']; ?></td>
+                <td><?php echo $row['startDate']; ?></td>
+                <td><?php echo $row['startTime']; ?></td>
+                <td><?php echo $row['vehicleID']; ?></td>
+                <td><?php echo $row['licensePlate']; ?></td>
+                <td><?php echo $row['duration']; ?></td>
+                <td><a href="EDIT_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-edit">Edit</a></td>
+                <td><a href="DELETE_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a></td>
+            </tr>
+            <?php 
+            }
+            ?>
+        </table>
         </div>
-        <div class="book-list">
-            <div class="details-book">
-            <table class="table-list">
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Parking Space</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Vehicle ID</th>
-                    <th>Plate Number</th>
-                    <th>Duration</th>
-                    <th colspan="2">Actions</th>
-                </tr>
-                <?php 
-                while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                <tr>
-                    <td><?php echo $row['bookingID']; ?></td>
-                    <td><?php echo $row['location']; ?></td>
-                    <td><?php echo $row['startDate']; ?></td>
-                    <td><?php echo $row['startTime']; ?></td>
-                    <td><?php echo $row['vehicleID']; ?></td>
-                    <td><?php echo $row['licencePlate']; ?></td>
-                    <td><?php echo $row['duration']; ?></td>
-                    <td><a href="EDIT_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-edit">Edit</a></td>
-                    <td><a href="DELETE_PAGE.php?bookingID=<?php echo $row['bookingID']; ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a></td>
-                </tr>
-                <?php 
-                }
-                ?>
-            </table>
-            </div>
-        </div>
-    </body>
+    </div>
+</body>
 </html>

@@ -66,9 +66,9 @@ if (isset($_POST['submit'])) {
         </div>
         <?php echo isset($message) ? $message : ''; ?>
         <div class="details">
-            <?php //if ($qrFile != ''): ?>
-               <!-- <p><img src="<?php //echo htmlspecialchars($qrFile); ?>" alt="QR Code"></p>-->
-            <?php //endif; ?>
+            <?php if ($qrFile != ''): ?>
+                <p><img src="<?php echo htmlspecialchars($qrFile); ?>" alt="QR Code"></p>
+            <?php endif; ?>
             <p>Parking Space ID: <?php echo htmlspecialchars($spaceID); ?></p>
             <p>Full Name: <?php echo htmlspecialchars($fname); ?></p>
             <p>Vehicle Plate Number: <?php echo htmlspecialchars($fvehicle); ?></p>
