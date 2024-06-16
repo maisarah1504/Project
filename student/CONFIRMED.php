@@ -66,6 +66,29 @@ if (isset($_POST['submit'])) {
             <p>Start Time: <?php echo htmlspecialchars($ftime); ?></p>
         </div>
     </div>
+    <?php 
+        include "phpqrcode/qrlib.php";
+        $png_temp_dir = 'temp/';
+        if(!file_exists($png_temp_dir))
+            mkdir($png_temp_dir);
+        $filename = $png_temp_dir . 'test.png';
+        
+        if(isset($_POST['submit'])) {
+            $codeString = $_POST['spaceID'] . "\n";
+            $codeString = $_POST['fname'] . "\n";
+            $codeString = $_POST['fvehicle'] . "\n";
+            $codeString = $_POST['fdate'] . "\n";
+            $codeString = $_POST['ftime'] . "\n";
+            $codeString = $_POST['duration'] . "\n";
+
+            $filename = $png_temp_dir . 'test' . md5($codeString) . 'png';
+
+            QRcode::png($codeString, $filename);
+
+            echo '<img src="' . $png_temp_dir . basename($filename) . '" /><hr/>';
+        }
+
+    ?>
 
     <footer>&copy; Universiti Malaysia Pahang Al-Sultan Abdullah</footer>
 </body>
