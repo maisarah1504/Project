@@ -33,11 +33,6 @@ if (isset($_POST['submit'])) {
     } else {
         $message = "<div class='alert-fail'>Booking Failed: " . $conn->error . "</div>";
     }
-
-    // Generate QR code
-    $qrContent = "Parking Space ID: $spaceID\nFull Name: $fname\nVehicle Plate Number: $fvehicle\nStart Date: $fdate\nStart Time: $ftime";
-    $qrFile = '../qr_codes/booking_' . $userID . '_' . time() . '.png'; // Ensure the path is correct and the directory is writable
-    QRcode::png($qrContent, $qrFile);
 }
 ?>
 
@@ -58,7 +53,7 @@ if (isset($_POST['submit'])) {
         </div>
         <?php echo isset($message) ? $message : ''; ?>
         <div class="details">
-            <p><img src="<?php echo $qrFile; ?>" alt="QR Code"></p>
+            <!--<p><img src="<?php echo $qrFile; ?>" alt="QR Code"></p> -->
             <p>Parking Space ID: <?php echo htmlspecialchars($spaceID); ?></p>
             <p>Full Name: <?php echo htmlspecialchars($fname); ?></p>
             <p>Vehicle Plate Number: <?php echo htmlspecialchars($fvehicle); ?></p>
