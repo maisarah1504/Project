@@ -45,7 +45,7 @@ if (isset($_POST['search'])) {
 }
 
 // Fetch traffic violation records from the database with search filter if applicable
-$sql = "SELECT violationID, violationType, plateNum, violationDate, demeritPoint FROM traffic_violation";
+$sql = "SELECT violationID, violationType, plateNum, violationTimestamp, demeritPoint FROM traffic_violation";
 if (!empty($searchQuery)) {
     $sql .= " WHERE violationType = '" . $conn->real_escape_string($searchQuery) . "'";
 }
